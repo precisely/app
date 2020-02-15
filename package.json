@@ -1,0 +1,27 @@
+{
+  "name": "app-frontend",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "browserslist": [
+    "since 2017-06"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src/*.js? src/**/*.js?",
+    "dev": "npx parcel index.html",
+    "build": "npx parcel build index.html -d build/ --public-url ./"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.7.4",
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0",
+    "parcel-bundler": "^1.12.4",
+    "postcss": "^7.0.26",
+    "tailwindcss": "^1.2.0",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
