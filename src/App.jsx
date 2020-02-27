@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import { SampleJSButton } from "./components/SampleJSButton";
+import { ExampleJSButton } from "./components/examples/ExampleJSButton";
+import { ExampleTSButton } from "./components/examples/ExampleTSButton";
 
 
 const App = () => {
@@ -12,7 +13,11 @@ const App = () => {
         <h1 className="text-5xl text-purple-500 font-sans">Greetings.</h1>
       </div>
       <div className="flex justify-center">
-        <SampleJSButton />
+        <ExampleJSButton />
+      </div>
+      <div className="h-2" />
+      <div className="flex justify-center">
+        <ExampleTSButton />
       </div>
     </div>
   );
