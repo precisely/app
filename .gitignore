@@ -1,6 +1,8 @@
 *~
 .DS_Store
+.bin
 .cache
+.dir-locals.el
 .idea
 
 build
