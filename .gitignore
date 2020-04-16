@@ -3,6 +3,7 @@
 .bin
 .cache
 .dir-locals.el
+.env*
 .idea
 
 build
