@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 
 import { ExampleJSButton } from "./components/examples/ExampleJSButton";
 import { ExampleTSButton } from "./components/examples/ExampleTSButton";
+import { Login } from "./components/Login";
 
 
 const App = () => {
@@ -18,6 +19,9 @@ const App = () => {
       <div className="h-2" />
       <div className="flex justify-center">
         <ExampleTSButton />
+      </div>
+      <div className="" >
+        <Login />
       </div>
     </div>
   );
