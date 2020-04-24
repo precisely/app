@@ -1,29 +1,16 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import { ExampleJSButton } from "./components/examples/ExampleJSButton";
-import { ExampleTSButton } from "./components/examples/ExampleTSButton";
-import { Login } from "./components/Login";
+import { Routes } from "~/src/routes/Routes";
 
 
 const App = () => {
 
   return (
-    <div>
-      <div className="flex justify-center">
-        <h1 className="text-5xl text-purple-500 font-sans">Greetings.</h1>
-      </div>
-      <div className="flex justify-center">
-        <ExampleJSButton />
-      </div>
-      <div className="h-2" />
-      <div className="flex justify-center">
-        <ExampleTSButton />
-      </div>
-      <div className="" >
-        <Login />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
 
 };

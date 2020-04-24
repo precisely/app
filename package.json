@@ -19,12 +19,20 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "@types/auth0-js": "^9.12.4",
+    "@types/lodash": "^4.14.150",
     "@types/node": "^13.11.1",
     "@types/react": "^16.9.22",
     "@types/react-dom": "^16.9.5",
     "@types/react-router-dom": "^5.1.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2"
+    "auth0-js": "^9.13.2",
+    "components": "^0.1.0",
+    "lodash": "^4.17.15",
+    "react": ">=15.0.0",
+    "react-dom": ">=15.0.0",
+    "react-router-dom": "^5.1.2",
+    "react-toastify": "^5.5.0",
+    "routes": "^2.1.0",
+    "src": "^1.1.2"
   }
 }
