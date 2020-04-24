@@ -16,6 +16,11 @@ npm install -g yarn
 (Run the same command whenever `yarn` complains about an old version.)
 
 
+## Configuration
+
+Make a personal `.env` file using `.env.sample` as a template.
+
+
 ## Development
 
 - Install dependencies: `yarn install`

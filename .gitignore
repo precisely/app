@@ -3,9 +3,13 @@
 .bin
 .cache
 .dir-locals.el
-.env*
 .idea
 
+# environment handling: ignore all .env files except .env.sample
+.env*
+!.env.sample
+
+# build artifacats
 build
 dist
 node_modules
