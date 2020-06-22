@@ -33,7 +33,7 @@
     "react": ">=15.0.0",
     "react-dom": ">=15.0.0",
     "react-router-dom": "^5.1.2",
-    "react-toastify": "^5.5.0",
+    "react-toastify": "^6.0.6",
     "routes": "^2.1.0",
     "src": "^1.1.2"
   }

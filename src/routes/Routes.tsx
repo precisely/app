@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import { Auth0Route } from "~/src/routes/Auth0Route";
+import { AuthRoute } from "~/src/routes/AuthRoute";
 
 import { AboutUs } from "~/src/components/AboutUs";
-import { LoginAuth0 } from "~/src/components/LoginAuth0";
+import { Login } from "~/src/components/Login";
 import { Main } from "~/src/components/Main";
 import { NotFound } from "~/src/components/errors/NotFound";
 import { Private } from "~/src/components/Private";
@@ -16,12 +16,12 @@ export const Routes = () => {
     <Switch>
       <Route path="/" exact={true}
              component={Main} />
-      <Route path="/login-auth0" exact={true}
-             component={LoginAuth0} />
+      <Route path="/login" exact={true}
+             component={Login} />
       <Route path="/about-us" exact={true}
              component={AboutUs} />
-      <Auth0Route path="/private" exact={true}
-                  component={Private} />
+      <AuthRoute path="/private" exact={true}
+                 component={Private} />
       <Route path="*"
              component={NotFound} />
     </Switch>

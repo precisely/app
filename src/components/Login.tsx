@@ -1,18 +1,33 @@
+import * as _ from "lodash";
 import * as React from "react";
-// import * as ReactDOM from "react-dom";
-import { RouteComponentProps} from "react-router";
+import { Redirect, RouteComponentProps} from "react-router";
+
+import * as AuthUtils from "~/src/utils/auth";
+import * as LoginUtils from "~/src/utils/login";
 
 import "./Login.css";
 
 
 export class Login extends React.Component<RouteComponentProps<void>> {
 
-  login(event: React.FormEvent<HTMLFormElement>) {
+  login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("clicky here");
-  }
+    const email = event.target["email"].value;
+    const password = event.target["password"].value;
+    await LoginUtils.login(email, password);
+    const to = _.get(this.props, ["location", "state", "from"], "/");
+    this.props.history.push(to);
+  };
+
 
   render(): JSX.Element {
+
+    if (AuthUtils.isAuthenticated()) {
+      return (
+        <Redirect to="/" />
+      );
+    }
+
     return (
       <div className="">
         <form onSubmit={this.login}>
