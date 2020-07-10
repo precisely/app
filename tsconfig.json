@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
+      "~/assets/*": ["./*"],
       "~/src/*": ["./*"]
     },
     "allowJs": true,
@@ -25,5 +26,8 @@
       "./types"
     ]
   },
-  "include": ["src/**/*"]
+  "include": [
+    "assets/**/*",
+    "src/**/*"
+  ]
 }

@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import * as React from "react";
-import { Redirect, RouteComponentProps} from "react-router";
+import { Redirect, RouteComponentProps } from "react-router";
 
 import * as AuthUtils from "~/src/utils/auth";
 import * as LoginUtils from "~/src/utils/login";

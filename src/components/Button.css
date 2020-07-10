@@ -1,0 +1,33 @@
+.btn {
+  @apply
+  flex justify-center
+  font-bold text-xs
+  border rounded cursor-pointer;
+}
+
+.btn-black {
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+
+.btn-blue:hover {
+  @apply bg-blue-700;
+}
+
+.btn-blue:active {
+  @apply bg-blue-800;
+}
+
+.btn-red {
+  @apply bg-red-500 text-white;
+}
+
+.btn-red:hover {
+  @apply bg-red-700;
+}
+
+.btn-red:active {
+  @apply bg-red-800;
+}
