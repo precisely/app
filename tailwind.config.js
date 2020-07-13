@@ -4,6 +4,9 @@ module.exports = {
       screens: {
         light: { raw: "(prefers-color-scheme: light)" },
         dark: { raw: "(prefers-color-scheme: dark)" }
+      },
+      fontFamily: {
+        sans: ["Ageo", "Helvetica", "Arial", "sans-serif"]
       }
     }
   },

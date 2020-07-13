@@ -1,3 +1,126 @@
 @tailwind base;
+
+@font-face {
+  font-family: "Ageo";
+  font-weight: 100;
+  src: url("/assets/fonts/ageo/thin.woff2") format("woff2"),
+       url("/assets/fonts/ageo/thin.woff") format("woff"),
+       url("/assets/fonts/ageo/thin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 100;
+  font-style: italic;
+  src: url("/assets/fonts/ageo/thinitalic.woff2") format("woff2"),
+       url("/assets/fonts/ageo/thinitalic.woff") format("woff"),
+       url("/assets/fonts/ageo/thinitalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 200 300;
+  src: url("/assets/fonts/ageo/light.woff2") format("woff2"),
+       url("/assets/fonts/ageo/light.woff") format("woff"),
+       url("/assets/fonts/ageo/light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 200 300;
+  font-style: italic;
+  src: url("/assets/fonts/ageo/lightitalic.woff2") format("woff2"),
+       url("/assets/fonts/ageo/lightitalic.woff") format("woff"),
+       url("/assets/fonts/ageo/lightitalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 400;
+  src: url("/assets/fonts/ageo/regular.woff2") format("woff2"),
+       url("/assets/fonts/ageo/regular.woff") format("woff"),
+       url("/assets/fonts/ageo/regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 400;
+  font-style: italic;
+  src: url("/assets/fonts/ageo/regularitalic.woff2") format("woff2"),
+       url("/assets/fonts/ageo/regularitalic.woff") format("woff"),
+       url("/assets/fonts/ageo/regularitalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 500;
+  src: url("/assets/fonts/ageo/medium.woff2") format("woff2"),
+       url("/assets/fonts/ageo/medium.woff") format("woff"),
+       url("/assets/fonts/ageo/medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 500;
+  font-style: italic;
+  src: url("/assets/fonts/ageo/mediumitalic.woff2") format("woff2"),
+       url("/assets/fonts/ageo/mediumitalic.woff") format("woff"),
+       url("/assets/fonts/ageo/mediumitalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 600;
+  src: url("/assets/fonts/ageo/semibold.woff2") format("woff2"),
+       url("/assets/fonts/ageo/semibold.woff") format("woff"),
+       url("/assets/fonts/ageo/semibold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 600;
+  font-style: italic;
+  src: url("/assets/fonts/ageo/semibolditalic.woff2") format("woff2"),
+       url("/assets/fonts/ageo/semibolditalic.woff") format("woff"),
+       url("/assets/fonts/ageo/semibolditalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 700;
+  src: url("/assets/fonts/ageo/bold.woff2") format("woff2"),
+       url("/assets/fonts/ageo/bold.woff") format("woff"),
+       url("/assets/fonts/ageo/bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 700;
+  font-style: italic;
+  src: url("/assets/fonts/ageo/bolditalic.woff2") format("woff2"),
+       url("/assets/fonts/ageo/bolditalic.woff") format("woff"),
+       url("/assets/fonts/ageo/bolditalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 800;
+  src: url("/assets/fonts/ageo/extrabold.woff2") format("woff2"),
+       url("/assets/fonts/ageo/extrabold.woff") format("woff"),
+       url("/assets/fonts/ageo/extrabold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 800;
+  font-style: italic;
+  src: url("/assets/fonts/ageo/extrabolditalic.woff2") format("woff2"),
+       url("/assets/fonts/ageo/extrabolditalic.woff") format("woff"),
+       url("/assets/fonts/ageo/extrabolditalic.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 900;
+  src: url("/assets/fonts/ageo/heavy.woff2") format("woff2"),
+       url("/assets/fonts/ageo/heavy.woff") format("woff"),
+       url("/assets/fonts/ageo/heavy.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Ageo";
+  font-weight: 900;
+  font-style: italic;
+  src: url("/assets/fonts/ageo/heavyitalic.woff2") format("woff2"),
+       url("/assets/fonts/ageo/heavyitalic.woff") format("woff"),
+       url("/assets/fonts/ageo/heavyitalic.ttf") format("truetype");
+}
+
 @tailwind components;
+
 @tailwind utilities;
