@@ -7,8 +7,8 @@ import { Button } from "~/src/components/Button";
 
 import "./common.css";
 
-import logoFileLt from "~/assets/images/logo-full-red-black.svg";
-import logoFileDk from "~/assets/images/logo-full-red-white.svg";
+import logoFileLt from "~/assets/images/logo/full-red-black.svg";
+import logoFileDk from "~/assets/images/logo/full-red-white.svg";
 
 
 export class Main extends React.Component<RouteComponentProps<void>> {
