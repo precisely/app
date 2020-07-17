@@ -18,9 +18,9 @@ module.exports = {
         coconut: "#FEFEFE",
         // - reds and pinks
         cardinal: {
-          default: "#E71F54",
-          darker: "#CD1647",
-          darkest: "#B81442"
+          default: "#E72054",
+          darker: "#CB1646",
+          darkest: "#AF133C"
         },
         blush: "#F28599",
         puff: "#FDEDF2",
@@ -32,17 +32,17 @@ module.exports = {
         },
         peppermint: "#F3F8FE",
         // - green
-        parakeet: "#1EC69C",
+        parakeet: "#1EC69B",
         // secondary:
-        clover: "#20C882",
-        monarch: "#FA6400",
-        proton: "#7451F0",
-        butterscotch: "#F7B500",
+        clover: "#1FC882",
+        monarch: "#FA6401",
+        proton: "#7452F0",
+        butterscotch: "#F8B500",
         lapis: "#0080FF",
-        salamander: "#FF4400",
-        royal: "#7700F4",
+        salamander: "#FF4401",
+        royal: "#7800F4",
         bubblegum: "#FF14B0",
-        aqua: "#00DFEC"
+        aqua: "#00DFEB"
       },
     }
   },
