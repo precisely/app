@@ -5,29 +5,34 @@
   border rounded cursor-pointer;
 }
 
-.btn-black {
+.btn-ink {
+  @apply bg-ink text-cloud;
 }
 
-.btn-blue {
-  @apply bg-blue-500 text-white;
+.btn-cloud {
+  @apply bg-cloud text-ink;
 }
 
-.btn-blue:hover {
-  @apply bg-blue-700;
+.btn-cardinal {
+  @apply bg-cardinal text-cloud;
 }
 
-.btn-blue:active {
-  @apply bg-blue-800;
+.btn-cardinal:hover {
+  @apply bg-cardinal-darker;
 }
 
-.btn-red {
-  @apply bg-red-500 text-white;
+.btn-cardinal:active {
+  @apply bg-cardinal-darkest;
 }
 
-.btn-red:hover {
-  @apply bg-red-700;
+.btn-cobalt {
+  @apply bg-cobalt text-cloud;
 }
 
-.btn-red:active {
-  @apply bg-red-800;
+.btn-cobalt:hover {
+  @apply bg-cobalt-darker;
+}
+
+.btn-cobalt:active {
+  @apply bg-cobalt-darkest;
 }

@@ -39,7 +39,7 @@ export class Main extends React.Component<RouteComponentProps<void>> {
           <img className="dark:hidden h-8" src={logoFileLt} />
         </div>
         <div className="col-span-1 ctr">
-          <Button text="Login" color="red" />
+          <Button text="Login" color="cardinal" />
         </div>
       </div>
     );
