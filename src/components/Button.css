@@ -1,38 +1,39 @@
 .btn {
   @apply
   flex justify-center
+  py-1 px-8
   font-bold text-xs
   border rounded cursor-pointer;
 }
 
+.btn:hover {
+  filter: brightness(85%);
+}
+
+.btn:active {
+  filter: brightness(65%);
+}
+
 .btn-ink {
-  @apply bg-ink text-cloud;
+  @apply bg-ink text-cloud border-cloud;
 }
 
 .btn-cloud {
-  @apply bg-cloud text-ink;
+  @apply bg-cloud text-ink border-ink;
+}
+
+.btn-coconut {
+  @apply bg-coconut text-ink border-ink;
 }
 
 .btn-cardinal {
-  @apply bg-cardinal text-cloud;
+  @apply bg-cardinal text-cloud border-cloud;
 }
 
-.btn-cardinal:hover {
-  @apply bg-cardinal-darker;
-}
-
-.btn-cardinal:active {
-  @apply bg-cardinal-darkest;
+.btn-cardinal-inv {
+  @apply text-cardinal border-cardinal;
 }
 
 .btn-cobalt {
   @apply bg-cobalt text-cloud;
-}
-
-.btn-cobalt:hover {
-  @apply bg-cobalt-darker;
-}
-
-.btn-cobalt:active {
-  @apply bg-cobalt-darkest;
 }

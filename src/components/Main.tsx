@@ -15,13 +15,13 @@ export class Main extends React.Component<RouteComponentProps<void>> {
 
   render(): JSX.Element {
     return (
-      <div className="p-4 grid grid-cols-4 gap-4" >
-        <div className="col-start-2 col-span-2 mt-2 ctr">
+      <div className="p-4 grid grid-cols-2 gap-4" >
+        <div className="col-span-1 mt-2 ctr">
           <img className="light:hidden h-8" src={logoFileDk} />
           <img className="dark:hidden h-8" src={logoFileLt} />
         </div>
-        <div className="col-span-1 ctr">
-          <Button text="Login" color="cardinal" />
+        <div className="col-span-1 rt">
+          <Button text="Login" color="cardinal-inv" />
         </div>
       </div>
     );

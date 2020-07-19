@@ -15,7 +15,7 @@ export class Button extends React.Component<Props, {}> {
 
   public static defaultProps = {
     text: "Button",
-    color: "black",
+    color: "ink",
     callback: () => {}
   };
 
