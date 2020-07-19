@@ -14,24 +14,6 @@ import logoFileDk from "~/assets/images/logo/full-red-white.svg";
 export class Main extends React.Component<RouteComponentProps<void>> {
 
   render(): JSX.Element {
-    /* <div>
-       { AuthUtils.isAuthenticated() ? `hello ${AuthUtils.username()}` : "" }
-       <ul>
-       <li>
-       <a href="/about-us">About Us</a>
-       </li>
-       <li>
-       <a href="/private">Private</a>
-       </li>
-       <li>
-       <Logout {...this.props} />
-       </li>
-       </ul>
-       <hr />
-       <Example />
-       <hr />
-       </div>
-     */
     return (
       <div className="p-4 grid grid-cols-4 gap-4" >
         <div className="col-start-2 col-span-2 mt-2 ctr">
