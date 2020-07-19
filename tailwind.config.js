@@ -56,7 +56,7 @@ module.exports = {
         },
         "@screen dark": {
           body: {
-            color: config("theme.colors.cloud"),
+            color: config("theme.colors.cocount"),
             backgroundColor: config("theme.colors.ink")
           }
         }
