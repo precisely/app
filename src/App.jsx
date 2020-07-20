@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { Routes } from "~/src/routes/Routes";
 
 import "react-toastify/dist/ReactToastify.css";
+import "~/src/components/common.css";
 
 
 const App = () => {
