@@ -26,7 +26,7 @@ export const AuthRoute = (authProps: AuthProps) => {
     return AuthUtils.isAuthenticated() ? (
       renderMergedProps(authProps.component, routeProps, rest)
     ) : (
-      <Redirect to={{ pathname: "/login", state: { from: routeProps.location.pathname } }} />
+      <Redirect to={{ pathname: "/landing/login", state: { from: routeProps.location.pathname } }} />
     );
   }
 

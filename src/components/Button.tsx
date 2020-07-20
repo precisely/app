@@ -20,11 +20,11 @@ export class Button extends React.Component<Props, {}> {
 
   render(): JSX.Element {
     return (
-      <div
+      <button
         className={`btn btn-${this.props.color}`}
         onClick={this.props.callback}>
         {this.props.text}
-      </div>
+      </button>
     );
   }
 

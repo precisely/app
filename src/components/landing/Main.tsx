@@ -5,6 +5,7 @@ import { RouteComponentProps} from "react-router";
 import { Header } from "~/src/components/landing/Header";
 import { Home } from "~/src/components/landing/Home";
 import { Company } from "~/src/components/landing/Company";
+import { NotFound as ErrorNotFound } from "~/src/components/errors/NotFound";
 
 
 export class Main extends React.Component<RouteComponentProps<void>, {}> {
@@ -14,9 +15,10 @@ export class Main extends React.Component<RouteComponentProps<void>, {}> {
       <div>
         <Header />
         <Switch>
-          <Route path="/" exact={true} component={Home} />
-          <Route path="/home" exact={true} component={Home} />
-          <Route path="/company" exact={true} component={Company} />
+          <Route exact path="/landing/" component={Home} />
+          <Route exact path="/landing/home" component={Home} />
+          <Route exact path="/landing/company" component={Company} />
+          <Route path="/landing/*" component={ErrorNotFound} />
         </Switch>
       </div>
     );
