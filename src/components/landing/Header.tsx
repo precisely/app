@@ -1,12 +1,23 @@
 import * as React from "react";
 
-import { Button } from "~/src/components/Button";
-
 import logoFileLt from "~/assets/images/logo/full-red-black.svg";
 import logoFileDk from "~/assets/images/logo/full-red-white.svg";
 
 
-export class Header extends React.Component {
+interface Props {
+  action?: JSX.Element
+}
+
+
+export class Header extends React.Component<Props> {
+
+  action = () => {
+    return (
+      <div className="col-span-1 rt">
+        {this.props.action}
+      </div>
+    );
+  };
 
   render(): JSX.Element {
     return (
@@ -15,9 +26,7 @@ export class Header extends React.Component {
           <img className="light:hidden h-8" src={logoFileDk} />
           <img className="dark:hidden h-8" src={logoFileLt} />
         </div>
-        <div className="col-span-1 rt">
-          <Button text="Login" color="cardinal-inv" />
-        </div>
+        {this.action()}
       </div>
     );
   }

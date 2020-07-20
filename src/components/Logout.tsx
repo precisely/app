@@ -1,16 +1,16 @@
 import * as React from "react";
-import { Redirect, RouteComponentProps} from "react-router";
+import { Redirect } from "react-router";
 
 import * as AuthUtils from "~/src/utils/auth";
 import * as LoginUtils from "~/src/utils/login";
+import { Button } from "~/src/components/Button";
 
 
-export class Logout extends React.Component<RouteComponentProps<void>> {
+export class Logout extends React.Component<{}, {}> {
 
-  logout = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  logout = async () => {
     await LoginUtils.logout();
-    this.props.history.push("/");
+    <Redirect to="/" />
   };
 
 
@@ -23,16 +23,9 @@ export class Logout extends React.Component<RouteComponentProps<void>> {
     }
 
     return (
-      <div className="">
-        <form onSubmit={this.logout}>
-          <div>
-            <button className="bg-blue-500 text-white"
-                    type="submit">
-              Logout
-            </button>
-          </div>
-        </form>
-      </div>
+      <Button text="Logout"
+              color="cardinal-inv"
+              callback={this.logout} />
     );
   }
 
