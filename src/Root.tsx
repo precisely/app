@@ -18,12 +18,12 @@ class Root extends React.Component<{}, {}> {
   redirect = () => {
     if (AuthUtils.isAuthenticated()) {
       return (
-        <Redirect to="/landing" />
+        <Redirect to="/app" />
       );
     }
     else {
       return (
-        <Redirect to="/app" />
+        <Redirect to="/landing" />
       );
     }
   }
