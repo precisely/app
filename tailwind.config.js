@@ -50,13 +50,15 @@ module.exports = {
   plugins: [
     function({ addBase, config }) {
       addBase({
-        body: {
-          color: config("theme.colors.ink"),
-          backgroundColor: config("theme.colors.coconut")
-        },
-        "@screen dark": {
+        "@media (prefers-color-scheme: light)": {
           body: {
-            color: config("theme.colors.cocount"),
+            color: config("theme.colors.ink"),
+            backgroundColor: config("theme.colors.coconut")
+          },
+        },
+        "@media (prefers-color-scheme: dark)": {
+          body: {
+            color: config("theme.colors.coconut"),
             backgroundColor: config("theme.colors.ink")
           }
         }
