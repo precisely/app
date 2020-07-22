@@ -1,17 +1,16 @@
 import * as React from "react";
+import * as RouterDOM from "react-router-dom";
 
 
-export class NotFound extends React.Component {
+export const NotFound = () => {
 
-  render(): JSX.Element {
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <h4>You have taken a wrong turn.</h4>
-          <a href="/">Please start over.</a>
-        </div>
+        <h4>You have taken a wrong turn.</h4>
+        <RouterDOM.Link to="/">Please start over.</RouterDOM.Link>
       </div>
-    );
-  }
+    </div>
+  );
 
-}
+};

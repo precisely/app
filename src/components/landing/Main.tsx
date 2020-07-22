@@ -1,26 +1,26 @@
 import * as React from "react";
-import { Route, Switch } from "react-router-dom";
-import { RouteComponentProps} from "react-router";
+import * as Router from "react-router";
+import * as RouterDOM from "react-router-dom";
 
+import { Company } from "~/src/components/landing/Company";
 import { Header } from "~/src/components/landing/Header";
 import { Home } from "~/src/components/landing/Home";
-import { Company } from "~/src/components/landing/Company";
 import { Login } from "~/src/components/landing/Login";
 import { NotFound as ErrorNotFound } from "~/src/components/errors/NotFound";
 
 
-export const Main = (props: RouteComponentProps<void>) => {
+export const Main = (props: Router.RouteComponentProps<void>) => {
 
   return (
     <div>
       <Header location={props.location.pathname} />
-      <Switch>
-        <Route exact path="/landing/" component={Home} />
-        <Route exact path="/landing/home" component={Home} />
-        <Route exact path="/landing/company" component={Company} />
-        <Route exact path="/landing/login" component={Login} />
-        <Route path="/landing/*" component={ErrorNotFound} />
-      </Switch>
+      <RouterDOM.Switch>
+        <RouterDOM.Route exact path="/landing/" component={Home} />
+        <RouterDOM.Route exact path="/landing/home" component={Home} />
+        <RouterDOM.Route exact path="/landing/company" component={Company} />
+        <RouterDOM.Route exact path="/landing/login" component={Login} />
+        <RouterDOM.Route path="/landing/*" component={ErrorNotFound} />
+      </RouterDOM.Switch>
     </div>
   );
 

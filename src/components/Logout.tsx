@@ -1,32 +1,29 @@
 import * as React from "react";
-import { Redirect } from "react-router";
+import * as Router from "react-router";
 
 import * as AuthUtils from "~/src/utils/auth";
 import * as LoginUtils from "~/src/utils/login";
 import { Button } from "~/src/components/Button";
 
 
-export class Logout extends React.Component<{}, {}> {
+export const Logout = () => {
 
-  logout = async () => {
+  const logout = async () => {
     await LoginUtils.logout();
-    <Redirect to="/" />
+    <Router.Redirect to="/" />
   };
 
 
-  render(): JSX.Element {
-
-    if (!AuthUtils.isAuthenticated()) {
-      return (
-        <Redirect to="/" />
-      );
-    }
-
+  if (!AuthUtils.isAuthenticated()) {
     return (
-      <Button text="Logout"
-              color="cardinal-inv"
-              callback={this.logout} />
+      <Router.Redirect to="/" />
     );
   }
 
-}
+  return (
+    <Button text="Logout"
+            color="cardinal-inv"
+            callback={logout} />
+  );
+
+};

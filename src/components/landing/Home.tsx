@@ -1,15 +1,18 @@
 import * as React from "react";
-import { RouteComponentProps} from "react-router";
+import * as RouterDOM from "react-router-dom";
+import { RouteComponentProps } from "react-router";
 
 
-export class Home extends React.Component<RouteComponentProps<void>, {}> {
+export const Home = (props: RouteComponentProps<void>) => {
 
-  render(): JSX.Element {
-    return (
-      <div>
-        home
-      </div>
-    );
-  }
+  return (
+    <div>
+      <ul>
+        <li><RouterDOM.Link to="/landing/login">login</RouterDOM.Link></li>
+        <li><RouterDOM.Link to="/landing/company">RouterDOM.Link company</RouterDOM.Link></li>
+        <li><a href="/landing/company">anchor company</a></li>
+      </ul>
+    </div>
+  );
 
-}
+};

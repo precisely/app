@@ -1,21 +1,18 @@
 import * as React from "react";
-import { Route, Switch } from "react-router-dom";
-import { RouteComponentProps} from "react-router";
+import * as RouterDOM from "react-router-dom";
 
 
-export class Main extends React.Component<RouteComponentProps<void>, {}> {
+export const Main = () => {
 
-  render(): JSX.Element {
-    return (
-      <div>
-        app main
-        {/* <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/company" component={Company} />
-            </Switch> */}
-      </div>
-    );
-  }
+  return (
+    <div>
+      app main
+      <RouterDOM.Switch>
+        {/* <RouterDOM.Route exact path="/app" component={Main} />
+            <RouterDOM.Route exact path="/home" component={Home} />
+            <RouterDOM.Route exact path="/company" component={Company} /> */}
+      </RouterDOM.Switch>
+    </div>
+  );
 
-}
+};

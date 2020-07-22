@@ -10,22 +10,22 @@ interface Props {
 }
 
 
-export class Button extends React.Component<Props, {}> {
+export const Button = (propsRaw: Props) => {
 
-  public static defaultProps = {
+  const propsDefault = {
     text: "Button",
     color: "ink",
     callback: () => {}
   };
 
-  render(): JSX.Element {
-    return (
-      <button
-        className={`btn btn-${this.props.color}`}
-        onClick={this.props.callback}>
-        {this.props.text}
-      </button>
-    );
-  }
+  const props = { ...propsDefault, ...propsRaw };
 
-}
+  return (
+    <button
+      className={`btn btn-${props.color}`}
+      onClick={props.callback}>
+      {props.text}
+    </button>
+  );
+
+};
