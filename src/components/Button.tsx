@@ -4,17 +4,23 @@ import "./Button.css";
 
 
 interface Props {
-  text: string,
-  color: string,
-  callback: () => void
+  color?: string,
+  classes?: string,
+  disabled?: boolean,
+  text?: string,
+  type?: string,
+  callback?: () => void
 }
 
 
 export const Button = (propsRaw: Props) => {
 
   const propsDefault = {
-    text: "Button",
     color: "ink",
+    classes: "",
+    disabled: false,
+    text: "Button",
+    type: "button",
     callback: () => {}
   };
 
@@ -22,7 +28,8 @@ export const Button = (propsRaw: Props) => {
 
   return (
     <button
-      className={`btn btn-${props.color}`}
+      className={`btn btn-${props.color} ${props.classes}`}
+      disabled={props.disabled}
       onClick={props.callback}>
       {props.text}
     </button>

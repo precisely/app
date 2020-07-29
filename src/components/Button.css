@@ -1,7 +1,6 @@
 .btn {
   @apply
   flex justify-center
-  py-1 px-8
   font-bold text-xs
   border rounded cursor-pointer;
 }
@@ -36,4 +35,8 @@
 
 .btn-cobalt {
   @apply bg-cobalt text-cloud;
+}
+
+.btn-grey {
+  @apply bg-grey text-cloud;
 }

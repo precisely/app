@@ -37,6 +37,7 @@ export const Header = (props: Props): JSX.Element => {
       return (
         <Button text="Login"
                 color="cardinal-inv"
+                classes="py-1 px-8"
                 callback={login} />
       );
     }
