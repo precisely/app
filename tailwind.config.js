@@ -14,22 +14,15 @@ module.exports = {
         // primary:
         // - black and white
         ink: "#191818",
+        grey: "#8D8D8D",
         cloud: "#F2F2F2",
         coconut: "#FEFEFE",
         // - reds and pinks
-        cardinal: {
-          default: "#E71F54",
-          darker: "#CD1647",
-          darkest: "#B81442"
-        },
+        cardinal: "#E71F54",
         blush: "#F28599",
         puff: "#FDEDF2",
         // - blues
-        cobalt: {
-          default: "#1A73E8",
-          darker: "#1260BA",
-          darkest: "#1054A3"
-        },
+        cobalt: "#1A73E8",
         peppermint: "#F3F8FE",
         // - green
         parakeet: "#1EC69C",
