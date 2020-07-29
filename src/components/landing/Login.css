@@ -1,3 +1,9 @@
 .input-text {
-  @apply border-solid border;
+  @apply border-solid border
+  text-xs
+  block p-2 w-full;
+}
+
+.input-text:invalid {
+  @apply border-cardinal;
 }
