@@ -7,3 +7,9 @@
 .input-text:invalid {
   @apply border-cardinal;
 }
+
+@media (prefers-color-scheme: dark) {
+  .input-text {
+    @apply bg-ink text-cloud;
+  }
+}
