@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 import * as React from "react";
 import * as Router from "react-router";
+import * as RouterDOM from "react-router-dom";
 
 import * as AuthUtils from "~/src/utils/auth";
 import * as LoginUtils from "~/src/utils/login";
@@ -50,7 +51,7 @@ export const Login = (props: Router.RouteComponentProps) => {
 
   return (
     <div className="">
-      <div className="pt-5 pb-5 flex justify-center text-lg font-bold">
+      <div className="pt-5 pb-5 flex justify-center text-xl font-bold">
         Welcome Back to Precisely
       </div>
       <form ref={loginFormRef} onSubmit={login}>
@@ -86,6 +87,19 @@ export const Login = (props: Router.RouteComponentProps) => {
                     text="Login" />
           </div>
         </div>
+        <RouterDOM.Link to="/landing/reset"
+                        className="ctr text-xs font-bold pt-8">
+          Forgot password?
+        </RouterDOM.Link>
+        <div className="ctr text-xs pt-8">
+          <div>
+            Don't have an account yet?
+          </div>
+        </div>
+        <RouterDOM.Link to="/landing/signup"
+                        className="ctr text-xs font-bold">
+          Sign up
+        </RouterDOM.Link>
       </form>
     </div>
   );
