@@ -2,7 +2,6 @@ import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
-import { Company } from "~/src/components/landing/Company";
 import { Header1 } from "~/src/components/Header1";
 import { Home } from "~/src/components/landing/Home";
 import { Login } from "~/src/components/landing/Login";
@@ -19,7 +18,6 @@ export const Main = (props: Router.RouteComponentProps) => {
       <RouterDOM.Switch>
         <RouterDOM.Route exact path="/landing/" component={Home} />
         <RouterDOM.Route exact path="/landing/home" component={Home} />
-        <RouterDOM.Route exact path="/landing/company" component={Company} />
         <RouterDOM.Route exact path="/landing/login" component={Login} />
         <RouterDOM.Route exact path="/landing/reset" component={Reset} />
         <RouterDOM.Route exact path="/landing/signup" component={Signup} />

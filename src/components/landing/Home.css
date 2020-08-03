@@ -1,0 +1,7 @@
+.stuffs {
+  @apply flex flex-col p-3;
+}
+
+.stuffs img {
+  @apply h-20 mb-2;
+}

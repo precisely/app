@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 71 143" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Phone">
+        <path d="M71,5C71,2.241 68.759,0 66,0L5,0C2.241,0 -0,2.241 -0,5L-0,138C-0,140.759 2.241,143 5,143L66,143C68.759,143 71,140.759 71,138L71,5ZM66.5,16.5L4.5,16.5L4.5,126.5L66.5,126.5L66.5,16.5ZM43.162,8.897C43.162,8.124 42.535,7.497 41.762,7.497L29.238,7.497C28.465,7.497 27.838,8.124 27.838,8.897L27.838,9.597C27.838,10.37 28.465,10.997 29.238,10.997L41.762,10.997C42.535,10.997 43.162,10.37 43.162,9.597L43.162,8.897Z" style="fill:rgb(212,56,87);"/>
+    </g>
+    <g id="Background">
+    </g>
+</svg>
