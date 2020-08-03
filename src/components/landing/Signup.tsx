@@ -50,7 +50,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
 
   return (
     <div className="">
-      <div className="pt-5 pb-5 flex justify-center text-xl font-bold">
+      <div className="h1">
         Welcome to Precisely
       </div>
       <div className="grid grid-cols-6 text-xs">

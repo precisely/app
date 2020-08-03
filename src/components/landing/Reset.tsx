@@ -10,7 +10,7 @@ import { Button } from "~/src/components/Button";
 import "./common.css";
 
 
-export const Reset = (props: Router.RouteComponentProps) => {
+export const Reset = () => {
 
   const resetFormRef = React.useRef(null);
   const [valid, setValid] = React.useState(false);
@@ -57,7 +57,7 @@ export const Reset = (props: Router.RouteComponentProps) => {
 
   return (
     <div className="">
-      <div className="pt-5 pb-1 text-center text-xl font-bold">
+      <div className="h1">
         Reset your password
       </div>
       <div className="grid grid-cols-6 text-xs">

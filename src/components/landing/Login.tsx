@@ -51,7 +51,7 @@ export const Login = (props: Router.RouteComponentProps) => {
 
   return (
     <div className="">
-      <div className="pt-5 pb-5 text-center text-xl font-bold">
+      <div className="h1">
         Welcome Back to Precisely
       </div>
       <form ref={loginFormRef} onSubmit={login}>
