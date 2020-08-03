@@ -10,18 +10,17 @@ import { Button } from "~/src/components/Button";
 import "./common.css";
 
 
-export const Login = (props: Router.RouteComponentProps) => {
+export const Signup = (props: Router.RouteComponentProps) => {
 
-  const loginFormRef = React.useRef(null);
+  const signupFormRef = React.useRef(null);
   const [valid, setValid] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await LoginUtils.login(email, password);
-    const to = _.get(props, ["location", "state", "from"], "/");
-    props.history.push(to);
+    //await LoginUtils.signup(email, password);
+    // FIXME!!!
   };
 
   const onChangeEmail = (event: React.FormEvent<HTMLInputElement>) => {
@@ -34,8 +33,8 @@ export const Login = (props: Router.RouteComponentProps) => {
 
   React.useEffect(() => {
     setValid(
-      loginFormRef.current && _.every(
-        loginFormRef.current.elements,
+      signupFormRef.current && _.every(
+        signupFormRef.current.elements,
         (elt: HTMLFormElement) => {
           return elt.checkValidity();
         }
@@ -51,10 +50,15 @@ export const Login = (props: Router.RouteComponentProps) => {
 
   return (
     <div className="">
-      <div className="pt-5 pb-5 text-center text-xl font-bold">
-        Welcome Back to Precisely
+      <div className="pt-5 pb-5 flex justify-center text-xl font-bold">
+        Welcome to Precisely
       </div>
-      <form ref={loginFormRef} onSubmit={login}>
+      <div className="grid grid-cols-6 text-xs">
+        <div className="col-start-2 col-span-4 text-center">
+          Thank you for your interest. Please fill out this form to sign up.
+        </div>
+      </div>
+      <form ref={signupFormRef} onSubmit={login}>
         <div className="pt-5 grid grid-cols-4 text-sm">
           <div className="col-start-2 col-span-2 pb-8">
             <label>
@@ -79,27 +83,26 @@ export const Login = (props: Router.RouteComponentProps) => {
                      required
                      name="password" />
             </label>
+            <div className="text-2xs">
+              Minimum 8 characters and at least 1 digit or symbol
+            </div>
           </div>
           <div className="col-start-2 col-span-2">
             <Button type="submit"
                     color={valid ? "cardinal" : "grey"}
                     classes="w-full py-2"
-                    text="Login" />
+                    text="Sign Up" />
           </div>
         </div>
       </form>
-      <RouterDOM.Link to="/landing/reset"
-                      className="ctr text-xs font-bold pt-8">
-        Forgot password?
-      </RouterDOM.Link>
       <div className="ctr text-xs pt-8">
         <div>
-          Don't have an account yet?
+          Already have an account?
         </div>
       </div>
-      <RouterDOM.Link to="/landing/signup"
+      <RouterDOM.Link to="/landing/login"
                       className="ctr text-xs font-bold">
-        Sign up
+        Login
       </RouterDOM.Link>
     </div>
   );

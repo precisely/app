@@ -1,7 +1,15 @@
 .ctr {
-  @apply flex justify-center items-center;
+  @apply flex justify-center items-center text-center;
 }
 
 .rt {
-  @apply flex justify-end items-center;
+  @apply flex justify-end items-center text-right;
+}
+
+.text-2xs {
+  font-size: .6rem;
+}
+
+.text-3xs {
+  font-size: .5rem;
 }

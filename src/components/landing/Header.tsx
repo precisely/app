@@ -17,6 +17,14 @@ interface Props {
 export const Header = (props: Props): JSX.Element => {
 
   const urlLogin = "/landing/login";
+  const urlReset = "/landing/reset";
+  const urlSignup = "/landing/signup";
+
+  const urlsNoLoginButton = [
+    urlLogin,
+    urlReset,
+    urlSignup
+  ];
 
   const history = RouterDOM.useHistory();
 
@@ -25,7 +33,7 @@ export const Header = (props: Props): JSX.Element => {
   };
 
   const button: JSX.Element = (() => {
-    if (props.location === urlLogin) {
+    if (urlsNoLoginButton.includes(props.location)) {
       return null;
     }
     else if (AuthUtils.isAuthenticated()) {
