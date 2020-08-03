@@ -11,6 +11,9 @@ import imgTransparentDoctor from "~/assets/images/transparent-doctor.svg";
 import imgTestTube from "~/assets/images/test-tube.svg";
 import imgHome from "~/assets/images/home.svg";
 
+import imgLogoApollo from "~/assets/images/logo-apollo.jpg";
+import imgLogoNarayana from "~/assets/images/logo-narayana.png";
+
 
 export const Home = () => {
 
@@ -57,9 +60,18 @@ export const Home = () => {
       </div>
       <div className="mt-8 text-center font-bold">
         In partnership with
-        <div>
-          
+        <div className="mt-4 grid grid-cols-2">
+          <div className="flex justify-center">
+            <img className="w-3/5" src={imgLogoNarayana} />
+          </div>
+          <div className="flex justify-center">
+            <img className="w-3/5" src={imgLogoApollo} />
+          </div>
         </div>
+      </div>
+      <hr className="mt-8" />
+      {/* FIXME: Implment About, etc. accordion. */}
+      <div>
       </div>
     </div>
   );
