@@ -12,6 +12,7 @@ import { Privacy } from "~/src/components/Privacy";
 import { NotFound as ErrorNotFound } from "~/src/components/errors/NotFound";
 
 import "react-toastify/dist/ReactToastify.css";
+import "~/src/toast.css";
 import "~/src/components/common.css";
 
 
@@ -42,7 +43,10 @@ const Root = () => {
           <RouterDOM.Route path="*" component={ErrorNotFound} />
         </RouterDOM.Switch>
       </RouterDOM.BrowserRouter>
-      <Toast.ToastContainer />
+      <Toast.ToastContainer
+        autoClose={3500}
+        position="top-right"
+        hideProgressBar={true} />
     </div>
   );
 

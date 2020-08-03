@@ -1,0 +1,15 @@
+.Toastify__toast {
+  @apply text-center font-bold;
+}
+
+.Toastify__toast--info {
+  @apply bg-lapis;
+}
+
+.Toastify__toast--warning {
+  @apply bg-monarch;
+}
+
+.Toastify__toast--error {
+  @apply bg-flame;
+}

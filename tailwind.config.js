@@ -33,10 +33,11 @@ module.exports = {
         parakeet: "#1EC69C",
         // secondary:
         clover: "#20C882",
-        monarch: "#FA6400",
+        monarch: "#FA6400", // warning messages
+        flame: "#E74C3C",   // error messages
         proton: "#7451F0",
         butterscotch: "#F7B500",
-        lapis: "#0080FF",
+        lapis: "#0080FF",   // info messages
         salamander: "#FF4400",
         royal: "#7700F4",
         bubblegum: "#FF14B0",
