@@ -41,3 +41,18 @@ export async function logout() {
     toast.error("Something broke horribly!");
   }
 }
+
+
+export async function signup(email: string, password: string) {
+  const data = { user: { email, password } };
+  try {
+    const resp: ApiUtils.Result<{}> = await ApiUtils.api<AuthUtils.UserData>(
+      `${process.env.URL_BACKEND}/auth/signup`, "POST", data);
+    return resp.ok;
+  }
+  catch (error) {
+    // TODO: Add proper error handling.
+    toast.error("Something broke in the signup process.");
+    return false;
+  }
+}

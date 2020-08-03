@@ -10,17 +10,30 @@ import { Button } from "~/src/components/Button";
 import "./common.css";
 
 
+enum SignupState {
+  None,
+  Success,
+  Failure
+}
+
+
 export const Signup = (props: Router.RouteComponentProps) => {
 
   const signupFormRef = React.useRef(null);
   const [valid, setValid] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [signupState, setSignupState] = React.useState(SignupState.None);
 
-  const login = async (event: React.FormEvent<HTMLFormElement>) => {
+  const signup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    //await LoginUtils.signup(email, password);
-    // FIXME!!!
+    const signupResult = await LoginUtils.signup(email, password);
+    if (signupResult) {
+      setSignupState(SignupState.Success);
+    }
+    else {
+      setSignupState(SignupState.Failure);
+    }
   };
 
   const onChangeEmail = (event: React.FormEvent<HTMLInputElement>) => {
@@ -48,6 +61,24 @@ export const Signup = (props: Router.RouteComponentProps) => {
     );
   }
 
+  if (SignupState.Success === signupState) {
+    return (
+      <div>
+        FIXME
+        all good
+      </div>
+    );
+  }
+
+  if (SignupState.Failure === signupState) {
+    return (
+      <div>
+        FIXME
+        fail
+      </div>
+    );
+  }
+
   return (
     <div className="">
       <div className="h1">
@@ -58,7 +89,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
           Thank you for your interest. Please fill out this form to sign up.
         </div>
       </div>
-      <form ref={signupFormRef} onSubmit={login}>
+      <form ref={signupFormRef} onSubmit={signup}>
         <div className="pt-5 grid grid-cols-4">
           <div className="col-start-2 col-span-2 pb-6">
             <label>
