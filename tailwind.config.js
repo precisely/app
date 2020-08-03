@@ -10,6 +10,11 @@ module.exports = {
       fontFamily: {
         sans: ["Ageo", "Helvetica", "Arial", "sans-serif"]
       },
+      fontSize: {
+        "3xs": ".5rem",
+        "2xs": ".6rem",
+        "7xl": "5rem"
+      },
       colors: {
         // primary:
         // - black and white

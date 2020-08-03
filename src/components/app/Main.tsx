@@ -16,7 +16,7 @@ export const Main = () => {
           You are logged in.
         </p>
       </div>
-      <div className="pt-6 grid grid-cols-6 text-xs text-center">
+      <div className="pt-6 grid grid-cols-6 text-sm text-center">
         <div className="col-start-2 col-span-4">
           <RouterDOM.Link to="/terms"
                           className="p-1 font-bold">

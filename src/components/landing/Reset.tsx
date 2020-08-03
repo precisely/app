@@ -60,13 +60,13 @@ export const Reset = () => {
       <div className="h1">
         Reset your password
       </div>
-      <div className="grid grid-cols-6 text-xs">
+      <div className="grid grid-cols-6 text-sm">
         <div className="col-start-2 col-span-4 text-center">
           Please enter your email address to receive a link to reset your password
         </div>
       </div>
       <form ref={resetFormRef} onSubmit={reset}>
-        <div className="pt-5 grid grid-cols-4 text-sm">
+        <div className="pt-5 grid grid-cols-4">
           <div className="col-start-2 col-span-2 pb-8">
             <label>
               Email
@@ -88,7 +88,7 @@ export const Reset = () => {
         </div>
       </form>
       <RouterDOM.Link to="/landing/login"
-                      className="ctr text-xs font-bold pt-6">
+                      className="ctr text-sm font-bold pt-6">
         Back to Login
       </RouterDOM.Link>
     </div>

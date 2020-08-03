@@ -55,7 +55,7 @@ export const Login = (props: Router.RouteComponentProps) => {
         Welcome Back to Precisely
       </div>
       <form ref={loginFormRef} onSubmit={login}>
-        <div className="pt-5 grid grid-cols-4 text-sm">
+        <div className="pt-5 grid grid-cols-4">
           <div className="col-start-2 col-span-2 pb-6">
             <label>
               Email
@@ -89,16 +89,16 @@ export const Login = (props: Router.RouteComponentProps) => {
         </div>
       </form>
       <RouterDOM.Link to="/landing/reset"
-                      className="ctr text-xs font-bold pt-6">
+                      className="ctr text-sm font-bold pt-6">
         Forgot password?
       </RouterDOM.Link>
-      <div className="ctr text-xs pt-6">
+      <div className="ctr text-sm pt-6">
         <div>
           Don't have an account yet?
         </div>
       </div>
       <RouterDOM.Link to="/landing/signup"
-                      className="ctr text-xs font-bold">
+                      className="ctr text-sm font-bold">
         Sign up
       </RouterDOM.Link>
     </div>

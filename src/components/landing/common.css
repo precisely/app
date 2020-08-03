@@ -1,6 +1,6 @@
 .input-text {
   @apply border-solid border
-  text-xs
+  text-sm
   block p-2 w-full;
 }
 

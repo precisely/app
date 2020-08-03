@@ -53,13 +53,13 @@ export const Signup = (props: Router.RouteComponentProps) => {
       <div className="h1">
         Welcome to Precisely
       </div>
-      <div className="grid grid-cols-6 text-xs">
+      <div className="grid grid-cols-6 text-sm">
         <div className="col-start-2 col-span-4 text-center">
           Thank you for your interest. Please fill out this form to sign up.
         </div>
       </div>
       <form ref={signupFormRef} onSubmit={login}>
-        <div className="pt-5 grid grid-cols-4 text-sm">
+        <div className="pt-5 grid grid-cols-4">
           <div className="col-start-2 col-span-2 pb-6">
             <label>
               Email
@@ -83,7 +83,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
                      required
                      name="password" />
             </label>
-            <div className="text-2xs">
+            <div className="text-xs">
               Minimum 8 characters and at least 1 digit or symbol
             </div>
           </div>
@@ -95,7 +95,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
           </div>
         </div>
       </form>
-      <div className="pt-6 grid grid-cols-6 text-xs text-center">
+      <div className="pt-6 grid grid-cols-6 text-sm text-center">
         <div className="col-start-2 col-span-4">
           By signing up, you agree to the
           <RouterDOM.Link to="/terms"
@@ -109,13 +109,13 @@ export const Signup = (props: Router.RouteComponentProps) => {
           </RouterDOM.Link>
         </div>
       </div>
-      <div className="ctr text-xs pt-6">
+      <div className="ctr text-sm pt-6">
         <div>
           Already have an account?
         </div>
       </div>
       <RouterDOM.Link to="/landing/login"
-                      className="ctr text-xs font-bold">
+                      className="ctr text-sm font-bold">
         Login
       </RouterDOM.Link>
     </div>
