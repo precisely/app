@@ -95,7 +95,21 @@ export const Signup = (props: Router.RouteComponentProps) => {
           </div>
         </div>
       </form>
-      <div className="ctr text-xs pt-8">
+      <div className="pt-6 grid grid-cols-6 text-xs text-center">
+        <div className="col-start-2 col-span-4">
+          By signing up, you agree to the
+          <RouterDOM.Link to="/terms"
+                          className="p-1 font-bold">
+            Terms and Conditions
+          </RouterDOM.Link>
+          and
+          <RouterDOM.Link to="/privacy"
+                          className="p-1 font-bold">
+            Privacy Policy
+          </RouterDOM.Link>.
+        </div>
+      </div>
+      <div className="ctr text-xs pt-6">
         <div>
           Already have an account?
         </div>
