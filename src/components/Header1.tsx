@@ -2,8 +2,8 @@ import * as React from "react";
 import * as RouterDOM from "react-router-dom";
 
 import * as AuthUtils from "~/src/utils/auth";
+import * as LoginUtils from "~/src/utils/login";
 import { Button } from "~/src/components/Button";
-import { Logout } from "~/src/components/Logout";
 
 import logoFileLt from "~/assets/images/logo/full-red-black.svg";
 import logoFileDk from "~/assets/images/logo/full-red-white.svg";
@@ -14,7 +14,7 @@ interface Props {
 }
 
 
-export const Header = (props: Props): JSX.Element => {
+export const Header1 = (props: Props): JSX.Element => {
 
   const urlLogin = "/landing/login";
   const urlReset = "/landing/reset";
@@ -32,13 +32,21 @@ export const Header = (props: Props): JSX.Element => {
     history.push(urlLogin);
   };
 
+  const logout = async () => {
+    await LoginUtils.logout();
+    history.push("/");
+  };
+
   const button: JSX.Element = (() => {
     if (urlsNoLoginButton.includes(props.location)) {
       return null;
     }
     else if (AuthUtils.isAuthenticated()) {
       return (
-        <Logout />
+        <Button text="Logout"
+                color="cardinal-inv"
+                classes="py-1 px-8"
+                callback={logout} />
       );
     }
     else {

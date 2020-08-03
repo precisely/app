@@ -106,7 +106,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
           <RouterDOM.Link to="/privacy"
                           className="p-1 font-bold">
             Privacy Policy
-          </RouterDOM.Link>.
+          </RouterDOM.Link>
         </div>
       </div>
       <div className="ctr text-xs pt-6">

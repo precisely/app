@@ -1,9 +1,8 @@
 import * as React from "react";
 import * as RouterDOM from "react-router-dom";
-import { RouteComponentProps } from "react-router";
 
 
-export const Home = (props: RouteComponentProps<void>) => {
+export const Home = () => {
 
   return (
     <div>

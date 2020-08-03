@@ -1,16 +1,16 @@
 import * as React from "react";
 import * as Router from "react-router";
 
-import { Header } from "~/src/components/landing/Header";
+import { Header1 } from "~/src/components/Header1";
 
 import "./common.css";
 
 
-export const Privacy = (props: Router.RouteComponentProps<void>) => {
+export const Privacy = (props: Router.RouteComponentProps) => {
 
   return (
     <div>
-      <Header location={props.location.pathname} />
+      <Header1 location={props.location.pathname} />
       <div className="">
         <div className="h1">
           Privacy Policy
