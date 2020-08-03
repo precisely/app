@@ -20,15 +20,11 @@ export async function login(email: string, password: string) {
   catch (error) {
     // TODO: Add proper error handling.
     toast.error("Something broke!");
-    console.log(error);
   }
 }
 
 
 export async function logout() {
-  AuthUtils.removeAuthentication();
-  // TODO: Figure out why this does not work:
-  /*
   try {
     const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>(
       `${process.env.URL_BACKEND}/auth/logout`, "DELETE");
@@ -42,6 +38,6 @@ export async function logout() {
   }
   catch (error) {
     // TODO: Add proper error handling.
+    toast.error("Something broke horribly!");
   }
-  */
 }

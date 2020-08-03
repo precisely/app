@@ -15,7 +15,7 @@ export interface Result<T> {
 export async function api<T>(
   url: string,
   method: string,
-  data: object
+  data?: object
 ): Promise<Result<T>> {
   const headers = {
     "Accept": "application/json",
@@ -26,27 +26,26 @@ export async function api<T>(
   }
   const body = JSON.stringify(data);
   const resp = await fetch(url, { method, headers, body });
-  if (!resp.ok) {
-    return {
-      status: resp.status,
-      ok: resp.ok
-    };
+  const res: Result<T> = {
+    status: resp.status,
+    ok: resp.ok
+  };
+  // attempt JSON body decode
+  try {
+    const respJson = await resp.json();
+    res.data = respJson;
   }
-  const respJson = await resp.json();
+  catch (err) {
+    // probably no response body, do nothing
+  }
+  // attempt Authentication header JWT decode
   const jwtRaw = resp.headers.get("Authorization");
   if (jwtRaw) {
     const decoded: AuthUtils.JWTDecoded = JWTDecode.default(jwtRaw);
-    return {
-      status: resp.status,
-      ok: resp.ok,
-      data: respJson,
-      jwt: {
-        token: jwtRaw,
-        decoded
-      }
+    res.jwt = {
+      token: jwtRaw,
+      decoded
     };
   }
-  else {
-    return respJson;
-  }
+  return res;
 }

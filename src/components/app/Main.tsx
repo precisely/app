@@ -1,10 +1,19 @@
 import * as React from "react";
 import * as RouterDOM from "react-router-dom";
 
+import * as LoginUtils from "~/src/utils/login";
+
 import escutcheon from "~/assets/images/escutcheon/red.svg";
 
 
 export const Main = () => {
+
+  const history = RouterDOM.useHistory();
+
+  const logout = async () => {
+    await LoginUtils.logout();
+    history.push("/");
+  };
 
   return (
     <div>
@@ -16,8 +25,8 @@ export const Main = () => {
           You are logged in.
         </p>
       </div>
-      <div className="pt-6 grid grid-cols-6 text-sm text-center">
-        <div className="col-start-2 col-span-4">
+      <div className="pt-6 grid grid-cols-8 text-sm text-center">
+        <div className="col-start-2 col-span-6">
           <RouterDOM.Link to="/terms"
                           className="p-1 font-bold">
             Terms and Conditions
@@ -26,6 +35,11 @@ export const Main = () => {
           <RouterDOM.Link to="/privacy"
                           className="p-1 font-bold">
             Privacy Policy
+          </RouterDOM.Link>
+          —
+          <RouterDOM.Link to="" onClick={logout}
+                          className="p-1 font-bold">
+            Logout
           </RouterDOM.Link>
         </div>
       </div>
