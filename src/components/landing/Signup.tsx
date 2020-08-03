@@ -60,7 +60,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
       </div>
       <form ref={signupFormRef} onSubmit={login}>
         <div className="pt-5 grid grid-cols-4 text-sm">
-          <div className="col-start-2 col-span-2 pb-8">
+          <div className="col-start-2 col-span-2 pb-6">
             <label>
               Email
               <input className="input-text"

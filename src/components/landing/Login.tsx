@@ -56,7 +56,7 @@ export const Login = (props: Router.RouteComponentProps) => {
       </div>
       <form ref={loginFormRef} onSubmit={login}>
         <div className="pt-5 grid grid-cols-4 text-sm">
-          <div className="col-start-2 col-span-2 pb-8">
+          <div className="col-start-2 col-span-2 pb-6">
             <label>
               Email
               <input className="input-text"
@@ -89,10 +89,10 @@ export const Login = (props: Router.RouteComponentProps) => {
         </div>
       </form>
       <RouterDOM.Link to="/landing/reset"
-                      className="ctr text-xs font-bold pt-8">
+                      className="ctr text-xs font-bold pt-6">
         Forgot password?
       </RouterDOM.Link>
-      <div className="ctr text-xs pt-8">
+      <div className="ctr text-xs pt-6">
         <div>
           Don't have an account yet?
         </div>

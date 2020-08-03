@@ -88,7 +88,7 @@ export const Reset = (props: Router.RouteComponentProps) => {
         </div>
       </form>
       <RouterDOM.Link to="/landing/login"
-                      className="ctr text-xs font-bold pt-8">
+                      className="ctr text-xs font-bold pt-6">
         Back to Login
       </RouterDOM.Link>
     </div>
