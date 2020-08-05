@@ -27,7 +27,7 @@ export async function api<T>(args: Args): Promise<Result<T>> {
     ...args.headers
   };
   if (AuthUtils.isAuthenticated()) {
-    headers["Authorization"] = AuthUtils.makeAuthorizationHeader();
+    headers["Authorization"] = AuthUtils.authorization();
   }
   const body = JSON.stringify(args.data);
   const url = args.query ?

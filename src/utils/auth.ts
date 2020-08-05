@@ -63,10 +63,8 @@ export function removeAuthentication() {
 }
 
 
-export function makeAuthorizationHeader(): {[key: string]: string} {
-  return {
-    Authorization: `Bearer ${localStorage.getItem(LS_AUTH_ACCESS_TOKEN)}`
-  };
+export function authorization(): string {
+  return `${localStorage.getItem(LS_AUTH_ACCESS_TOKEN)}`;
 }
 
 
