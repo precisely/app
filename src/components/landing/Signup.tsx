@@ -61,34 +61,35 @@ export const Signup = (props: Router.RouteComponentProps) => {
     );
   }
 
-  if (SignupState.Success === signupState) {
-    return (
-      <div>
-        FIXME
-        all good
-      </div>
-    );
-  }
-
-  if (SignupState.Failure === signupState) {
-    return (
-      <div>
-        FIXME
-        fail
-      </div>
-    );
-  }
-
-  return (
-    <div className="">
-      <div className="h1">
-        Welcome to Precisely
-      </div>
-      <div className="grid grid-cols-6 text-sm">
-        <div className="col-start-2 col-span-4 text-center">
+  const renderHelper = () => {
+    if (SignupState.None === signupState) {
+      return (
+        <div>
           Thank you for your interest. Please fill out this form to sign up.
         </div>
-      </div>
+      );
+    }
+    else if (SignupState.Success === signupState) {
+      return (
+        <div>
+          Your signup application was received. Please check your email for a confirmation link.
+        </div>
+      );
+    }
+    else if (SignupState.Failure === signupState) {
+      return (
+        <div>
+          Something went wrong with your signup process. Perhaps you have already registered for Precisely in the past?
+        </div>
+      );
+    }
+  };
+
+  const renderForm = () => {
+    if (SignupState.None !== signupState) {
+      return null;
+    }
+    return (
       <form ref={signupFormRef} onSubmit={signup}>
         <div className="pt-5 grid grid-cols-4">
           <div className="col-start-2 col-span-2 pb-6">
@@ -126,6 +127,20 @@ export const Signup = (props: Router.RouteComponentProps) => {
           </div>
         </div>
       </form>
+    );
+  };
+
+  return (
+    <div className="">
+      <div className="h1">
+        Welcome to Precisely
+      </div>
+      <div className="grid grid-cols-6 text-sm">
+        <div className="col-start-2 col-span-4 text-center">
+          {renderHelper()}
+        </div>
+      </div>
+      {renderForm()}
       <div className="pt-6 grid grid-cols-6 text-sm text-center">
         <div className="col-start-2 col-span-4">
           By signing up, you agree to the
