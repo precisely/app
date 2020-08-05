@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as RouterDOM from "react-router-dom";
 
 import { Button } from "~/src/components/Button";
 
@@ -16,6 +17,12 @@ import imgLogoNarayana from "~/assets/images/logo-narayana.png";
 
 
 export const Home = () => {
+
+  const history = RouterDOM.useHistory();
+
+  const goToSignup = () => {
+    history.push("/landing/signup");
+  };
 
   return (
     <div className="">
@@ -55,7 +62,8 @@ export const Home = () => {
         <div className="col-start-2 col-span-2">
           <Button color="cobalt"
                   classes="w-full py-2"
-                  text="Get Started" />
+                  text="Get Started"
+                  callback={goToSignup} />
         </div>
       </div>
       <div className="mt-8 text-center font-bold">
