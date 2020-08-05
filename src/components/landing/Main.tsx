@@ -7,6 +7,7 @@ import { Home } from "~/src/components/landing/Home";
 import { Login } from "~/src/components/landing/Login";
 import { Reset } from "~/src/components/landing/Reset";
 import { Signup } from "~/src/components/landing/Signup";
+import { Confirm } from "~/src/components/landing/Confirm";
 import { NotFound as ErrorNotFound } from "~/src/components/errors/NotFound";
 
 
@@ -21,6 +22,7 @@ export const Main = (props: Router.RouteComponentProps) => {
         <RouterDOM.Route exact path="/landing/login" component={Login} />
         <RouterDOM.Route exact path="/landing/reset" component={Reset} />
         <RouterDOM.Route exact path="/landing/signup" component={Signup} />
+        <RouterDOM.Route exact path="/landing/signup/confirm/:token" component={Confirm} />
         <RouterDOM.Route path="/landing/*" component={ErrorNotFound} />
       </RouterDOM.Switch>
     </div>

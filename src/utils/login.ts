@@ -64,3 +64,20 @@ export async function signup(email: string, password: string) {
     return false;
   }
 }
+
+
+export async function confirm(token: string) {
+  try {
+    const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
+      method: "GET",
+      query: {confirmation_token: token},
+      url: `${process.env.URL_BACKEND}/auth/confirmation`
+    });
+    return resp.ok;
+  }
+  catch (error) {
+    // TODO: Add proper error handling.
+    toast.error("Something broke in the signup confirmation process.");
+    return false;
+  }
+}
