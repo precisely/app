@@ -3,6 +3,15 @@ import * as JWTDecode from "jwt-decode";
 import * as AuthUtils from "~/src/utils/auth";
 
 
+export interface Args {
+  method: string,
+  headers?: object,
+  url: string,
+  query?: Record<string, string>,
+  data?: object
+}
+
+
 export interface Result<T> {
   status: number,
   ok: boolean,
@@ -11,21 +20,20 @@ export interface Result<T> {
 }
 
 
-// TODO: Support optional additional headers. Keyword params appropriate?
-export async function api<T>(
-  url: string,
-  method: string,
-  data?: object
-): Promise<Result<T>> {
+export async function api<T>(args: Args): Promise<Result<T>> {
   const headers = {
     "Accept": "application/json",
     "Content-Type": "application/json",
+    ...args.headers
   };
   if (AuthUtils.isAuthenticated()) {
     headers["Authorization"] = AuthUtils.makeAuthorizationHeader();
   }
-  const body = JSON.stringify(data);
-  const resp = await fetch(url, { method, headers, body });
+  const body = JSON.stringify(args.data);
+  const url = args.query ?
+              (`${args.url}?` + new URLSearchParams(args.query)) :
+              args.url;
+  const resp = await fetch(url, { method: args.method, headers, body });
   const res: Result<T> = {
     status: resp.status,
     ok: resp.ok

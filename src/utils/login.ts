@@ -7,8 +7,11 @@ import * as ApiUtils from "~/src/utils/api";
 export async function login(email: string, password: string) {
   const data = { user: { email, password } };
   try {
-    const resp: ApiUtils.Result<AuthUtils.UserData> = await ApiUtils.api<AuthUtils.UserData>(
-      `${process.env.URL_BACKEND}/auth/login`, "POST", data);
+    const resp: ApiUtils.Result<AuthUtils.UserData> = await ApiUtils.api<AuthUtils.UserData>({
+      method: "POST",
+      data,
+      url: `${process.env.URL_BACKEND}/auth/login`
+    });
     if (resp.ok) {
       AuthUtils.saveAuthentication(resp.data, resp.jwt);
       toast.info("Login successful. Welcome.");
@@ -26,8 +29,10 @@ export async function login(email: string, password: string) {
 
 export async function logout() {
   try {
-    const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>(
-      `${process.env.URL_BACKEND}/auth/logout`, "DELETE");
+    const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
+      method: "DELETE",
+      url: `${process.env.URL_BACKEND}/auth/logout`
+    });
     if (resp.ok) {
       AuthUtils.removeAuthentication();
       toast.info("Logout successful. Goodbye!");
@@ -46,8 +51,11 @@ export async function logout() {
 export async function signup(email: string, password: string) {
   const data = { user: { email, password } };
   try {
-    const resp: ApiUtils.Result<{}> = await ApiUtils.api<AuthUtils.UserData>(
-      `${process.env.URL_BACKEND}/auth/signup`, "POST", data);
+    const resp: ApiUtils.Result<{}> = await ApiUtils.api<AuthUtils.UserData>({
+      method: "POST",
+      data,
+      url: `${process.env.URL_BACKEND}/auth/signup`
+    });
     return resp.ok;
   }
   catch (error) {
