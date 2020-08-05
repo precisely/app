@@ -7,7 +7,7 @@ import * as LoginUtils from "~/src/utils/login";
 
 import { Button } from "~/src/components/Button";
 
-import escutcheon from "~/assets/images/escutcheon/red.svg";
+import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
 
 
 export const Main = () => {
@@ -44,7 +44,7 @@ export const Main = () => {
     <div>
       <div className="pt-8">
         <div className="flex justify-center">
-          <img className="w-1/4" src={escutcheon} />
+          <img className="w-1/4 h-full" src={imgEscutcheon} />
         </div>
         <p className="text-center">
           You are logged in.

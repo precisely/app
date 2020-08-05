@@ -62,10 +62,10 @@ export const Home = () => {
         In partnership with
         <div className="mt-4 grid grid-cols-2">
           <div className="flex justify-center">
-            <img className="w-3/5" src={imgLogoNarayana} />
+            <img className="w-3/5 h-full" src={imgLogoNarayana} />
           </div>
           <div className="flex justify-center">
-            <img className="w-3/5" src={imgLogoApollo} />
+            <img className="w-3/5 h-full" src={imgLogoApollo} />
           </div>
         </div>
       </div>
