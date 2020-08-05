@@ -97,6 +97,8 @@ export const Signup = (props: Router.RouteComponentProps) => {
               Email
               <input className="input-text"
                      placeholder="Enter your email"
+                     autocomplete="off"
+                     autoCapitalize="off"
                      value={email}
                      required
                      pattern=".+@.+"
@@ -133,7 +135,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
   return (
     <div className="">
       <div className="h1">
-        Welcome to Precisely
+        Create an Account
       </div>
       <div className="grid grid-cols-6 text-sm">
         <div className="col-start-2 col-span-4 text-center">
