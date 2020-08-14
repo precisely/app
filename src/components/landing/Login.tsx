@@ -3,8 +3,8 @@ import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
+import * as SessionUtils from "~/src/utils/session";
 import * as AuthUtils from "~/src/utils/auth";
-import * as LoginUtils from "~/src/utils/login";
 import { Button } from "~/src/components/Button";
 
 import "./common.css";
@@ -19,7 +19,7 @@ export const Login = (props: Router.RouteComponentProps) => {
 
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await LoginUtils.login(email, password);
+    await AuthUtils.login(email, password);
     const to = _.get(props, ["location", "state", "from"], "/");
     props.history.push(to);
   };
@@ -43,7 +43,7 @@ export const Login = (props: Router.RouteComponentProps) => {
     );
   });
 
-  if (AuthUtils.isAuthenticated()) {
+  if (SessionUtils.isAuthenticated()) {
     return (
       <Router.Redirect to="/" />
     );

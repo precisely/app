@@ -3,7 +3,7 @@ import * as RouterDOM from "react-router-dom";
 import { toast } from "react-toastify";
 
 import * as ApiUtils from "~/src/utils/api";
-import * as LoginUtils from "~/src/utils/login";
+import * as AuthUtils from "~/src/utils/auth";
 
 import { Button } from "~/src/components/Button";
 
@@ -17,7 +17,7 @@ export const Main = () => {
   const [stuff, setStuff] = React.useState([]);
 
   const logout = async () => {
-    await LoginUtils.logout();
+    await AuthUtils.logout();
     history.push("/");
   };
 

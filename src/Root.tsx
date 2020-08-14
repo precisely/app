@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import * as RouterDOM from "react-router-dom";
 import * as Toast from "react-toastify";
 
-import * as AuthUtils from "~/src/utils/auth";
+import * as SessionUtils from "~/src/utils/session";
 import { AuthRoute } from "~/src/AuthRoute";
 import { Main as LandingMain } from "~/src/components/landing/Main";
 import { Main as AppMain } from "~/src/components/app/Main";
@@ -19,7 +19,7 @@ import "~/src/components/common.css";
 const Root = () => {
 
   const redirect = () => {
-    if (AuthUtils.isAuthenticated()) {
+    if (SessionUtils.isAuthenticated()) {
       return (
         <RouterDOM.Redirect to="/app" />
       );

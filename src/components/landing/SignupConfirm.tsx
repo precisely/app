@@ -2,8 +2,8 @@ import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
+import * as SessionUtils from "~/src/utils/session";
 import * as AuthUtils from "~/src/utils/auth";
-import * as LoginUtils from "~/src/utils/login";
 import { Spinner } from "~/src/components/Spinner";
 
 import "./common.css";
@@ -24,7 +24,7 @@ export const SignupConfirm = (props: Router.RouteComponentProps) => {
 
   React.useEffect(() => {
     const go = async () => {
-      const confirmResult = await LoginUtils.signupConfirm(token);
+      const confirmResult = await AuthUtils.signupConfirm(token);
       if (confirmResult) {
         setConfirmState(ConfirmState.Success);
       }
@@ -37,7 +37,7 @@ export const SignupConfirm = (props: Router.RouteComponentProps) => {
     }
   });
 
-  if (AuthUtils.isAuthenticated()) {
+  if (SessionUtils.isAuthenticated()) {
     return (
       <Router.Redirect to="/" />
     );

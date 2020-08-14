@@ -3,8 +3,8 @@ import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
+import * as SessionUtils from "~/src/utils/session";
 import * as AuthUtils from "~/src/utils/auth";
-import * as LoginUtils from "~/src/utils/login";
 import { Button } from "~/src/components/Button";
 
 import "./common.css";
@@ -27,7 +27,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
 
   const signup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const signupResult = await LoginUtils.signup(email, password);
+    const signupResult = await AuthUtils.signup(email, password);
     if (signupResult) {
       setSignupState(SignupState.Success);
     }
@@ -55,7 +55,7 @@ export const Signup = (props: Router.RouteComponentProps) => {
     );
   });
 
-  if (AuthUtils.isAuthenticated()) {
+  if (SessionUtils.isAuthenticated()) {
     return (
       <Router.Redirect to="/" />
     );

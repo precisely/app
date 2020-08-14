@@ -3,8 +3,8 @@ import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
+import * as SessionUtils from "~/src/utils/session";
 import * as AuthUtils from "~/src/utils/auth";
-import * as LoginUtils from "~/src/utils/login";
 import { Button } from "~/src/components/Button";
 
 import "./common.css";
@@ -20,7 +20,7 @@ export const Reset = () => {
   const reset = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // FIXME!!!
-    //await LoginUtils.reset(email);
+    //await AuthUtils.reset(email);
     setResetRequestSent(true);
   };
 
@@ -39,7 +39,7 @@ export const Reset = () => {
     );
   });
 
-  if (AuthUtils.isAuthenticated()) {
+  if (SessionUtils.isAuthenticated()) {
     return (
       <Router.Redirect to="/" />
     );

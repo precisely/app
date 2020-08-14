@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import * as AuthUtils from "~/src/utils/auth";
+import * as SessionUtils from "~/src/utils/session";
 
 
 function renderMergedProps(component:  React.ComponentClass<any> | React.StatelessComponent<any>, ...rest: any[]) {
@@ -23,7 +23,7 @@ export const AuthRoute = (authProps: AuthProps) => {
   const { component, ...rest } = authProps;
 
   function wrapRender(routeProps: any) {
-    return AuthUtils.isAuthenticated() ? (
+    return SessionUtils.isAuthenticated() ? (
       renderMergedProps(authProps.component, routeProps, rest)
     ) : (
       <Redirect to={{ pathname: "/landing/login", state: { from: routeProps.location.pathname } }} />

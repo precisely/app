@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as RouterDOM from "react-router-dom";
 
+import * as SessionUtils from "~/src/utils/session";
 import * as AuthUtils from "~/src/utils/auth";
-import * as LoginUtils from "~/src/utils/login";
 import { Button } from "~/src/components/Button";
 
 import logoFileLt from "~/assets/images/logo/full-red-black.svg";
@@ -33,7 +33,7 @@ export const Header1 = (props: Props): JSX.Element => {
   };
 
   const logout = async () => {
-    await LoginUtils.logout();
+    await AuthUtils.logout();
     history.push("/");
   };
 
@@ -41,7 +41,7 @@ export const Header1 = (props: Props): JSX.Element => {
     if (urlsNoLoginButton.includes(props.location)) {
       return null;
     }
-    else if (AuthUtils.isAuthenticated()) {
+    else if (SessionUtils.isAuthenticated()) {
       return (
         <Button text="Logout"
                 color="cardinal-inv"
