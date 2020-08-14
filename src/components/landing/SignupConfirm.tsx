@@ -16,7 +16,7 @@ enum ConfirmState {
 }
 
 
-export const Confirm = (props: Router.RouteComponentProps) => {
+export const SignupConfirm = (props: Router.RouteComponentProps) => {
 
   const { token } = Router.useParams();
 
@@ -24,7 +24,7 @@ export const Confirm = (props: Router.RouteComponentProps) => {
 
   React.useEffect(() => {
     const go = async () => {
-      const confirmResult = await LoginUtils.confirm(token);
+      const confirmResult = await LoginUtils.signupConfirm(token);
       if (confirmResult) {
         setConfirmState(ConfirmState.Success);
       }

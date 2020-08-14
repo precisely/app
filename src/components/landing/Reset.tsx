@@ -72,6 +72,8 @@ export const Reset = () => {
               Email
               <input className="input-text"
                      placeholder="Enter your email"
+                     autocomplete="off"
+                     autoCapitalize="off"
                      value={email}
                      required
                      pattern=".+@.+"

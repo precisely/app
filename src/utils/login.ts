@@ -66,7 +66,7 @@ export async function signup(email: string, password: string) {
 }
 
 
-export async function confirm(token: string) {
+export async function signupConfirm(token: string) {
   try {
     const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
       method: "GET",
