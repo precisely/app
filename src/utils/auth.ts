@@ -19,10 +19,12 @@ export async function login(email: string, password: string) {
     else {
       toast.error("Wrong username or password!");
     }
+    return resp.ok;
   }
   catch (error) {
     // TODO: Add proper error handling.
     toast.error("Something broke!");
+    return false;
   }
 }
 
@@ -40,10 +42,12 @@ export async function logout() {
     else {
       toast.error("Logout failed.");
     }
+    return resp.ok;
   }
   catch (error) {
     // TODO: Add proper error handling.
     toast.error("Something broke horribly!");
+    return false;
   }
 }
 
@@ -78,6 +82,42 @@ export async function signupConfirm(token: string) {
   catch (error) {
     // TODO: Add proper error handling.
     toast.error("Something broke in the signup confirmation process.");
+    return false;
+  }
+}
+
+
+export async function reset(email: string) {
+  const data = { user: { email } };
+  try {
+    const resp: ApiUtils.Result<{}> = await ApiUtils.api<SessionUtils.UserData>({
+      method: "POST",
+      data,
+      url: `${process.env.URL_BACKEND}/auth/password`
+    });
+    return resp.ok;
+  }
+  catch (error) {
+    // TODO: Add proper error handling.
+    toast.error("Something broke in the reset password request process.");
+    return false;
+  }
+}
+
+
+export async function resetConfirm(token: string, password: string) {
+  try {
+    const data = { user: { reset_password_token: token, password } };
+    const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
+      method: "PUT",
+      data,
+      url: `${process.env.URL_BACKEND}/auth/password`
+    });
+    return resp.ok;
+  }
+  catch (error) {
+    // TODO: Add proper error handling.
+    toast.error("Something broke in the reset confirmation process.");
     return false;
   }
 }
