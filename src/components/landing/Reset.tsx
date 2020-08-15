@@ -19,8 +19,7 @@ export const Reset = () => {
 
   const reset = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // FIXME!!!
-    //await AuthUtils.reset(email);
+    await AuthUtils.reset(email);
     setResetRequestSent(true);
   };
 
