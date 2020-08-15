@@ -61,7 +61,7 @@ export const Login = (props: Router.RouteComponentProps) => {
               Email
               <input className="input-text"
                      placeholder="Enter your email"
-                     autocomplete="off"
+                     autoComplete="off"
                      autoCapitalize="off"
                      value={email}
                      required
