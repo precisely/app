@@ -19,9 +19,15 @@ export const Login = (props: Router.RouteComponentProps) => {
 
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await AuthUtils.login(email, password);
-    const to = _.get(props, ["location", "state", "from"], "/");
-    props.history.push(to);
+    const resp = await AuthUtils.login(email, password);
+    if (resp) {
+      const to = _.get(props, ["location", "state", "from"], "/");
+      props.history.push(to);
+    }
+    else {
+      setEmail("");
+      setPassword("");
+    }
   };
 
   const onChangeEmail = (event: React.FormEvent<HTMLInputElement>) => {
