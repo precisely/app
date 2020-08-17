@@ -1,3 +1,27 @@
+.login-form-grid {
+  @apply grid grid-cols-8;
+}
+
+.login-form-row {
+  @apply col-start-2 col-end-8;
+}
+
+@screen md {
+  .login-form-row {
+    @apply col-start-3 col-end-7;
+  }
+}
+
+.login-form-row-short {
+  @apply col-start-3 col-end-7;
+}
+
+@screen md {
+  .login-form-row-short {
+    @apply col-start-4 col-end-6;
+  }
+}
+
 .input-text {
   @apply border-solid border
   text-sm

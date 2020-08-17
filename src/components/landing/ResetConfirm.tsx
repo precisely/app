@@ -65,8 +65,8 @@ export const ResetConfirm = (props: Router.RouteComponentProps) => {
     if (ConfirmState.Waiting === confirmState) {
       return (
         <form ref={passwordFormRef} onSubmit={resetPassword}>
-          <div className="pt-5 grid grid-cols-4">
-            <div className="col-start-2 col-span-2 pb-6">
+          <div className="pt-5 login-form-grid">
+            <div className="login-form-row">
               <label>
                 New password
                 <input className="input-text"
@@ -78,7 +78,7 @@ export const ResetConfirm = (props: Router.RouteComponentProps) => {
                        name="password" />
               </label>
             </div>
-            <div className="col-start-2 col-span-2">
+            <div className="pt-6 login-form-row">
               <Button type="submit"
                       color={valid ? "cardinal" : "grey"}
                       classes="w-full py-2"

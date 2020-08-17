@@ -61,8 +61,8 @@ export const Login = (props: Router.RouteComponentProps) => {
         Welcome Back to Precisely
       </div>
       <form ref={loginFormRef} onSubmit={login}>
-        <div className="pt-5 grid grid-cols-4">
-          <div className="col-start-2 col-span-2 pb-6">
+        <div className="pt-5 login-form-grid">
+          <div className="login-form-row">
             <label>
               Email
               <input className="input-text"
@@ -76,7 +76,7 @@ export const Login = (props: Router.RouteComponentProps) => {
                      name="email" />
             </label>
           </div>
-          <div className="col-start-2 col-span-2 pb-8">
+          <div className="pt-6 login-form-row">
             <label>
               Password
               <input className="input-text"
@@ -88,7 +88,7 @@ export const Login = (props: Router.RouteComponentProps) => {
                      name="password" />
             </label>
           </div>
-          <div className="col-start-2 col-span-2">
+          <div className="pt-8 login-form-row-short">
             <Button type="submit"
                     color={valid ? "cardinal" : "grey"}
                     classes="w-full py-2"

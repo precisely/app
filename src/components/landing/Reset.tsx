@@ -65,8 +65,8 @@ export const Reset = () => {
         </div>
       </div>
       <form ref={resetFormRef} onSubmit={reset}>
-        <div className="pt-5 grid grid-cols-4">
-          <div className="col-start-2 col-span-2 pb-8">
+        <div className="pt-5 login-form-grid">
+          <div className="login-form-row">
             <label>
               Email
               <input className="input-text"
@@ -80,7 +80,7 @@ export const Reset = () => {
                      name="email" />
             </label>
           </div>
-          <div className="col-start-2 col-span-2">
+          <div className="pt-8 login-form-row-short">
             <Button type="submit"
                     color={valid ? "cardinal" : "grey"}
                     classes="w-full py-2"
