@@ -1,6 +1,10 @@
 // -*- eval: (rainbow-mode 1) -*-
 
 module.exports = {
+  future: {
+    // for TailwindCSS v2.0 (currently v1.7.0)
+    removeDeprecatedGapUtilities: true
+  },
   theme: {
     extend: {
       screens: {
