@@ -6,13 +6,25 @@
     "since 2017-06"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "npx jest",
+    "watch": "npx jest --watch",
     "dev": "npx parcel index.html",
     "build": "npx parcel build index.html -d build/ --public-url ./"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript",
+      "@babel/preset-react"
+    ]
+  },
   "devDependencies": {
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.10",
     "autoprefixer": "^9.7.4",
-    "jest": "^25.1.0",
+    "jest": "^26.4.0",
     "parcel-bundler": "^1.12.4",
     "postcss": "^7.0.26",
     "tailwindcss": "^1.2.0",
