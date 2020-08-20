@@ -9,7 +9,7 @@
     "test": "npx jest",
     "watch": "npx jest --watch",
     "dev": "npx parcel index.html",
-    "start": "npx serve build",
+    "start": "npx serve --single build",
     "build": "NODE_ENV=production npx parcel build index.html -d build/ --public-url ./"
   },
   "babel": {
