@@ -9,7 +9,8 @@
     "test": "npx jest",
     "watch": "npx jest --watch",
     "dev": "npx parcel index.html",
-    "build": "npx parcel build index.html -d build/ --public-url ./"
+    "start": "npx serve build",
+    "build": "NODE_ENV=production npx parcel build index.html -d build/ --public-url ./"
   },
   "babel": {
     "presets": [
@@ -19,6 +20,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
@@ -45,6 +47,7 @@
     "react-router-dom": "^5.1.2",
     "react-toastify": "^6.0.6",
     "routes": "^2.1.0",
+    "serve": "^11.3.2",
     "src": "^1.1.2"
   }
 }

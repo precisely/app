@@ -1,6 +1,11 @@
 // -*- eval: (rainbow-mode 1) -*-
 
 module.exports = {
+  purge: [
+    "src/**/*.html",
+    "src/**/*.jsx",
+    "src/**/*.tsx"
+  ],
   future: {
     // for TailwindCSS v2.0 (currently v1.7.0)
     removeDeprecatedGapUtilities: true
