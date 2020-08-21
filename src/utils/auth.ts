@@ -10,7 +10,7 @@ export async function login(email: string, password: string) {
     const resp: ApiUtils.Result<SessionUtils.UserData> = await ApiUtils.api<SessionUtils.UserData>({
       method: "POST",
       data,
-      url: `${process.env.URL_BACKEND}/auth/login`
+      url: `${process.env.BACKEND_URL}/auth/login`
     });
     if (resp.ok) {
       SessionUtils.saveAuthentication(resp.data, resp.jwt);
@@ -33,7 +33,7 @@ export async function logout() {
   try {
     const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
       method: "DELETE",
-      url: `${process.env.URL_BACKEND}/auth/logout`
+      url: `${process.env.BACKEND_URL}/auth/logout`
     });
     if (resp.ok) {
       SessionUtils.removeAuthentication();
@@ -58,7 +58,7 @@ export async function signup(email: string, password: string) {
     const resp: ApiUtils.Result<{}> = await ApiUtils.api<SessionUtils.UserData>({
       method: "POST",
       data,
-      url: `${process.env.URL_BACKEND}/auth/signup`
+      url: `${process.env.BACKEND_URL}/auth/signup`
     });
     return resp.ok;
   }
@@ -75,7 +75,7 @@ export async function signupConfirm(token: string) {
     const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
       method: "GET",
       query: {confirmation_token: token},
-      url: `${process.env.URL_BACKEND}/auth/confirmation`
+      url: `${process.env.BACKEND_URL}/auth/confirmation`
     });
     return resp.ok;
   }
@@ -93,7 +93,7 @@ export async function reset(email: string) {
     const resp: ApiUtils.Result<{}> = await ApiUtils.api<SessionUtils.UserData>({
       method: "POST",
       data,
-      url: `${process.env.URL_BACKEND}/auth/password`
+      url: `${process.env.BACKEND_URL}/auth/password`
     });
     return resp.ok;
   }
@@ -111,7 +111,7 @@ export async function resetConfirm(token: string, password: string) {
     const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
       method: "PUT",
       data,
-      url: `${process.env.URL_BACKEND}/auth/password`
+      url: `${process.env.BACKEND_URL}/auth/password`
     });
     return resp.ok;
   }

@@ -25,7 +25,7 @@ export const Main = () => {
     try {
       const resp: ApiUtils.Result<{message: string}> = await ApiUtils.api<{message: string}>({
         method: "GET",
-        url: `${process.env.URL_BACKEND}/endpoints/private`
+        url: `${process.env.BACKEND_URL}/endpoints/private`
       });
       if (resp.ok) {
         toast.info("Succesfully made private request.");
