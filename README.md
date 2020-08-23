@@ -39,3 +39,19 @@ Follow these guidelines:
 - Let's not introduce Redux into this unless we absolutely have to.
 - Embrace Tailwind for styling.
 - Do not break dark mode. Do not break the app for common screen sizes.
+## Deployment
+
+The app is currently deployed in Heroku using [`serve`](https://github.com/vercel/serve). A Heroku environment requires:
+
+- environment variable `BACKEND_URL`
+
+Note that changing Heroku environment variables requires a rebuild and redeployment (since these variables are baked into the static files):
+
+```
+git commit --allow-empty -m "temporary commit"
+git push heroku master
+git reset 'HEAD~'
+git push -f heroku master
+```
+
+For the same reason, Heroku pipelines _cannot_ be used! Since pipelines use the same slug, copying from staging to production will copy the wrong baked-in environment variables.
