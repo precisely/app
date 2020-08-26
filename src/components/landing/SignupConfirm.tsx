@@ -54,7 +54,11 @@ export const SignupConfirm = (props: Router.RouteComponentProps) => {
     else if (ConfirmState.Success === confirmState) {
       return (
         <div>
-          Confirmation succeeded! Please login.
+          Confirmation succeeded! Please
+          <RouterDOM.Link to="/landing/login"
+                          className="pl-1 font-bold">
+            Login
+          </RouterDOM.Link>!
         </div>
       );
     }
