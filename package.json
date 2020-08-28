@@ -19,13 +19,26 @@
       "@babel/preset-react"
     ]
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.ts"
+    ],
+    "moduleNameMapper": {
+      "^~/src/(.*)$": "<rootDir>/src/$1",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/mocks/file.js",
+      "\\.(scss|sass|css)$": "identity-obj-proxy"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^10.4.9",
     "@types/jest": "^26.0.10",
     "autoprefixer": "^9.7.4",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.0",
     "parcel-bundler": "^1.12.4",
     "postcss": "^7.0.26",
