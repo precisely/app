@@ -5,9 +5,10 @@
 .dir-locals.el
 .idea
 
-# environment handling: ignore all .env files except .env.sample
+# environment handling: ignore all .env files except .env.sample and .env.test
 .env*
 !.env.sample
+!.env.test
 
 # build artifacats
 build
