@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "~/assets/*": ["./*"],
-      "~/src/*": ["./*"]
+      "~/assets/*": ["./assets/*"],
+      "~/src/*": ["./src/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

@@ -1,4 +1,4 @@
-import * as JWTDecode from "jwt-decode";
+import JWTDecode from "jwt-decode";
 
 import * as SessionUtils from "~/src/utils/session";
 
@@ -49,7 +49,7 @@ export async function api<T>(args: Args): Promise<Result<T>> {
   // attempt Authentication header JWT decode
   const jwtRaw = resp.headers.get("Authorization");
   if (jwtRaw) {
-    const decoded: SessionUtils.JWTDecoded = JWTDecode.default(jwtRaw);
+    const decoded: SessionUtils.JWTDecoded = JWTDecode(jwtRaw);
     res.jwt = {
       token: jwtRaw,
       decoded
