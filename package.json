@@ -21,6 +21,7 @@
   },
   "jest": {
     "preset": "ts-jest",
+    "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
       "<rootDir>/jest.setup.ts"
     ],
@@ -41,8 +42,6 @@
     "autoprefixer": "^9.7.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.0",
-    "msw": "^0.20.5",
-    "node-fetch": "^2.5.7",
     "parcel-bundler": "^1.12.4",
     "postcss": "^7.0.26",
     "tailwindcss": "^1.2.0",
