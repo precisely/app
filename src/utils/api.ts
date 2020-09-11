@@ -47,13 +47,15 @@ export async function api<T>(args: Args): Promise<Result<T>> {
     // probably no response body, do nothing
   }
   // attempt Authentication header JWT decode
-  const jwtRaw = resp.headers.get("Authorization");
-  if (jwtRaw) {
-    const decoded: SessionUtils.JWTDecoded = JWTDecode(jwtRaw);
-    res.jwt = {
-      token: jwtRaw,
-      decoded
-    };
+  if (resp.headers) {
+    const jwtRaw = resp.headers.get("Authorization");
+    if (jwtRaw) {
+      const decoded: SessionUtils.JWTDecoded = JWTDecode(jwtRaw);
+      res.jwt = {
+	token: jwtRaw,
+	decoded
+      };
+    }
   }
   return res;
 }
