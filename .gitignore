@@ -12,5 +12,6 @@
 
 # build artifacats
 build
+build-local
 dist
 node_modules

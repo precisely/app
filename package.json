@@ -9,8 +9,10 @@
     "test": "npx jest",
     "watch": "npx jest --watch",
     "dev": "npx parcel index.html",
+    "build": "NODE_ENV=production npx parcel build index.html -d build/ --public-url '/'", 
     "start": "npx serve --single build",
-    "build": "NODE_ENV=production npx parcel build index.html -d build/ --public-url '/'"
+    "build-local": "NODE_ENV=production npx parcel build index.html -d build-local/ --public-url './'",
+    "start-local": "npx serve --single build-local"
   },
   "babel": {
     "presets": [
