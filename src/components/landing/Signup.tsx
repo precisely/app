@@ -17,7 +17,7 @@ enum SignupState {
 }
 
 
-export const Signup = (props: Router.RouteComponentProps) => {
+export const Signup = (_props: Router.RouteComponentProps) => {
 
   const signupFormRef = React.useRef(null);
   const [valid, setValid] = React.useState(false);
@@ -82,6 +82,12 @@ export const Signup = (props: Router.RouteComponentProps) => {
           Something went wrong with your signup process. Perhaps you have already registered for Precisely in the past?
         </div>
       );
+    }
+    else {
+      // keep compiler happy @@
+      return (<div>
+	This should never render.
+      </div>);
     }
   };
 
