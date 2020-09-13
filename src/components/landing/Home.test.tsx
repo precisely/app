@@ -1,22 +1,10 @@
+import * as History from "history";
 import * as React from "react";
 import * as TLR from "@testing-library/react";
 
+import * as ReactUtils from "~/src/utils/react";
+
 import { Home } from "./Home";
-
-
-const mocks = {
-  useHistory: {
-    push: jest.fn()
-  }
-};
-
-// NB: Use this technique to test code relying on the useHistory hook.
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useHistory: () => ({
-    push: mocks.useHistory.push
-  }),
-}));
 
 
 describe("Home", () => {
@@ -26,11 +14,12 @@ describe("Home", () => {
     expect(TLR.screen.getByText(/Protects/)).toHaveTextContent("Protects you and your family");
   });
 
-  test("go to signup", async () => {
-    TLR.render(<Home />);
+  test("home", async () => {
+    const h = History.createMemoryHistory();
+    TLR.render(ReactUtils.routedComponent((_props) => <Home />, h));
     const signupButton = TLR.screen.getByText("Get Started");
     TLR.fireEvent.click(signupButton);
-    expect(mocks.useHistory.push).toHaveBeenCalledWith("/landing/signup");
+    expect(h.location.pathname).toEqual("/landing/signup");
   });
 
 });

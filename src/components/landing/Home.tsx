@@ -78,7 +78,7 @@ export const Home = () => {
         </div>
       </div>
       <hr className="mt-8" />
-      {/* FIXME: Implment About, etc. accordion. */}
+      {/* TODO: Implement About, etc. accordion. */}
       <div>
       </div>
     </div>
