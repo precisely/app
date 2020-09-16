@@ -17,7 +17,7 @@ export async function login(email: string, password: string) {
       toast.info("Login successful. Welcome.");
     }
     else {
-      toast.error("Wrong username or password!");
+      toast.error("Unknown or wrong email or password!");
     }
     return resp.ok;
   }
