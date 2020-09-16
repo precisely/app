@@ -48,3 +48,17 @@ export function oneLogout() {
     });
   });
 }
+
+
+export function oneSignup() {
+  global.fetch = jest.fn().mockImplementationOnce((url: string, args: object) => {
+    if (!url.match(/.*\/auth\/signup/)) {
+      throw `unexpected fetch URL in mock: expected /auth/signup, received ${url}`;
+    }
+
+    return Promise.resolve({
+      ok: true,
+      status: 200
+    });
+  });
+}
