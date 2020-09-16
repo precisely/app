@@ -68,7 +68,7 @@ export function authorization(): string {
 }
 
 
-export function username(): string {
+export function email(): string {
   const user = JSON.parse(localStorage.getItem(LS_SESSION_USER));
   return _.get(user, ["email"], "");
 }
