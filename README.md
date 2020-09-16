@@ -39,6 +39,15 @@ Follow these guidelines:
 - Let's not introduce Redux into this unless we absolutely have to.
 - Embrace Tailwind for styling.
 - Do not break dark mode. Do not break the app for common screen sizes.
+
+
+## Tests
+
+- Jest is the test runner.
+- [React Testing Library](https://github.com/testing-library/react-testing-library) is the React testing renderer.
+- An attempt was made to use [Mock Service Worker](https://github.com/mswjs/msw), but as of 2020-09, its TypeScript wrappers did not support adjusting response headers, which made JSW authentication impossible to emulate. Consequently, `fetch` mocks use Jest facilities.
+
+
 ## Deployment
 
 The app is currently deployed in Heroku using [`serve`](https://github.com/vercel/serve). A Heroku environment requires:
