@@ -16,7 +16,7 @@ enum ConfirmState {
 }
 
 
-export const SignupConfirm = (props: Router.RouteComponentProps) => {
+export const SignupConfirm = (_props: Router.RouteComponentProps) => {
 
   const { token } = Router.useParams();
 
@@ -68,6 +68,10 @@ export const SignupConfirm = (props: Router.RouteComponentProps) => {
           Confirmation failed. Please contact Precisely support.
         </div>
       );
+    }
+    else {
+      // keep compiler happy @@
+      return (<div>This should never render.</div>);
     }
   };
 

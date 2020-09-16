@@ -85,9 +85,7 @@ export const Signup = (_props: Router.RouteComponentProps) => {
     }
     else {
       // keep compiler happy @@
-      return (<div>
-	This should never render.
-      </div>);
+      return (<div>This should never render.</div>);
     }
   };
 
