@@ -1,10 +1,21 @@
 import * as MockAPI from "~/src/mocks/api";
+import * as MockSession from "~/src/mocks/session";
 
-import * as AuthUtils from "./auth";
-import * as SessionUtils from "./session";
+import * as AuthUtils from "~/src/utils/auth";
+import * as SessionUtils from "~/src/utils/session";
 
 
 describe("AuthUtils", () => {
+
+  afterEach(() => {
+    SessionUtils.removeAuthentication();
+  });
+
+  test("mock login", async () => {
+    expect(SessionUtils.isAuthenticated()).toBeFalsy();
+    MockSession.loginAs("alice@example.com");
+    expect(SessionUtils.isAuthenticated()).toBeTruthy();
+  });
 
   test("login-logout sequence", async () => {
     MockAPI.oneLoginAs("alice@example.com");
