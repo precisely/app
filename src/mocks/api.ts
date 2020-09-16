@@ -1,18 +1,18 @@
 import * as JWTSimple from "jwt-simple";
 
 
-export function oneLoginAs(username: string) {
+export function oneLoginAs(email: string) {
   global.fetch = jest.fn().mockImplementationOnce((url: string, args: object) => {
     if (!url.match(/.*\/auth\/login/)) {
       throw `unexpected fetch URL in mock: expected /auth/login, received ${url}`;
     }
 
     const body = args["body"];
-    const email = JSON.parse(body)["user"]["email"];
+    const emailArg = JSON.parse(body)["user"]["email"];
     const exp = Math.round((Date.now() + (15 * 60)) / 1000);
-    const token = JWTSimple.encode({email, exp}, "key");
+    const token = JWTSimple.encode({emailArg, exp}, "key");
 
-    if (username !== email) {
+    if (email !== emailArg) {
       return Promise.resolve({
 	ok: false,
 	status: 401
@@ -28,7 +28,7 @@ export function oneLoginAs(username: string) {
       json: () => {
 	return {
 	  "id": 1,
-	  email
+	  emailArg
 	};
       }
     });
