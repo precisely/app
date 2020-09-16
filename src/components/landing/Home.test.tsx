@@ -15,11 +15,11 @@ describe("Home", () => {
   });
 
   test("home", async () => {
-    const h = History.createMemoryHistory();
-    TLR.render(ReactUtils.routedComponent((_props) => <Home />, h));
+    const history = History.createMemoryHistory();
+    TLR.render(ReactUtils.routedComponent((_props) => <Home />, history));
     const signupButton = TLR.screen.getByText("Get Started");
     TLR.fireEvent.click(signupButton);
-    expect(h.location.pathname).toEqual("/landing/signup");
+    expect(history.location.pathname).toEqual("/landing/signup");
   });
 
 });
