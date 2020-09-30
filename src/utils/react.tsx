@@ -7,13 +7,30 @@ import * as RouterDOM from "react-router-dom";
 export type RenderFn = (props: Router.RouteComponentProps<any>) => JSX.Element;
 
 
-export function routedComponent(renderFn: RenderFn, history?: History.History) {
-  if (!history) {
-    history = History.createMemoryHistory();
-  }
+export interface RoutedComponentArgs {
+  route?: string,
+  path?: string,
+  history?: History.History
+};
+
+
+// Instructions for use:
+// - renderFn should be a function which takes props and returns a component
+//   rendered using these props
+// - argsRaw should be an object containing some combination of route, path,
+//   and history keys. Most importantly: a _route_ is the expected address with
+//   URL param names (e.g.: "/url/location/:param1/:param2"), and a _path_ is
+//   the expected address with param values (e.g.: "/url/location/value1/value2").
+//   path can be omitted if route contains no variables.
+export function routedComponent(renderFn: RenderFn, argsRaw: RoutedComponentArgs = {}) {
+  const args: RoutedComponentArgs = {
+    route: argsRaw.route || "/",
+    path: argsRaw.path || argsRaw.route || "/",
+    history: argsRaw.history || History.createMemoryHistory({initialEntries: [argsRaw.path || argsRaw.route || "/"]})
+  };
   return (
-    <RouterDOM.Router history={history}>
-      <RouterDOM.Route render={renderFn} />
+    <RouterDOM.Router history={args.history}>
+      <RouterDOM.Route path={args.route} render={renderFn} />
     </RouterDOM.Router>
   );
 }

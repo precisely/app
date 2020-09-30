@@ -16,7 +16,7 @@ describe("Home", () => {
 
   test("home", async () => {
     const history = History.createMemoryHistory();
-    TLR.render(ReactUtils.routedComponent((_props) => <Home />, history));
+    TLR.render(ReactUtils.routedComponent((_props) => <Home />, {history}));
     const signupButton = TLR.screen.getByText("Get Started");
     TLR.fireEvent.click(signupButton);
     expect(history.location.pathname).toEqual("/landing/signup");

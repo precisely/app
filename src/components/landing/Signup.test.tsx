@@ -44,7 +44,7 @@ describe("Signup", () => {
   test("prevent signup if logged in", async () => {
     const history = History.createMemoryHistory();
     MockSession.loginAs("alice@example.com");
-    TLR.render(ReactUtils.routedComponent((props) => <Signup {...props} />, history));
+    TLR.render(ReactUtils.routedComponent((props) => <Signup {...props} />, {history}));
     expect(history.location.pathname).toEqual("/");
     expect(TLR.screen.queryByText(/Create/)).toBeNull();
   });
