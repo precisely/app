@@ -23,7 +23,7 @@ describe("Login", () => {
   test("successful login", async () => {
     // prep
     MockAPI.oneLoginAs("alice@example.com");
-    const history = History.createMemoryHistory({initialEntries: ["/come/back", "/landing/login"]});
+    const history = History.createMemoryHistory({initialEntries: ["/landing/login"]});
     history.push = jest.fn();
     TLR.render(ReactUtils.routedComponent(
       (props) => <Login {...props} />,
@@ -36,6 +36,25 @@ describe("Login", () => {
     // this should redirect back to the original
     await TLR.waitFor(() => {
       expect(history.push).toBeCalled();
+    });
+  });
+
+  test("failed login", async () => {
+    // prep
+    MockAPI.oneLoginAs("alice@example.com");
+    const history = History.createMemoryHistory({initialEntries: ["/landing/login"]});
+    history.push = jest.fn();
+    TLR.render(ReactUtils.routedComponent(
+      (props) => <Login {...props} />,
+      {route: "/landing/login", history}
+    ));
+    // fill out form
+    TLR.fireEvent.change(TLR.screen.getByLabelText("Email"), {target: {value: "bob@example.com"}});
+    TLR.fireEvent.change(TLR.screen.getByLabelText("Password"), {target: {value: "password"}});
+    TLR.fireEvent.click(TLR.screen.getByText("Login"));
+    // this should redirect back to the original
+    await TLR.waitFor(() => {
+      expect(history.push).not.toBeCalled();
     });
   });
 
