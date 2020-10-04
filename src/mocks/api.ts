@@ -90,3 +90,17 @@ export function onePasswordReset() {
     });
   });
 }
+
+
+export function onePasswordResetConfirm() {
+  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: object) => {
+    if (!url.match(/.*\/auth\/password/)) {
+      throw `unexpected fetch URL in mock: expected /auth/password, received ${url}`;
+    }
+
+    return Promise.resolve({
+      ok: true,
+      status: 204
+    });
+  });
+}
