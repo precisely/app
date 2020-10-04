@@ -25,6 +25,7 @@ describe("Login", () => {
     MockAPI.oneLoginAs("alice@example.com");
     const history = History.createMemoryHistory({initialEntries: ["/landing/login"]});
     history.push = jest.fn();
+    // render
     TLR.render(ReactUtils.routedComponent(
       (props) => <Login {...props} />,
       {route: "/landing/login", history}
