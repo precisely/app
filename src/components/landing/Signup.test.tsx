@@ -27,12 +27,9 @@ describe("Signup", () => {
     TLR.render(ReactUtils.routedComponent((props) => <Signup {...props} />));
     expect(TLR.screen.queryByText(/Create/)).toHaveTextContent("Create an Account");
     // fill out form
-    (TLR.screen.getByLabelText("Email") as HTMLInputElement).value =
-      "alice@example.com";
-    (TLR.screen.getByLabelText("Email") as HTMLInputElement).value =
-      "password";
-    TLR.fireEvent.click(
-      TLR.screen.getByText("Sign Up"));
+    TLR.fireEvent.change(TLR.screen.getByLabelText("Email"), {target: {value: "alice@example.com"}});
+    TLR.fireEvent.change(TLR.screen.getByLabelText("Password"), {target: {value: "password"}});
+    TLR.fireEvent.click(TLR.screen.getByText("Sign Up"));
     // check
     await TLR.waitFor(() => {
       expect(TLR.screen.getByText(/Your signup/))
