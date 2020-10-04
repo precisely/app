@@ -1,4 +1,3 @@
-import * as History from "history";
 import * as React from "react";
 import * as TLR from "@testing-library/react";
 

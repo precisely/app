@@ -19,9 +19,9 @@ enum ConfirmState {
 }
 
 
-export const ResetConfirm = (props: Router.RouteComponentProps) => {
+export const ResetConfirm = (_props: Router.RouteComponentProps) => {
 
-  const { token } = Router.useParams();
+  const { token } = Router.useParams<{token: string}>();
 
   const passwordFormRef = React.useRef(null);
   const [valid, setValid] = React.useState(false);
@@ -112,6 +112,10 @@ export const ResetConfirm = (props: Router.RouteComponentProps) => {
           Password reset failed. Please contact Precisely support.
         </div>
       );
+    }
+    else {
+      // keep compiler happy @@
+      return (<div>This should never render.</div>);
     }
   };
 

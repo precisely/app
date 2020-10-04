@@ -2,20 +2,20 @@ import * as JWTSimple from "jwt-simple";
 
 
 export function oneLoginAs(email: string) {
-  global.fetch = jest.fn().mockImplementationOnce((url: string, args: object) => {
+  global.fetch = jest.fn().mockImplementationOnce((url: string, args: Record<string, unknown>) => {
     if (!url.match(/.*\/auth\/login/)) {
       throw `unexpected fetch URL in mock: expected /auth/login, received ${url}`;
     }
 
-    const body = args["body"];
+    const body = args["body"] as string;
     const emailArg = JSON.parse(body)["user"]["email"];
     const exp = Math.round((Date.now() + (15 * 60)) / 1000);
     const token = JWTSimple.encode({emailArg, exp}, "key");
 
     if (email !== emailArg) {
       return Promise.resolve({
-	ok: false,
-	status: 401
+        ok: false,
+        status: 401
       });
     }
 
@@ -23,13 +23,13 @@ export function oneLoginAs(email: string) {
       ok: true,
       status: 201,
       headers: new Headers({
-	"Authorization": `Bearer ${token}`
+        "Authorization": `Bearer ${token}`
       }),
       json: () => {
-	return {
-	  "id": 1,
-	  emailArg
-	};
+        return {
+          "id": 1,
+          emailArg
+        };
       }
     });
   });
@@ -37,7 +37,7 @@ export function oneLoginAs(email: string) {
 
 
 export function oneLogout() {
-  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: object) => {
+  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: Record<string, unknown>) => {
     if (!url.match(/.*\/auth\/logout/)) {
       throw `unexpected fetch URL in mock: expected /auth/logout, received ${url}`;
     }
@@ -51,7 +51,7 @@ export function oneLogout() {
 
 
 export function oneSignup() {
-  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: object) => {
+  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: Record<string, unknown>) => {
     if (!url.match(/.*\/auth\/signup/)) {
       throw `unexpected fetch URL in mock: expected /auth/signup, received ${url}`;
     }
@@ -65,7 +65,7 @@ export function oneSignup() {
 
 
 export function oneSignupConfirm() {
-  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: object) => {
+  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: Record<string, unknown>) => {
     if (!url.match(/.*\/auth\/confirmation/)) {
       throw `unexpected fetch URL in mock: expected /auth/confirmation, received ${url}`;
     }
@@ -79,7 +79,7 @@ export function oneSignupConfirm() {
 
 
 export function onePasswordReset() {
-  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: object) => {
+  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: Record<string, unknown>) => {
     if (!url.match(/.*\/auth\/password/)) {
       throw `unexpected fetch URL in mock: expected /auth/password, received ${url}`;
     }
@@ -93,7 +93,7 @@ export function onePasswordReset() {
 
 
 export function onePasswordResetConfirm() {
-  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: object) => {
+  global.fetch = jest.fn().mockImplementationOnce((url: string, _args: Record<string, unknown>) => {
     if (!url.match(/.*\/auth\/password/)) {
       throw `unexpected fetch URL in mock: expected /auth/password, received ${url}`;
     }

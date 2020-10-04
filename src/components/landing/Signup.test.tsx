@@ -33,8 +33,8 @@ describe("Signup", () => {
     // check
     await TLR.waitFor(() => {
       expect(TLR.screen.getByText(/Your signup/))
-	.toHaveTextContent(
-	  "Your signup application was received.");
+        .toHaveTextContent(
+          "Your signup application was received.");
     });
   });
 

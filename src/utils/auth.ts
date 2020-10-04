@@ -31,7 +31,7 @@ export async function login(email: string, password: string) {
 
 export async function logout() {
   try {
-    const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
+    const resp: ApiUtils.Result<null> = await ApiUtils.api<null>({
       method: "DELETE",
       url: `${process.env.BACKEND_URL}/auth/logout`
     });
@@ -55,7 +55,7 @@ export async function logout() {
 export async function signup(email: string, password: string) {
   const data = { user: { email, password } };
   try {
-    const resp: ApiUtils.Result<{}> = await ApiUtils.api<SessionUtils.UserData>({
+    const resp: ApiUtils.Result<SessionUtils.UserData> = await ApiUtils.api<SessionUtils.UserData>({
       method: "POST",
       data,
       url: `${process.env.BACKEND_URL}/auth/signup`
@@ -72,7 +72,7 @@ export async function signup(email: string, password: string) {
 
 export async function signupConfirm(token: string) {
   try {
-    const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
+    const resp: ApiUtils.Result<null> = await ApiUtils.api<null>({
       method: "GET",
       query: {confirmation_token: token},
       url: `${process.env.BACKEND_URL}/auth/confirmation`
@@ -90,7 +90,7 @@ export async function signupConfirm(token: string) {
 export async function reset(email: string) {
   const data = { user: { email } };
   try {
-    const resp: ApiUtils.Result<{}> = await ApiUtils.api<SessionUtils.UserData>({
+    const resp: ApiUtils.Result<SessionUtils.UserData> = await ApiUtils.api<SessionUtils.UserData>({
       method: "POST",
       data,
       url: `${process.env.BACKEND_URL}/auth/password`
@@ -108,7 +108,7 @@ export async function reset(email: string) {
 export async function resetConfirm(token: string, password: string) {
   try {
     const data = { user: { reset_password_token: token, password } };
-    const resp: ApiUtils.Result<{}> = await ApiUtils.api<{}>({
+    const resp: ApiUtils.Result<null> = await ApiUtils.api<null>({
       method: "PUT",
       data,
       url: `${process.env.BACKEND_URL}/auth/password`

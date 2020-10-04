@@ -5,10 +5,10 @@ import * as SessionUtils from "~/src/utils/session";
 
 export interface Args {
   method: string,
-  headers?: object,
+  headers?: Record<string, string>,
   url: string,
   query?: Record<string, string>,
-  data?: object
+  data?: unknown
 }
 
 

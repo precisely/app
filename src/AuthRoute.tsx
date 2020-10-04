@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-explicit-any: "off" */
+
 import * as React from "react";
 import { Route, Redirect } from "react-router-dom";
 

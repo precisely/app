@@ -17,8 +17,8 @@ export const Spinner = (rawProps: Props) => {
   const props = { ...defaultProps, ...rawProps };
 
   const color: string = props.color;
-  const size: string = `${props.sizePx}px`;
-  const viewBox: string = `0 0 ${props.sizePx} ${props.sizePx}`;
+  const size = `${props.sizePx}px`;
+  const viewBox = `0 0 ${props.sizePx} ${props.sizePx}`;
 
   return (
     <svg width={size} height={size} viewBox={viewBox} preserveAspectRatio="xMidYMid">

@@ -4,14 +4,14 @@ import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
 
-export type RenderFn = (props: Router.RouteComponentProps<any>) => JSX.Element;
+export type RenderFn = (props: Router.RouteComponentProps<unknown>) => JSX.Element;
 
 
 export interface RoutedComponentArgs {
   route?: string,
   path?: string,
   history?: History.History
-};
+}
 
 
 // Instructions for use:
