@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 import * as ApiUtils from "~/src/utils/api";
 import * as AuthUtils from "~/src/utils/auth";
+import * as PIAUtils from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
 
@@ -40,6 +41,18 @@ export const Main = () => {
     }
   };
 
+  const piaEndpoint = async () => {
+    try {
+      const resp = await PIAUtils.startRun("welcome");
+      // resp.data;
+      console.log(resp);
+    }
+    catch (error) {
+      // TODO: Add proper error handling.
+      toast.error("PIA request broke!");
+    }
+  };
+
   return (
     <div>
       <div className="pt-8">
@@ -56,6 +69,14 @@ export const Main = () => {
                   color="cardinal"
                   classes="w-full py-2"
                   text="Private Endpoint" />
+        </div>
+      </div>
+      <div className="pt-6 grid grid-cols-3">
+        <div className="col-start-2">
+          <Button callback={piaEndpoint}
+                  color="cardinal"
+                  classes="w-full py-2"
+                  text="PIA Endpoint" />
         </div>
       </div>
       <div>
