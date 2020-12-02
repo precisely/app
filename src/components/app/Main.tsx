@@ -7,6 +7,7 @@ import * as AuthUtils from "~/src/utils/auth";
 import * as PIAUtils from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
+import { RunUI } from "~/src/components/app/pia/RunUI";
 
 import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
 
@@ -62,6 +63,11 @@ export const Main = () => {
         <p className="text-center">
           You are logged in.
         </p>
+      </div>
+      <div className="pt-6 grid grid-cols-3">
+        <div className="col-start-2">
+          <RunUI flowName="welcome" />
+        </div>
       </div>
       <div className="pt-6 grid grid-cols-3">
         <div className="col-start-2">
