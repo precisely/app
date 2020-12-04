@@ -18,6 +18,24 @@ interface RunUIProps {
   flowName: string
 }
 
+interface ChoicesProps {
+  type: "choices",
+  choices: string[],
+  text: string
+}
+
+interface SliderProps {
+  type: "slider"
+  min: number,
+  minTag: string,
+  max: number,
+  maxTag: string,
+  text: string,
+  increment: number
+}
+
+type ResponseElement = string | ChoicesProps | SliderProps;
+
 
 export const RunUI = (props: RunUIProps) => {
 
@@ -29,12 +47,14 @@ export const RunUI = (props: RunUIProps) => {
     setRunUIState(RunUIState.Running);
     toast.info(msg);
     try {
-      const resp = await PIAUtils.startRun("welcome");
-      console.log(resp);
+      const run = await PIAUtils.startRun("welcome");
+      console.log(run);
       setRunUIState(RunUIState.Running);
       setElements(
-        resp.response.map((elt: any, idx: number) => {
+        //fill out the type for elt any
+        run.response.map((elt: ResponseElement, idx: number) => {
           if ("string" === typeof(elt)) {
+            console.log("This is to make sure the function reloaded");
             return (
               <ChatText text={elt} key={idx} />
             );
