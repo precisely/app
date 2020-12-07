@@ -36,7 +36,6 @@ interface SliderProps {
 
 type ResponseElement = string | ChoicesProps | SliderProps;
 
-
 export const RunUI = (props: RunUIProps) => {
 
   const [runUIState, setRunUIState] = React.useState(RunUIState.NotStarted);
@@ -51,7 +50,6 @@ export const RunUI = (props: RunUIProps) => {
       console.log(run);
       setRunUIState(RunUIState.Running);
       setElements(
-        //fill out the type for elt any
         run.response.map((elt: ResponseElement, idx: number) => {
           if ("string" === typeof(elt)) {
             console.log("This is to make sure the function reloaded");
