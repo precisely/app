@@ -2,14 +2,16 @@ import * as ApiUtils from "~/src/utils/api";
 
 
 // FIXME: types any are not any, they're actually JSON
+//type JSON = null | boolean | number | string | {string: JSON} | [JSON];
+
 
 //Need to think more about how args would be used in the runs - is the type an array of JSON strings?
 interface Run {
   id: string,
   state: "running" | "suspended" | "complete",
-  result: string[],
-  response: string[],
-  runResponse: string[],
+  result: JSON,
+  response: JSON[],
+  runResponse: JSON[],
   returnMode?:  null | "block" | "redirect",
   nextId?: null | string,
   next?: null | string

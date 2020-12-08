@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 import { Button } from "~/src/components/Button";
-import { ChatText } from "~/src/components/app/pia/ChatText";
 import { Spinner } from "~/src/components/Spinner";
 
+import { ChatMessage, ChatMessageProps } from "~/src/components/app/pia/ChatMessage";
+import { ChatChoices, ChatChoicesProps } from "~/src/components/app/pia/ChatChoices";
+import { ChatSlider, ChatSliderProps } from "~/src/components/app/pia/ChatSlider";
 
 enum RunUIState {
   NotStarted,
@@ -13,28 +15,27 @@ enum RunUIState {
   Loading
 }
 
-
 interface RunUIProps {
   flowName: string
 }
 
-interface ChoicesProps {
-  type: "choices",
-  choices: string[],
-  text: string
-}
+type ResponseElement = {type: string, [key: string]: any}; //ChatMessageProps | ChatChoicesProps | ChatSliderProps;
 
-interface SliderProps {
-  type: "slider"
-  min: number,
-  minTag: string,
-  max: number,
-  maxTag: string,
-  text: string,
-  increment: number
-}
+const ResponseMap: {[key: string]: (props: ResponseElement) => JSX.Element } = {
+  slider: ChatSlider,
+  choices: ChatChoices,
+  message: ChatMessage
+};
 
-type ResponseElement = string | ChoicesProps | SliderProps;
+function normalizeResponseElement(elt: JSON): ResponseElement {
+  if (typeof elt === 'string') {
+     return { type: 'message', text: elt};
+  } else if ('type' in elt) {
+     return elt;
+  } else {
+    throw "Invalid response element"; // TODO: handle more gracefully
+  };
+}
 
 export const RunUI = (props: RunUIProps) => {
 
@@ -50,21 +51,19 @@ export const RunUI = (props: RunUIProps) => {
       console.log(run);
       setRunUIState(RunUIState.Running);
       setElements(
-        run.response.map((elt: ResponseElement, idx: number) => {
-          if ("string" === typeof(elt)) {
-            console.log("This is to make sure the function reloaded");
-            return (
-              <ChatText text={elt} key={idx} />
-            );
+        run.response.map((elt: JSON, idx: number) => {
+          //this should all become its own function, params are elt and idx
+          let responseElement = normalizeResponseElement(elt); //the idx needs to be added to the elt obj {id: "my-new-prop", ... existing-object}
+          //display the idx in the rendered components
+          let component = ResponseMap[responseElement.type];
+          if (!component) {
+            console.log("No component found for ", responseElement, " in RunUI");
+            return null;
           }
           else {
-            return (
-              <div>
-                FIXME: This needs to dispatch on elt and create the correct component.
-              </div>
-            );
+            return component(responseElement);
           }
-        })
+        }).filter( x => !!x)
       );
     }
     catch (error) {
