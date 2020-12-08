@@ -33,6 +33,7 @@ export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
 
 
 export const ChatChoices = (props: ChatChoicesProps) => {
+
   return (
     <div id={"choice_" + props.id}>
       <div>{props.text}</div>

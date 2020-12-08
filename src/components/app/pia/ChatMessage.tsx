@@ -1,7 +1,8 @@
 import * as React from "react";
+import { ChatProps } from './ChatProps';
 
 
-export interface ChatMessageProps {
+export interface ChatMessageProps extends ChatProps {
   type: "message",
   text: string
 }
