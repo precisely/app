@@ -18,7 +18,7 @@ enum ConfirmState {
 
 export const SignupConfirm = (_props: Router.RouteComponentProps) => {
 
-  const { token } = Router.useParams();
+  const { token } = Router.useParams <{token: string}>();
 
   const [confirmState, setConfirmState] = React.useState(ConfirmState.Working);
 
