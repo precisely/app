@@ -38,7 +38,7 @@ export async function api<T>(args: Args): Promise<Result<T>> {
     status: resp.status,
     ok: resp.ok
   };
-  // attempt JSON body decode
+  // attempt JSONDatabody decode
   try {
     const respJson = await resp.json();
     res.data = respJson;

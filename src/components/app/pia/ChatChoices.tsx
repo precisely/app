@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChatProps } from "~/src/components/app/pia/ChatProps";
+import { ChatProps } from "~/src/components/app/types";
 
 /**
  *
@@ -7,10 +7,11 @@ import { ChatProps } from "~/src/components/app/pia/ChatProps";
  * We may include styles of choice in the future.
  *
  */
-export interface ChoiceItemProps {
+export type ChoiceItemProps = {
   id: string,
   text: string
   runId: string
+  sendChoice: () => Promise<void>
 }
 
 export interface ChatChoicesProps extends ChatProps {
@@ -20,24 +21,23 @@ export interface ChatChoicesProps extends ChatProps {
   text: string
 }
 
-function clickCallback(runId: string, choiceId: string) {
-  return () => <div>Call pia-server/continue with for run {runId} and choice {choiceId}</div>;
-}
-
 export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
   <button
+    id={`id_${props.id}`}
     className="btn"
-    onClick={clickCallback(props.runId, props.id)}>
+    onClick={props.sendChoice}>
     {props.text}
   </button>;
-
 
 export const ChatChoices = (props: ChatChoicesProps) => {
 
   return (
     <div id={"choice_" + props.id}>
       <div>{props.text}</div>
-      {... props.choices.map(c => ChoiceItem(c))}
+      {...props.choices.map(c => ChoiceItem({
+        sendChoice: () => props.continueCallback(c.id, props.permit),
+        ... c
+      }))}
     </div>
   );
 }

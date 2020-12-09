@@ -46,7 +46,6 @@ export const Main = () => {
   const piaEndpoint = async () => {
     try {
       const resp = await PIAUtils.startRun("welcome");
-      // resp.data;
       console.log(resp);
     }
     catch (error) {
@@ -78,16 +77,17 @@ export const Main = () => {
                   text="Private Endpoint" />
         </div>
       </div>
-      <div className="pt-6 grid grid-cols-3">
+      {/* <div className="pt-6 grid grid-cols-3">
         <div className="col-start-2">
           <Button callback={piaEndpoint}
                   color="cardinal"
                   classes="w-full py-2"
                   text="PIA Endpoint" />
         </div>
-      </div>
+      </div> */}
       <div>
         {stuff.map(item => <div>{item}</div>)}
+        <RunUI flowName="welcome"/>
       </div>
       <div className="pt-6 grid grid-cols-8 text-sm text-center">
         <div className="col-start-2 col-span-6">
