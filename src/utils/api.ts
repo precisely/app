@@ -31,8 +31,8 @@ export async function api<T>(args: Args): Promise<Result<T>> {
   }
   const body = JSON.stringify(args.data);
   const url = args.query ?
-              (`${args.url}?` + new URLSearchParams(args.query)) :
-              args.url;
+    (`${args.url}?` + new URLSearchParams(args.query)) :
+    args.url;
   const resp = await fetch(url, { method: args.method, headers, body });
   const res: Result<T> = {
     status: resp.status,
@@ -52,8 +52,8 @@ export async function api<T>(args: Args): Promise<Result<T>> {
     if (jwtRaw) {
       const decoded: SessionUtils.JWTDecoded = JWTDecode(jwtRaw);
       res.jwt = {
-	token: jwtRaw,
-	decoded
+        token: jwtRaw,
+        decoded
       };
     }
   }

@@ -30,6 +30,7 @@ export const RunUI = (props: RunUIProps) => {
   const [run, setRun] = React.useState(null);
 
   const startRun = async (flow: string) => {
+    console.log("Hello from startRun in RunUI")
     await safelySetRun(PIAUtils.startRun(flow));
   };
 

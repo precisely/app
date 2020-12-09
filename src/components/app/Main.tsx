@@ -87,7 +87,6 @@ export const Main = () => {
       </div> */}
       <div>
         {stuff.map(item => <div>{item}</div>)}
-        <RunUI flowName="welcome"/>
       </div>
       <div className="pt-6 grid grid-cols-8 text-sm text-center">
         <div className="col-start-2 col-span-6">
