@@ -1,6 +1,5 @@
 import * as ApiUtils from "~/src/utils/api";
 import { JSONData } from '../components/app/types';
-
 // FIXME: types any are not any, they're actually JSON
 //type JSONData= null | boolean | number | string | {string: JSONData | [JSONData;
 
@@ -11,9 +10,9 @@ export interface Run {
   state: "running" | "suspended" | "complete",
   result: JSONData,
   response: [JSONData],
-  runResponse: [JSONData],
-  returnMode?:  null | "block" | "redirect",
-  nextId?: null | string,
+  run_response: [JSONData],
+  return_mode?:  null | "block" | "redirect",
+  next_id?: null | string,
   next?: null | string
 }
 
@@ -30,7 +29,7 @@ export async function startRun(name: string, args: any[] = []): Promise<Run> {
   }
   else {
     // FIXME: error handling
-    throw "???";
+    throw error()
   }
 }
 
@@ -45,6 +44,8 @@ export async function continueRun(runId: string, data: JSONData= null, permit: J
     return resp.data;
   }
   else {
+    throw new Error()
+    toast.error("Run is broken")
     // FIXME: error handling
     throw "???";
   }

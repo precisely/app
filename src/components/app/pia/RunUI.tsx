@@ -86,7 +86,7 @@ export const RunUI = (props: RunUIProps) => {
 
   const makeContinueCallback = (run: Run): ContinueCallback =>
     async (data: JSONData = null, permit: JSONData = null) =>
-      await safelySetRun(PIAUtils.continueRun(run.nextId, data, permit));
+      await safelySetRun(PIAUtils.continueRun(run.next_id, data, permit));
 
   const componentFromElement = (element: ChatProps) => {
     let component = ComponentMap[element['type']];
