@@ -9,8 +9,7 @@ import { ChatProps } from "~/src/components/app/types";
  */
 export type ChoiceItemProps = {
   id: string,
-  text: string
-  runId: string
+  text: string,
   sendChoice: () => Promise<void>
 }
 
@@ -32,7 +31,7 @@ export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
 export const ChatChoices = (props: ChatChoicesProps) => {
 
   return (
-    <div id={"choice_" + props.id}>
+    <div id={ props.reactId}>
       <div>{props.text}</div>
       {...props.choices.map(c => ChoiceItem({
         sendChoice: () => props.continueCallback(c.id, props.permit),
