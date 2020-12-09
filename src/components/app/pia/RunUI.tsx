@@ -20,7 +20,7 @@ interface RunUIProps {
   flowName: string
 }
 
-const ResponseMap: { [key: string]: ((props: any) => JSX.Element) } = {
+const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
   choices: ChatChoices,
   message: ChatMessage
 };
@@ -87,7 +87,7 @@ export const RunUI = (props: RunUIProps) => {
   };
 
   const componentFromElement = (element: ChatProps) => {
-    let component = ResponseMap[element['type']];
+    let component = ComponentMap[element['type']];
     if (!component) {
       console.log("Unrecognized component ", element, " in RunUI");
       return null;
