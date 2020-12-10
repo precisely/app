@@ -56,21 +56,25 @@ module.exports = {
   },
   variants: {},
   plugins: [
-    function({ addBase, config }) {
+    function ({ addBase, config }) {
       addBase({
         "@media (prefers-color-scheme: light)": {
           body: {
             color: config("theme.colors.ink"),
             backgroundColor: config("theme.colors.coconut")
           },
-        },
-        "@media (prefers-color-scheme: dark)": {
-          body: {
-            color: config("theme.colors.coconut"),
-            backgroundColor: config("theme.colors.ink")
-          }
         }
       });
+      if (process.env.DISABLE_DARK_MODE != 'true' || process.env.DISABLE_DARK_MODE != '1') {
+        addBase({
+          "@media (prefers-color-scheme: dark)": {
+            body: {
+              color: config("theme.colors.coconut"),
+              backgroundColor: config("theme.colors.ink")
+            }
+          }
+        });
+      }
     }
   ],
 }

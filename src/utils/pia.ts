@@ -1,5 +1,7 @@
 import * as ApiUtils from "~/src/utils/api";
 import { JSONData } from '../components/app/types';
+import { toast } from 'react-toastify';
+
 // FIXME: types any are not any, they're actually JSON
 //type JSONData= null | boolean | number | string | {string: JSONData | [JSONData;
 
@@ -28,8 +30,9 @@ export async function startRun(name: string, args: any[] = []): Promise<Run> {
     return resp.data;
   }
   else {
+    toast.error("Server error while continuing run")
     // FIXME: error handling
-    throw error()
+    throw "???";
   }
 }
 
@@ -44,13 +47,11 @@ export async function continueRun(runId: string, data: JSONData= null, permit: J
     return resp.data;
   }
   else {
-    throw new Error()
-    toast.error("Run is broken")
+    toast.error("Server error while continuing run")
     // FIXME: error handling
     throw "???";
   }
 }
-
 
 /*
 // FIXME: add keyword args:
