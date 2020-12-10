@@ -65,7 +65,8 @@ module.exports = {
           },
         }
       });
-      if (process.env.DISABLE_DARK_MODE != 'true' || process.env.DISABLE_DARK_MODE != '1') {
+      let darkMode = (process.env.DISABLE_DARK_MODE || '').toLowerCase().trimLeft()[0];
+      if (!['t', '1', 'y'].includes(darkMode)) {
         addBase({
           "@media (prefers-color-scheme: dark)": {
             body: {

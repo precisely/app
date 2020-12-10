@@ -31,7 +31,7 @@ We use [Parcel](https://parceljs.org/) as our front-end application bundler. Thi
 
 ## Disabling Dark Mode
 
-Set the DISABLE_DARK_MODE variable in .env to `true` or `1` and delete `.cache`.
+Set the DISABLE_DARK_MODE variable in .env to `true` or `1`, do `yarn clean` and restart the server.
 
 ## Style
 

@@ -10,6 +10,7 @@
     "watch": "npx jest --watch",
     "lint": "npx eslint --ext js,jsx,ts,tsx src",
     "dev": "npx parcel index.html",
+    "clean": "rm -frd .cache",
     "build": "NODE_ENV=production npx parcel build index.html -d build/ --public-url '/'",
     "start": "npx serve --single build",
     "build-local": "NODE_ENV=production npx parcel build index.html -d build-local/ --public-url './'",
