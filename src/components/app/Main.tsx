@@ -4,11 +4,14 @@ import { toast } from "react-toastify";
 
 import * as ApiUtils from "~/src/utils/api";
 import * as AuthUtils from "~/src/utils/auth";
+import * as PIAUtils from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
+import { RunUI } from "~/src/components/app/pia/RunUI";
 
 import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
 
+console.log("This is the url ", process.env.BACKEND_URL);
 
 export const Main = () => {
 
@@ -40,6 +43,17 @@ export const Main = () => {
     }
   };
 
+  const piaEndpoint = async () => {
+    try {
+      const resp = await PIAUtils.startRun("welcome");
+      console.log(resp);
+    }
+    catch (error) {
+      // TODO: Add proper error handling.
+      toast.error("PIA request broke!");
+    }
+  };
+
   return (
     <div>
       <div className="pt-8">
@@ -52,12 +66,25 @@ export const Main = () => {
       </div>
       <div className="pt-6 grid grid-cols-3">
         <div className="col-start-2">
+          <RunUI flowName="welcome" />
+        </div>
+      </div>
+      <div className="pt-6 grid grid-cols-3">
+        <div className="col-start-2">
           <Button callback={privateEndpoint}
                   color="cardinal"
                   classes="w-full py-2"
                   text="Private Endpoint" />
         </div>
       </div>
+      {/* <div className="pt-6 grid grid-cols-3">
+        <div className="col-start-2">
+          <Button callback={piaEndpoint}
+                  color="cardinal"
+                  classes="w-full py-2"
+                  text="PIA Endpoint" />
+        </div>
+      </div> */}
       <div>
         {stuff.map(item => <div>{item}</div>)}
       </div>

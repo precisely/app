@@ -3,11 +3,11 @@ import { toast } from "react-toastify";
 import * as SessionUtils from "~/src/utils/session";
 import * as ApiUtils from "~/src/utils/api";
 
-
+console.log("This is the login URL in auth.ts", process.env.BACKEND_URL);
 export async function login(email: string, password: string) {
   const data = { user: { email, password } };
   try {
-    const resp: ApiUtils.Result<SessionUtils.UserData> = await ApiUtils.api<SessionUtils.UserData>({
+    const resp = await ApiUtils.api<SessionUtils.UserData>({
       method: "POST",
       data,
       url: `${process.env.BACKEND_URL}/auth/login`
