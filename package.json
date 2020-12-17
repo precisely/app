@@ -12,6 +12,7 @@
     "dev": "npx parcel index.html",
     "clean": "rm -frd .cache",
     "build": "NODE_ENV=production npx parcel build index.html -d build/ --public-url '/'",
+    "coverage": "npx jest --collect-coverage",
     "start": "npx serve --single build",
     "build-local": "NODE_ENV=production npx parcel build index.html -d build-local/ --public-url './'",
     "start-local": "npx serve --single build-local"
@@ -37,15 +38,23 @@
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
+    "plugins": [
+      "@typescript-eslint"
+    ],
     "extends": [
       "eslint:recommended",
       "plugin:@typescript-eslint/eslint-recommended",
       "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-      "semi": ["error", "always"],
-      "quotes": [2, "double"],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        2,
+        "double"
+      ],
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-empty-function": "off",
       "no-unused-vars": "off",
@@ -72,7 +81,8 @@
     "postcss": "^7.0.26",
     "tailwindcss": "^1.2.0",
     "ts-jest": "^26.3.0",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "typescript-coverage-report": "^0.3.1"
   },
   "dependencies": {
     "@types/jwt-decode": "^2.2.0",

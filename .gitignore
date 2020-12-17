@@ -15,3 +15,4 @@ build
 build-local
 dist
 node_modules
+coverage
