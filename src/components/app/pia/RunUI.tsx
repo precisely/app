@@ -9,6 +9,7 @@ import { Spinner } from "~/src/components/Spinner";
 
 import { ChatMessage } from "~/src/components/app/pia/ChatMessage";
 import { ChatChoices } from "~/src/components/app/pia/ChatChoices";
+import { ChatForm } from './ChatForm';
 
 enum RunUIState {
   NotStarted,
@@ -22,7 +23,8 @@ interface RunUIProps {
 
 const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
   choices: ChatChoices,
-  message: ChatMessage
+  message: ChatMessage,
+  form: ChatForm
 };
 
 export const RunUI = (props: RunUIProps) => {
