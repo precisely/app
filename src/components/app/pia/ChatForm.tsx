@@ -5,7 +5,7 @@ import * as Survey from 'surveyjs-react';
 
 export interface ChatFormProps extends ChatProps {
   type: "form",
-  items: JSONData
+  elements: JSONData
 }
 
 export const ChatForm = (props: ChatFormProps) => {
@@ -17,7 +17,8 @@ export const ChatForm = (props: ChatFormProps) => {
   return (
     <Survey.Survey
       showCompletedPage={true}
-      json={props.items}
+
+      json={props.elements}
       onComplete={sendDataToServer} />
   );
 }

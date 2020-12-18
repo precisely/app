@@ -7,7 +7,7 @@ import { ChatForm } from "./ChatForm";
 describe("ChatForm", () => {
 
   test("basic rendering", async () => {
-    const items: any = {
+    const elements: any = {
       questions: [{
         type: "checkbox",
         name: "car",
@@ -33,7 +33,7 @@ describe("ChatForm", () => {
         ]
       }]
     };
-    TLR.render(<ChatForm type="form" items={items} reactId="" continueCallback={async () => { }} />);
+    TLR.render(<ChatForm type="form" elements={elements} reactId="" continueCallback={async () => { }} />);
     TLR.screen.getAllByText(/What car/).forEach(elt =>
       expect(elt).toHaveTextContent("What car are you driving?")
     );

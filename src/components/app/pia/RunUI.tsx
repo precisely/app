@@ -57,6 +57,9 @@ export const RunUI = (props: RunUIProps) => {
         return showStartButton();
 
       case RunUIState.Running:
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Convert the run response React components:
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         return normalizeElements(run.response).map(componentFromElement);
 
       case RunUIState.Loading:
