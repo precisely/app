@@ -1,7 +1,6 @@
 import * as React from "react";
-import ReactDOM from 'react-dom';
 import { ChatProps, JSONData } from '~/src/components/app/types';
-import * as Survey from 'surveyjs-react';
+import * as Survey from 'survey-react';
 
 export interface ChatFormProps extends ChatProps {
   type: "form",
@@ -11,14 +10,15 @@ export interface ChatFormProps extends ChatProps {
 export const ChatForm = (props: ChatFormProps) => {
 
   const sendDataToServer = (survey: Survey.SurveyModel) => {
-    props.continueCallback(survey.data, props.permit);
+    props.continueCallback(survey.data);
   };
 
-  return (
+  const result = (
     <Survey.Survey
       showCompletedPage={true}
-
       json={props.elements}
       onComplete={sendDataToServer} />
   );
+
+  return result;
 }

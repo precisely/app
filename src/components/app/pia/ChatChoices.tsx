@@ -31,10 +31,10 @@ export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
 export const ChatChoices = (props: ChatChoicesProps) => {
 
   return (
-    <div id={ props.reactId}>
+    <div key={ props.key}>
       <div>{props.text}</div>
       {...props.choices.map(c => ChoiceItem({
-        sendChoice: () => props.continueCallback(c.id, props.permit),
+        sendChoice: () => props.continueCallback(c.id),
         ... c
       }))}
     </div>

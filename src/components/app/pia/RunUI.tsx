@@ -60,7 +60,7 @@ export const RunUI = (props: RunUIProps) => {
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Convert the run response React components:
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        return normalizeElements(run.response).map(componentFromElement);
+        return runResponseToChatProps(run.response).map(componentFromElement);
 
       case RunUIState.Loading:
         return spinner();
@@ -84,13 +84,12 @@ export const RunUI = (props: RunUIProps) => {
       toast.error("PIA request broke!");
     }
   }
-  const normalizeElements = (elements: JSONData[]): ChatProps[] => {
-    const chatPropMaker = makeChatPropMaker(makeContinueCallback(run));
-    return elements.map(chatPropMaker).filter(x => !!x);
+  const runResponseToChatProps = (elements: JSONData[]): ChatProps[] => {
+    return elements.map(chatPropFromRunResponseElement).filter(x => !!x);
   };
 
-  const makeContinueCallback = (run: Run): ContinueCallback =>
-    async (data: JSONData = null, permit: JSONData = null) =>
+  const makeContinueCallback = (run: Run, permit: JSONData): ContinueCallback =>
+    async (data: JSONData = null) =>
       await safelySetRun(PIAUtils.continueRun(run.next_id, data, permit));
 
   const componentFromElement = (element: ChatProps) => {
@@ -104,40 +103,25 @@ export const RunUI = (props: RunUIProps) => {
     }
   };
 
-  // makeChatPropMaker returns a function which can be mapped over run.response
-  // and produces chatProps which can be handed to our React Chat components
-  const makeChatPropMaker = (continueCallback: ContinueCallback) =>
-    (elt: JSONData, idx: number): ChatProps => {
-      let reactId = `${idx}`;
-      if (typeof elt === 'string') {
-        return { reactId, type: 'message', text: elt, continueCallback: null };
-      } else if (elt instanceof Object &&
-        typeof elt === 'object' &&
-        //elt!["type"] &&
-        'type' in elt &&
-        //elt.hasOwnProperty("type") &&
-        typeof elt.type === 'string') {
-        // am: The type: elt["type"] is a kludge to get around the type checker.
-        //     For whatever reason, the above expression (or using "type" in elt)
-        //     does not recognize that elt contains a key "type". It must be
-        //     something to do with the JSONData definition {[key: string]: JSONData}
-        //     Also perhaps related to this Typescript issue:
-        //     https://github.com/microsoft/TypeScript/issues/21732
-        //
-        //     There may be a problem with our Typescript installation. We're on latest
-        //     stable as of time of writing, but still getting an issue.
-        //     See the commented code in app/types.ts - it works in a online playground,
-        //     but is producing an error for us. Why?
-        return {
-          reactId,
-          type: elt.type,
-          ...elt,
-          continueCallback: continueCallback
-        };
-      } else {
-        throw "Invalid response element"; // TODO: handle more gracefully
-      }
-    };
+  const chatPropFromRunResponseElement = (elt: JSONData, idx: number): ChatProps | null => {
+    let key = `${idx}`;
+    switch (typeof elt) {
+      case 'string':
+        return { key, type: 'message', text: elt, continueCallback: null };
+
+      case 'object':
+        if ('type' in elt && typeof elt.type === 'string') {
+          return {
+            key,
+            type: elt.type,
+            ...elt,
+            continueCallback: makeContinueCallback(run, elt.permit)
+          };
+        }
+    }
+    console.log("Unhandled Run response:" + JSON.stringify(elt));
+    return null;
+  };
 
   return (
     <div>

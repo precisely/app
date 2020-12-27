@@ -1,12 +1,13 @@
 import * as React from "react";
-import * as TLR from "@testing-library/react";
+import {screen, render, createEvent, fireEvent} from  "@testing-library/react";
 
 import { ChatForm } from "./ChatForm";
 
 
 describe("ChatForm", () => {
+  const mockCallback = jest.fn();
 
-  test("basic rendering", async () => {
+  beforeEach(() => {
     const elements: any = {
       questions: [{
         type: "checkbox",
@@ -18,33 +19,35 @@ describe("ChatForm", () => {
         noneText: "None of the above",
         colCount: 4,
         choicesOrder: "asc",
-        choices: [
-          "Ford",
-          "Tesla",
-          "Vauxhall",
-          "Volkswagen",
-          "Nissan",
-          "Audi",
-          "Mercedes-Benz",
-          "BMW",
-          "Peugeot",
-          "Toyota",
-          "Citroen"
-        ]
+        choices: ["Ford", "Tesla","Volkswagen"]
       }]
     };
-    TLR.render(<ChatForm type="form" elements={elements} reactId="" continueCallback={async () => { }} />);
-    TLR.screen.getAllByText(/What car/).forEach(elt =>
-      expect(elt).toHaveTextContent("What car are you driving?")
-    );
+    render(<ChatForm
+      type="form" key="foo"
+      permit="the-permit" elements={elements}
+      continueCallback={mockCallback} />);
   });
 
-  // test("home", async () => {
-  //   const history = History.createMemoryHistory();
-  //   TLR.render(ReactUtils.routedComponent((_props) => <Survey />, {history}));
-  //   const signupButton = TLR.screen.getByText("Get Started");
-  //   TLR.fireEvent.click(signupButton);
-  //   expect(history.location.pathname).toEqual("/landing/signup");
-  // });
+  test("basic rendering", async () => {
 
+    screen.getAllByText(/What car/).forEach((elt: any) =>
+      expect(elt).toHaveTextContent("What car are you driving?")
+    );
+    expect(screen.getByText("Ford")).toBeDefined();
+  });
+
+
+  test("Can submit data", () => {
+    const fordCheck = screen.getByText("Ford");
+
+    const fordClick = createEvent.click(fordCheck);
+    fireEvent(fordCheck, fordClick);
+
+    const submitButton = screen.getByText("Complete");
+    const submitClick = createEvent.click(submitButton);
+    fireEvent(submitButton, submitClick);
+
+    expect(mockCallback).toHaveBeenCalledTimes(1);
+    expect(mockCallback).toBeCalledWith({ "car": ["Ford"] });
+  });
 });
