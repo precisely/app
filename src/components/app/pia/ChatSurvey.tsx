@@ -2,12 +2,12 @@ import * as React from "react";
 import { ChatProps, JSONData } from '~/src/components/app/types';
 import * as Survey from 'survey-react';
 
-export interface ChatFormProps extends ChatProps {
-  type: "form",
+export interface ChatSurveyProps extends ChatProps {
+  type: "survey",
   elements: JSONData
 }
 
-export const ChatForm = (props: ChatFormProps) => {
+export const ChatSurvey = (props: ChatSurveyProps) => {
 
   const sendDataToServer = (survey: Survey.SurveyModel) => {
     props.continueCallback(survey.data);

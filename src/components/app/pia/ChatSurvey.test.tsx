@@ -1,10 +1,9 @@
 import * as React from "react";
 import {screen, render, createEvent, fireEvent} from  "@testing-library/react";
 
-import { ChatForm } from "./ChatForm";
+import { ChatSurvey } from "./ChatSurvey";
 
-
-describe("ChatForm", () => {
+describe("ChatSurvey", () => {
   const mockCallback = jest.fn();
 
   beforeEach(() => {
@@ -22,8 +21,8 @@ describe("ChatForm", () => {
         choices: ["Ford", "Tesla","Volkswagen"]
       }]
     };
-    render(<ChatForm
-      type="form" key="foo"
+    render(<ChatSurvey
+      type="survey" key="foo"
       permit="the-permit" elements={elements}
       continueCallback={mockCallback} />);
   });
