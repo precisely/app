@@ -100,6 +100,6 @@
     "react-router-dom": "^5.2.0",
     "react-toastify": "^6.0.6",
     "serve": "^11.3.2",
-    "survey-react": "^1.18.21"
+    "survey-react": "^1.8.22"
   }
 }
