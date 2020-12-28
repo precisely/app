@@ -23,16 +23,15 @@ export interface ChatChoicesProps extends ChatProps {
 // for now, ignore the style option - only display as buttons
 export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
   <button
-    id={`id_${props.id}`}
+    key={props.id}
     className="btn"
     onClick={props.sendChoice}>
     {props.text}
   </button>;
 
 export const ChatChoices = (props: ChatChoicesProps) => {
-
   return (
-    <div key={ props.key}>
+    <div key={props.id}>
       <div>{props.text}</div>
       {...props.choices.map(c => ChoiceItem({
         sendChoice: () => props.continueCallback(c.id),

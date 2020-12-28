@@ -104,15 +104,15 @@ export const RunUI = (props: RunUIProps) => {
   };
 
   const chatPropFromRunResponseElement = (elt: JSONData, idx: number): ChatProps | null => {
-    let key = `${idx}`;
+    let id = `${idx}`;
     switch (typeof elt) {
       case 'string':
-        return { key, type: 'message', text: elt, continueCallback: null };
+        return { id, type: 'message', text: elt, continueCallback: null };
 
       case 'object':
         if ('type' in elt && typeof elt.type === 'string') {
           return {
-            key,
+            id,
             type: elt.type,
             ...elt,
             continueCallback: makeContinueCallback(run, elt.permit)

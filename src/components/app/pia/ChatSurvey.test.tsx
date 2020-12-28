@@ -22,7 +22,8 @@ describe("ChatSurvey", () => {
       }]
     };
     render(<ChatSurvey
-      type="survey" key="foo"
+      type="survey"
+      id="foo"
       permit="the-permit" elements={elements}
       continueCallback={mockCallback} />);
   });

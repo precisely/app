@@ -15,6 +15,7 @@ export const ChatSurvey = (props: ChatSurveyProps) => {
 
   const result = (
     <Survey.Survey
+      id={props.id}
       showCompletedPage={true}
       json={props.elements}
       onComplete={sendDataToServer} />

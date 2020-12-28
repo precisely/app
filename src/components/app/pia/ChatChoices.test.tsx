@@ -14,9 +14,11 @@ describe("ChatChoices", () => {
     ];
 
     render(<ChatChoices
-      type="choices" key="foo"
+      type="choices"
+      id="foo"
       text="Make a choice"
-      permit="the-permit" choices={choices}
+      permit="the-permit"
+      choices={choices}
       continueCallback={mockCallback} />);
   });
 
