@@ -15,11 +15,12 @@ export type ChoiceItemProps = {
 
 export interface ChatChoicesProps extends ChatProps {
   type: "choices",
-  style: "buttons" | "list",
+  style?: "buttons" | "list",
   choices: ChoiceItemProps[],
   text: string
 }
 
+// for now, ignore the style option - only display as buttons
 export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
   <button
     id={`id_${props.id}`}
