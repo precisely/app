@@ -15,26 +15,26 @@ export type ChoiceItemProps = {
 
 export interface ChatChoicesProps extends ChatProps {
   type: "choices",
-  style: "buttons" | "list",
+  style?: "buttons" | "list",
   choices: ChoiceItemProps[],
   text: string
 }
 
+// for now, ignore the style option - only display as buttons
 export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
   <button
-    id={`id_${props.id}`}
+    key={props.id}
     className="btn"
     onClick={props.sendChoice}>
     {props.text}
   </button>;
 
 export const ChatChoices = (props: ChatChoicesProps) => {
-
   return (
-    <div id={ props.reactId}>
+    <div key={props.id}>
       <div>{props.text}</div>
       {...props.choices.map(c => ChoiceItem({
-        sendChoice: () => props.continueCallback(c.id, props.permit),
+        sendChoice: () => props.continueCallback(c.id),
         ... c
       }))}
     </div>
