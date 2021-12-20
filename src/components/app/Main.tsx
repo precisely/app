@@ -11,7 +11,6 @@ import { RunUI } from "~/src/components/app/pia/RunUI";
 
 import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
 
-console.log("This is the url ", process.env.BACKEND_URL);
 
 export const Main = () => {
 
