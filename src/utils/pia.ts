@@ -23,7 +23,7 @@ export async function startRun(name: string, args: any[] = []): Promise<Run> {
   const resp = await ApiUtils.api<Run>({
     method: "POST",
     data: args,
-    url: `${process.env.BACKEND_URL}/endpoints/pia/api/runs/${name}`
+    url: `${process.env.PIA_URL}/api/runs/${name}`
   });
   if (resp.ok) {
     console.log("startRun returned ", resp.data);
@@ -40,7 +40,7 @@ export async function continueRun(runId: string, data: JSONData= null, permit: J
   const resp = await ApiUtils.api<Run>({
     method: "POST",
     data: { data, permit },
-    url: `${process.env.BACKEND_URL}/endpoints/pia/api/runs/${runId}/continue`
+    url: `${process.env.PIA_URL}/api/runs/${runId}/continue`
   });
   if (resp.ok) {
     console.log("continueRun returned ", resp.data);
