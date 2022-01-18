@@ -6,10 +6,6 @@ module.exports = {
     "src/**/*.jsx",
     "src/**/*.tsx"
   ],
-  future: {
-    // for TailwindCSS v2.0 (currently v1.7.0)
-    removeDeprecatedGapUtilities: true
-  },
   theme: {
     extend: {
       screens: {
