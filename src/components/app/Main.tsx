@@ -8,20 +8,14 @@ import * as PIAUtils from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
 import { RunUI } from "~/src/components/app/pia/RunUI";
+import { Footer } from "~/src/components/Footer";
 
 import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
 
 
 export const Main = () => {
 
-  const history = RouterDOM.useHistory();
-
   const [stuff, setStuff] = React.useState([]);
-
-  const logout = async () => {
-    await AuthUtils.logout();
-    history.push("/");
-  };
 
   const privateEndpoint = async () => {
     try {
@@ -87,29 +81,7 @@ export const Main = () => {
       <div>
         {stuff.map(item => <div>{item}</div>)}
       </div>
-      <div className="pt-6 grid grid-cols-8 text-sm text-center">
-        <div className="col-start-2 col-span-6">
-          <RouterDOM.Link to="/terms"
-                          className="p-1 font-bold">
-            Terms and Conditions
-          </RouterDOM.Link>
-          —
-          <RouterDOM.Link to="/privacy"
-                          className="p-1 font-bold">
-            Privacy Policy
-          </RouterDOM.Link>
-          —
-          <RouterDOM.Link to="" onClick={logout}
-                          className="p-1 font-bold">
-            Logout
-          </RouterDOM.Link>
-        </div>
-      </div>
-      <RouterDOM.Switch>
-        {/* <RouterDOM.Route exact path="/app" component={Main} />
-            <RouterDOM.Route exact path="/home" component={Home} />
-            <RouterDOM.Route exact path="/company" component={Company} /> */}
-      </RouterDOM.Switch>
+      <Footer showLogout={true} />
     </div>
   );
 
