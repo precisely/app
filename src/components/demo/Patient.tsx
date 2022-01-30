@@ -3,6 +3,7 @@ import * as RouterDOM from "react-router-dom";
 import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
+import * as SSEUtils from "~/src/utils/sse";
 
 import { Button } from "~/src/components/Button";
 
@@ -11,6 +12,8 @@ export const Patient = () => {
 
   const patientId = 123;
 
+  const [sse, setSse] = React.useState<EventSource>(
+    SSEUtils.connect(`${process.env.PIA_URL}/async`, (sse, event) => toast.info(event.data)));
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 

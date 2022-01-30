@@ -18,19 +18,6 @@ export const Main = () => {
 
   const history = RouterDOM.useHistory();
 
-  const [sse, setSse] = React.useState<EventSource>(
-    () => {
-      const sse = new EventSource(`${process.env.PIA_URL}/async`);
-      sse.onerror = () => {
-        sse.close();
-      };
-      sse.onmessage = (event) => {
-        toast.info(event.data);
-      };
-      return sse;
-    }
-  );
-
   const urlPatientUI = "/demo/patient";
   const urlClinicUI = "/demo/clinic";
 
