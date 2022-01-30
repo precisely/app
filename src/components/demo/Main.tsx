@@ -6,7 +6,10 @@ import * as ApiUtils from "~/src/utils/api";
 import * as PIAUtils from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
-import { RunUI } from "~/src/components/app/pia/RunUI";
+import { Footer } from "~/src/components/Footer";
+
+import { Patient } from "~/src/components/demo/Patient";
+import { Clinic } from "~/src/components/demo/Clinic";
 
 import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
 
@@ -15,36 +18,28 @@ export const Main = () => {
 
   const history = RouterDOM.useHistory();
 
-  const [stuff, setStuff] = React.useState([]);
+  const [sse, setSse] = React.useState<EventSource>(
+    () => {
+      const sse = new EventSource(`${process.env.PIA_URL}/async`);
+      sse.onerror = () => {
+        sse.close();
+      };
+      sse.onmessage = (event) => {
+        toast.info(event.data);
+      };
+      return sse;
+    }
+  );
 
-  const helloWorldEndpoint = async () => {
-    try {
-      const resp: ApiUtils.Result<{message: string}> = await ApiUtils.api<{message: string}>({
-        method: "GET",
-        url: `${process.env.PIA_URL}/hello`
-      });
-      if (resp.ok) {
-        toast.info("Succesfully made public request.");
-        setStuff(stuff.concat(resp.data.message));
-      }
-      else {
-        toast.warn("Request failed!");
-      }
-    }
-    catch (error) {
-      toast.error("Request broke!", error);
-    }
+  const urlPatientUI = "/demo/patient";
+  const urlClinicUI = "/demo/clinic";
+
+  const gotoPatientUI = () => {
+    history.push(urlPatientUI);
   };
 
-  const piaEndpoint = async () => {
-    try {
-      const resp = await PIAUtils.startRun("welcome");
-      console.log(resp);
-    }
-    catch (error) {
-      // TODO: Add proper error handling.
-      toast.error("PIA request broke!");
-    }
+  const gotoClinicUI = () => {
+    history.push(urlClinicUI);
   };
 
   return (
@@ -53,52 +48,28 @@ export const Main = () => {
         <div className="flex justify-center">
           <img className="w-20" src={imgEscutcheon} />
         </div>
-        <p className="text-center">
-          Welcome to Precisely Rapids.
-        </p>
       </div>
       <div className="pt-6 grid grid-cols-3">
         <div className="col-start-2">
-          <RunUI flowName="welcome" />
+          <Button text="Patient UI"
+                  color="cardinal"
+                  classes="w-full py-2"
+                  callback={gotoPatientUI} />
         </div>
       </div>
       <div className="pt-6 grid grid-cols-3">
         <div className="col-start-2">
-          <Button callback={helloWorldEndpoint}
+          <Button text="Clinic UI"
                   color="cardinal"
                   classes="w-full py-2"
-                  text="Hello World Endpoint" />
-        </div>
-      </div>
-      {/* <div className="pt-6 grid grid-cols-3">
-        <div className="col-start-2">
-          <Button callback={piaEndpoint}
-                  color="cardinal"
-                  classes="w-full py-2"
-                  text="PIA Endpoint" />
-        </div>
-      </div> */}
-      <div>
-        {stuff.map(item => <div>{item}</div>)}
-      </div>
-      <div className="pt-6 grid grid-cols-8 text-sm text-center">
-        <div className="col-start-2 col-span-6">
-          <RouterDOM.Link to="/terms"
-                          className="p-1 font-bold">
-            Terms and Conditions
-          </RouterDOM.Link>
-          —
-          <RouterDOM.Link to="/privacy"
-                          className="p-1 font-bold">
-            Privacy Policy
-          </RouterDOM.Link>
+                  callback={gotoClinicUI} />
         </div>
       </div>
       <RouterDOM.Switch>
-        {/* <RouterDOM.Route exact path="/app" component={Main} />
-            <RouterDOM.Route exact path="/home" component={Home} />
-            <RouterDOM.Route exact path="/company" component={Company} /> */}
+        <RouterDOM.Route path={urlPatientUI} component={Patient} />
+        <RouterDOM.Route path={urlClinicUI} component={Clinic} />
       </RouterDOM.Switch>
+      <Footer showLogout={false} />
     </div>
   );
 
