@@ -13,7 +13,7 @@ export const Patient = () => {
   const patientId = 123;
 
   const [sse, setSse] = React.useState<EventSource>(
-    SSEUtils.connect(`${process.env.PIA_URL}/async`, (sse, event) => toast.info(event.data)));
+    SSEUtils.connect(`${process.env.PIA_URL}/notifications/patient/${patientId}`, (sse, event) => toast.info(event.data)));
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
