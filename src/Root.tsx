@@ -27,7 +27,7 @@ const Root = () => {
     }
     else {
       return (
-        <RouterDOM.Redirect to="/landing" />
+        <RouterDOM.Redirect to="/demo" />
       );
     }
   };
