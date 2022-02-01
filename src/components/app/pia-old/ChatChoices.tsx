@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChatProps } from "~/src/components/app/pia/types";
+import { ChatProps } from "~/src/components/app/pia-old/types";
 
 /**
  *
