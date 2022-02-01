@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 import { Run } from "~/src/utils/pia";
-import { JSONData, ChatProps, ContinueCallback } from "~/src/components/app/types";
+import { JSONData } from "~/src/utils/types.ts";
+import { ChatProps, ContinueCallback } from "~/src/components/app/pia/types";
 import { Button } from "~/src/components/Button";
 import { Spinner } from "~/src/components/Spinner";
 

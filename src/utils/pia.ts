@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
 import * as ApiUtils from "~/src/utils/api";
-import { JSONData } from "~/src/components/app/types";
+import { JSONData } from "~/src/utils/types";
 
 
 //Need to think more about how args would be used in the runs - is the type an array of JSONDatastrings?
