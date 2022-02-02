@@ -7,8 +7,7 @@ import * as SSEUtils from "~/src/utils/sse";
 
 import { Button } from "~/src/components/Button";
 
-import { Run as PIAUIRun } from "~/src/components/pia-ui/Run";
-import { RunUI } from "~/src/components/app/pia-old/RunUI";
+import { RunUI } from "~/src/components/pia-ui/RunUI";
 
 
 export const Patient = () => {
@@ -50,9 +49,6 @@ export const Patient = () => {
       return (<div></div>);
     }
     else {
-      // return (
-      //   <PIAUIRun run={currentRun} />
-      // );
       return (
         <RunUI run={currentRun} />
       );

@@ -4,12 +4,12 @@ import { toast } from "react-toastify";
 import * as PIAUtils from "~/src/utils/pia";
 import { Run } from "~/src/utils/pia";
 import { JSONData } from "~/src/utils/types";
-import { ChatProps, ContinueCallback } from "~/src/components/app/pia-old/types";
+import { ChatProps, ContinueCallback } from "~/src/components/pia-ui/types";
 import { Button } from "~/src/components/Button";
 import { Spinner } from "~/src/components/Spinner";
 
-import { ChatMessage } from "~/src/components/app/pia-old/ChatMessage";
-import { ChatChoices } from "~/src/components/app/pia-old/ChatChoices";
+import { ChatMessage } from "~/src/components/pia-ui/ChatMessage";
+import { ChatChoices } from "~/src/components/pia-ui/ChatChoices";
 
 
 enum RunUIState {

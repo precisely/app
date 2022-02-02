@@ -1,3 +1,6 @@
+import { JSONData } from "~/src/utils/types";
+
+
 export type ContinueCallback = (data?: JSONData, permit?: JSONData) => Promise<void>;
 
 export interface ChatProps {
