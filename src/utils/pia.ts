@@ -34,7 +34,7 @@ export async function startRun(name: string, args: any[] = []): Promise<Run> {
 export async function continueRun(runId: string, data: JSONData = null, permit: JSONData = null): Promise<Run> {
   const resp = await ApiUtils.api<Run>({
     method: "POST",
-    data: { data, permit },
+    data: { input: data, permit },
     url: `${process.env.PIA_URL}/api/runs/continue/${runId}`
   });
   if (resp.ok) {
