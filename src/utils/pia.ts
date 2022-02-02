@@ -9,9 +9,7 @@ export interface Run {
   id: string,
   state: "running" | "suspended" | "complete",
   output: [JSONData],
-  return_mode?:  null | "block" | "redirect",
-  next_id?: null | string,
-  next?: null | string
+  return_mode?:  null | "block" | "redirect"
 }
 
 

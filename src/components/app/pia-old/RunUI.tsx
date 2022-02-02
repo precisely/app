@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 import { Run } from "~/src/utils/pia";
-import { JSONData } from "~/src/utils/types.ts";
+import { JSONData } from "~/src/utils/types";
 import { ChatProps, ContinueCallback } from "~/src/components/app/pia-old/types";
 import { Button } from "~/src/components/Button";
 import { Spinner } from "~/src/components/Spinner";
@@ -13,72 +13,57 @@ import { ChatChoices } from "~/src/components/app/pia-old/ChatChoices";
 
 
 enum RunUIState {
-  NotStarted,
+//  NotStarted,
   Running,
   Loading
 }
 
 interface RunUIProps {
-  flowName: string
+  //flowName: string
+  run: Run
 }
 
 const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
-  choices: ChatChoices,
+  buttons: ChatChoices,
   message: ChatMessage
 };
 
 export const RunUI = (props: RunUIProps) => {
-  const [runUIState, setRunUIState] = React.useState(RunUIState.NotStarted);
-  const [run, setRun] = React.useState(null);
+  // const [runUIState, setRunUIState] = React.useState(RunUIState.NotStarted);
+  const [run, setRun] = React.useState(props.run);
 
-  const showStartButton = () => {
-    const msg = `Start run ${props.flowName}`;
-    return (
-      <div id="run-start-button">
-        <Button callback={() => startRun("welcome")}
-          color="cardinal"
-          classes="w-full py-2"
-          text={msg} />
-      </div>
-    );
-  };
-
-  const spinner = () => {
-    return (
-      <div className="ctr">
-        <Spinner />
-      </div>
-    );
-  };
+  // const showStartButton = () => {
+  //   const msg = `Start run ${props.flowName}`;
+  //   return (
+  //     <div id="run-start-button">
+  //       <Button callback={() => startRun("welcome")}
+  //         color="cardinal"
+  //         classes="w-full py-2"
+  //         text={msg} />
+  //     </div>
+  //   );
+  // };
+  // 
+  // const spinner = () => {
+  //   return (
+  //     <div className="ctr">
+  //       <Spinner />
+  //     </div>
+  //   );
+  // };
 
   const renderHelper = () => {
-    switch (runUIState) {
-      case RunUIState.NotStarted:
-        return showStartButton();
-
-      case RunUIState.Running:
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        // Convert the run response React components:
-        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        return runResponseToChatProps(run.response).map(componentFromElement);
-
-      case RunUIState.Loading:
-        return spinner();
-
-      default:
-        return (<div>This should never render.</div>);
-    }
+    return runResponseToChatProps(run.output).map(componentFromElement);
   };
 
-  const startRun = async (flow: string) => {
-    console.log("Hello from startRun in RunUI")
-    await safelySetRun(PIAUtils.startRun(flow));
-  };
+  // const startRun = async (flow: string) => {
+  //   console.log("Hello from startRun in RunUI")
+  //   await safelySetRun(PIAUtils.startRun(flow));
+  // };
 
   const safelySetRun = async (runPromise: Promise<Run>) => {
     try {
       setRun(await runPromise);
-      setRunUIState(RunUIState.Running);
     } catch {
       // TODO: Add proper error handling.
       toast.error("PIA request broke!");
@@ -90,7 +75,7 @@ export const RunUI = (props: RunUIProps) => {
 
   const makeContinueCallback = (run: Run, permit: JSONData): ContinueCallback =>
     async (data: JSONData = null) =>
-      await safelySetRun(PIAUtils.continueRun(run.next_id, data, permit));
+      await safelySetRun(PIAUtils.continueRun(run.id, data, permit));
 
   const componentFromElement = (element: ChatProps) => {
     let component = ComponentMap[element['type']];

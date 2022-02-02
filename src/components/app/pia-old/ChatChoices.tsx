@@ -33,7 +33,7 @@ export const ChatChoices = (props: ChatChoicesProps) => {
   return (
     <div key={props.id}>
       <div>{props.text}</div>
-      {...props.choices.map(c => ChoiceItem({
+      {...props.buttons.map(c => ChoiceItem({
         sendChoice: () => props.continueCallback(c.id),
         ... c
       }))}

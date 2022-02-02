@@ -7,6 +7,9 @@ import * as SSEUtils from "~/src/utils/sse";
 
 import { Button } from "~/src/components/Button";
 
+import { Run as PIAUIRun } from "~/src/components/pia-ui/Run";
+import { RunUI } from "~/src/components/app/pia-old/RunUI";
+
 
 export const Patient = () => {
 
@@ -37,15 +40,21 @@ export const Patient = () => {
     []
   );
 
+  const switchRun = (run: PIAUtils.Run) => {
+    setCurrentRun(run);
+    // use PIA utils here to switch to the run (continue?)
+  };
+
   const renderCurrentRun = () => {
     if (undefined === currentRun) {
       return (<div></div>);
     }
     else {
+      // return (
+      //   <PIAUIRun run={currentRun} />
+      // );
       return (
-        <div>
-          currently running {currentRun.id}
-        </div>
+        <RunUI run={currentRun} />
       );
     }
   };
@@ -60,7 +69,7 @@ export const Patient = () => {
               <li key={run.id}>
                 <Button text={run.id}
                         color="cardinal"
-                        callback={() => setCurrentRun(run)} />
+                        callback={() => switchRun(run)} />
               </li>
           ))}
         </ul>
