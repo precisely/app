@@ -4,10 +4,10 @@ import { screen, render, createEvent, fireEvent } from "@testing-library/react";
 import { ChatChoices } from "./ChatChoices";
 
 describe("ChatChoices", () => {
-  var mockCallback: jest.Mock;
+  var mockContinueFn: jest.Mock;
 
   beforeEach(() => {
-    mockCallback =  jest.fn();
+    mockContinueFn =  jest.fn();
     const choices: any = [
       { id: "yes", text: "Yes!" },
       { id: "no", text: "No!" }
@@ -19,7 +19,7 @@ describe("ChatChoices", () => {
       text="Make a choice"
       permit="the-permit"
       choices={choices}
-      continueCallback={mockCallback} />);
+      continueFn={mockContinueFn} />);
   });
 
   test("basic rendering", async () => {
@@ -34,15 +34,15 @@ describe("ChatChoices", () => {
     const yesButton = screen.getByText("Yes!");
     const yesClick = createEvent.click(yesButton);
     fireEvent(yesButton, yesClick);
-    expect(mockCallback).toHaveBeenCalledTimes(1);
-    expect(mockCallback).toBeCalledWith("yes");
+    expect(mockContinueFn).toHaveBeenCalledTimes(1);
+    expect(mockContinueFn).toBeCalledWith("yes");
   });
 
   test("can click second (no) button", () => {
     const yesButton = screen.getByText("No!");
     const yesClick = createEvent.click(yesButton);
     fireEvent(yesButton, yesClick);
-    expect(mockCallback).toHaveBeenCalledTimes(1);
-    expect(mockCallback).toBeCalledWith("no");
+    expect(mockContinueFn).toHaveBeenCalledTimes(1);
+    expect(mockContinueFn).toBeCalledWith("no");
   });
 });

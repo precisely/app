@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import * as PIAUtils from "~/src/utils/pia";
 import { Run } from "~/src/utils/pia";
 import { JSONData } from "~/src/utils/types";
-import { ChatProps, ContinueCallback } from "~/src/components/pia-ui/types";
+import { ChatProps, ContinueFn } from "~/src/components/pia-ui/types";
 import { Button } from "~/src/components/Button";
 import { Spinner } from "~/src/components/Spinner";
 
@@ -12,14 +12,7 @@ import { ChatMessage } from "~/src/components/pia-ui/ChatMessage";
 import { ChatChoices } from "~/src/components/pia-ui/ChatChoices";
 
 
-enum RunUIState {
-//  NotStarted,
-  Running,
-  Loading
-}
-
-interface RunUIProps {
-  //flowName: string
+interface Props {
   run: Run
 }
 
@@ -28,38 +21,12 @@ const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
   message: ChatMessage
 };
 
-export const RunUI = (props: RunUIProps) => {
-  // const [runUIState, setRunUIState] = React.useState(RunUIState.NotStarted);
+export const RunUI = (props: Props) => {
   const [run, setRun] = React.useState(props.run);
-
-  // const showStartButton = () => {
-  //   const msg = `Start run ${props.flowName}`;
-  //   return (
-  //     <div id="run-start-button">
-  //       <Button callback={() => startRun("welcome")}
-  //         color="cardinal"
-  //         classes="w-full py-2"
-  //         text={msg} />
-  //     </div>
-  //   );
-  // };
-  // 
-  // const spinner = () => {
-  //   return (
-  //     <div className="ctr">
-  //       <Spinner />
-  //     </div>
-  //   );
-  // };
 
   const renderHelper = () => {
     return runResponseToChatProps(run.output).map(componentFromElement);
   };
-
-  // const startRun = async (flow: string) => {
-  //   console.log("Hello from startRun in RunUI")
-  //   await safelySetRun(PIAUtils.startRun(flow));
-  // };
 
   const safelySetRun = async (runPromise: Promise<Run>) => {
     try {
@@ -73,7 +40,7 @@ export const RunUI = (props: RunUIProps) => {
     return elements.map(chatPropFromRunResponseElement).filter(x => !!x);
   };
 
-  const makeContinueCallback = (run: Run, permit: JSONData): ContinueCallback =>
+  const makeContinueFn = (run: Run, permit: JSONData): ContinueFn =>
     async (data: JSONData = null) =>
       await safelySetRun(PIAUtils.continueRun(run.id, data, permit));
 
@@ -92,7 +59,7 @@ export const RunUI = (props: RunUIProps) => {
     let id = `${idx}`;
     switch (typeof elt) {
       case 'string':
-        return { id, type: 'message', text: elt, continueCallback: null };
+        return { id, type: 'message', text: elt, continueFn: null };
 
       case 'object':
         if ('type' in elt && typeof elt.type === 'string') {
@@ -100,7 +67,7 @@ export const RunUI = (props: RunUIProps) => {
             id,
             type: elt.type,
             ...elt,
-            continueCallback: makeContinueCallback(run, elt.permit)
+            continueFn: makeContinueFn(run, elt.permit)
           };
         }
     }
