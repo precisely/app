@@ -8,6 +8,7 @@ import { JSONData } from "~/src/utils/types";
 export interface Run {
   id: string,
   state: "running" | "suspended" | "complete",
+  status: [JSONData],
   output: [JSONData],
   return_mode?:  null | "block" | "redirect"
 }

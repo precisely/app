@@ -63,7 +63,7 @@ export const Patient = () => {
           {runs.map(
             run => (
               <li key={run.id}>
-                <Button text={run.id}
+                <Button text={run.status["title"] || run.id}
                         color="cardinal"
                         callback={() => switchRun(run)} />
               </li>
