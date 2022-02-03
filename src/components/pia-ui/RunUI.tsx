@@ -4,12 +4,10 @@ import { toast } from "react-toastify";
 import * as PIAUtils from "~/src/utils/pia";
 import { Run } from "~/src/utils/pia";
 import { JSONData } from "~/src/utils/types";
-import { ChatProps, ContinueFn } from "~/src/components/pia-ui/types";
-import { Button } from "~/src/components/Button";
-import { Spinner } from "~/src/components/Spinner";
+import { UIProps, ContinueFn } from "~/src/components/pia-ui/types";
 
-import { ChatMessage } from "~/src/components/pia-ui/ChatMessage";
-import { ChatChoices } from "~/src/components/pia-ui/ChatChoices";
+import { Message } from "~/src/components/pia-ui/Message";
+import { Choices } from "~/src/components/pia-ui/Choices";
 
 
 interface Props {
@@ -17,15 +15,15 @@ interface Props {
 }
 
 const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
-  buttons: ChatChoices,
-  message: ChatMessage
+  buttons: Choices,
+  message: Message
 };
 
 export const RunUI = (props: Props) => {
   const [run, setRun] = React.useState(props.run);
 
   const renderHelper = () => {
-    return runResponseToChatProps(run.output).map(componentFromElement);
+    return convertRunOutputToUIProps(run.output).map(makeComponent);
   };
 
   const safelySetRun = async (runPromise: Promise<Run>) => {
@@ -36,15 +34,16 @@ export const RunUI = (props: Props) => {
       toast.error("PIA request broke!");
     }
   }
-  const runResponseToChatProps = (elements: JSONData[]): ChatProps[] => {
-    return elements.map(chatPropFromRunResponseElement).filter(x => !!x);
+
+  const convertRunOutputToUIProps = (elements: JSONData[]): UIProps[] => {
+    return elements.map(makeUIProps).filter(x => !!x);
   };
 
   const makeContinueFn = (run: Run, permit: JSONData): ContinueFn =>
     async (data: JSONData = null) =>
       await safelySetRun(PIAUtils.continueRun(run.id, data, permit));
 
-  const componentFromElement = (element: ChatProps) => {
+  const makeComponent = (element: UIProps) => {
     let component = ComponentMap[element['type']];
     if (!component) {
       console.log("Unrecognized component ", element, " in RunUI");
@@ -55,7 +54,7 @@ export const RunUI = (props: Props) => {
     }
   };
 
-  const chatPropFromRunResponseElement = (elt: JSONData, idx: number): ChatProps | null => {
+  const makeUIProps = (elt: JSONData, idx: number): UIProps | null => {
     let id = `${idx}`;
     switch (typeof elt) {
       case 'string':

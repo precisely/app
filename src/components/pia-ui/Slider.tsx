@@ -1,7 +1,7 @@
 import * as React from "react";
 
 
-export interface ChatSliderProps {
+export interface SliderProps {
   type: "slider",
   min: number,
   minTag: string,
@@ -11,7 +11,7 @@ export interface ChatSliderProps {
   increment: number
 }
 
-export const ChatSlider = (props: ChatSliderProps) => {
+export const Slider = (props: SliderProps) => {
   return (
     <div>
       {props.text}

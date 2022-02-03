@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ChatProps } from "~/src/components/pia-ui/types";
+import { UIProps } from "~/src/components/pia-ui/types";
 
 /**
  *
@@ -13,7 +13,7 @@ export type ChoiceItemProps = {
   sendChoice: () => Promise<void>
 }
 
-export interface ChatChoicesProps extends ChatProps {
+export interface ChoicesProps extends UIProps {
   type: "choices",
   style?: "buttons" | "list",
   choices: ChoiceItemProps[],
@@ -29,7 +29,7 @@ export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
     {props.text}
   </button>;
 
-export const ChatChoices = (props: ChatChoicesProps) => {
+export const Choices = (props: ChoicesProps) => {
   return (
     <div key={props.id}>
       <div>{props.text}</div>

@@ -1,9 +1,10 @@
 import * as React from "react";
 import { screen, render, createEvent, fireEvent } from "@testing-library/react";
 
-import { ChatChoices } from "./ChatChoices";
+import { Choices } from "~/src/components/pia-ui/Choices";
 
-describe("ChatChoices", () => {
+
+describe("Choices", () => {
   var mockContinueFn: jest.Mock;
 
   beforeEach(() => {
@@ -13,7 +14,7 @@ describe("ChatChoices", () => {
       { id: "no", text: "No!" }
     ];
 
-    render(<ChatChoices
+    render(<Choices
       type="choices"
       id="foo"
       text="Make a choice"

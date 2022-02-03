@@ -3,7 +3,7 @@ import { JSONData } from "~/src/utils/types";
 
 export type ContinueFn = (input?: JSONData, permit?: JSONData) => Promise<void>;
 
-export interface ChatProps {
+export interface UIProps {
   id: string, // this is used to generate the key
   type: string, // the key which dispatches to the actual React component via ComponentMap
   permit?: JSONData,
