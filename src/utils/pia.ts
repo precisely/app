@@ -7,10 +7,9 @@ import { JSONData } from "~/src/utils/types";
 //Need to think more about how args would be used in the runs - is the type an array of JSONDatastrings?
 export interface Run {
   id: string,
-  state: "running" | "suspended" | "complete",
-  status: [JSONData],
-  output: [JSONData],
-  return_mode?:  null | "block" | "redirect"
+  state: "running" | "error" | "complete" | "interrupted",
+  status: { [key: string]: JSONData },
+  output: [JSONData]
 }
 
 

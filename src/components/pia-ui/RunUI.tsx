@@ -6,7 +6,7 @@ import { Run } from "~/src/utils/pia";
 import { JSONData } from "~/src/utils/types";
 import { UIProps, ContinueFn } from "~/src/components/pia-ui/types";
 
-import { Message } from "~/src/components/pia-ui/Message";
+import { Text } from "~/src/components/pia-ui/Text";
 import { Choices } from "~/src/components/pia-ui/Choices";
 
 
@@ -16,7 +16,7 @@ interface Props {
 
 const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
   buttons: Choices,
-  message: Message
+  text: Text
 };
 
 export const RunUI = (props: Props) => {
@@ -43,14 +43,14 @@ export const RunUI = (props: Props) => {
     async (data: JSONData = null) =>
       await safelySetRun(PIAUtils.continueRun(run.id, data, permit));
 
-  const makeComponent = (element: UIProps) => {
+  const makeComponent = (element: UIProps, index: number) => {
     let component = ComponentMap[element['type']];
     if (!component) {
       console.log("Unrecognized component ", element, " in RunUI");
       return null;
     }
     else {
-      return component(element);
+      return component({ key: JSON.stringify(index), ...element });
     }
   };
 
