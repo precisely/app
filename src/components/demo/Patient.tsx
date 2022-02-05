@@ -11,12 +11,27 @@ import { RunUI } from "~/src/components/pia-ui/RunUI";
 
 import "./common.css";
 
-export const Patient = () => {
 
-  const patientId = 123;
+interface Props {
+  patientId: number
+}
+
+
+export const Patient = (props: Props) => {
+
+  const patientId = props.patientId;
 
   const [sse, setSse] = React.useState<EventSource>(
-    SSEUtils.connect(`${process.env.PIA_URL}/notifications/patient/${patientId}`, (sse, event) => toast.info(event.data)));
+    SSEUtils.connect(
+      `${process.env.PIA_URL}/notifications/patient/${patientId}`,
+      (sse, event) => {
+        const raw = event.data;
+        const data = JSON.parse(raw);
+        console.log(event);
+        console.log(data);
+        toast.info(data.message);
+      }
+  ));
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
