@@ -2,6 +2,28 @@ p {
   @apply pt-2;
 }
 
+input[type=number],
+input[type=text],
+input[type=password] {
+  @apply border-solid border
+  text-sm
+  block w-full;
+}
+
+input[type=number]:invalid,
+input[type=text]:invalid,
+input[type=password]:invalid {
+  @apply border-cardinal;
+}
+
+@media (prefers-color-scheme: dark) {
+  input[type=number],
+  input[type=text],
+  input[type=password] {
+    @apply bg-ink text-cloud;
+  }
+}
+
 .ctr {
   @apply flex justify-center items-center text-center;
 }

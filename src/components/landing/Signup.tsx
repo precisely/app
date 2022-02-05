@@ -99,8 +99,7 @@ export const Signup = (_props: Router.RouteComponentProps) => {
           <div className="login-form-row">
             <label>
               Email
-              <input className="input-text"
-                     placeholder="Enter your email"
+              <input placeholder="Enter your email"
                      autoComplete="off"
                      autoCapitalize="off"
                      value={email}
@@ -113,8 +112,7 @@ export const Signup = (_props: Router.RouteComponentProps) => {
           <div className="pt-6 login-form-row">
             <label>
               Password
-              <input className="input-text"
-                     placeholder="Enter your password"
+              <input placeholder="Enter your password"
                      value={password}
                      onChange={onChangePassword}
                      type="password"

@@ -69,8 +69,7 @@ export const Reset = () => {
           <div className="login-form-row">
             <label>
               Email
-              <input className="input-text"
-                     placeholder="Enter your email"
+              <input placeholder="Enter your email"
                      autoComplete="off"
                      autoCapitalize="off"
                      value={email}

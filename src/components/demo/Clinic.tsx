@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 
+import "./common.css";
+
 
 import * as SSEUtils from "~/src/utils/sse";
 

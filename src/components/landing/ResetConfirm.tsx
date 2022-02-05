@@ -69,8 +69,7 @@ export const ResetConfirm = (_props: Router.RouteComponentProps) => {
             <div className="login-form-row">
               <label>
                 New password
-                <input className="input-text"
-                       placeholder="Enter your password"
+                <input placeholder="Enter your password"
                        value={password}
                        onChange={onChangePassword}
                        type="password"

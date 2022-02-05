@@ -9,6 +9,7 @@ import { Button } from "~/src/components/Button";
 
 import { RunUI } from "~/src/components/pia-ui/RunUI";
 
+import "./common.css";
 
 export const Patient = () => {
 
