@@ -79,8 +79,7 @@ export const Patient = (props: Props) => {
           {runs.map(
             run => (
               <li key={run.id}>
-
-                <Button text={run.status.title || run.state}
+                <Button text={run.status.title.toString() || run.state}
                         color="cardinal"
                         callback={() => switchRun(run)} />
               </li>
