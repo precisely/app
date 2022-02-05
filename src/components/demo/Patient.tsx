@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -12,14 +13,9 @@ import { RunUI } from "~/src/components/pia-ui/RunUI";
 import "./common.css";
 
 
-interface Props {
-  patientId: number
-}
+export const Patient = () => {
 
-
-export const Patient = (props: Props) => {
-
-  const patientId = props.patientId;
+  const { patientId } = Router.useParams<{patientId: string}>();
 
   const [sse, setSse] = React.useState<EventSource>(
     SSEUtils.connect(
@@ -29,7 +25,13 @@ export const Patient = (props: Props) => {
         const data = JSON.parse(raw);
         console.log(event);
         console.log(data);
-        toast.info(data.message);
+        toast.info(
+          <a href={data["run-id"]}>{data["message"]}</a>,
+          {
+            autoClose: false,
+            closeOnClick: false
+          }
+        );
       }
   ));
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
