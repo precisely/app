@@ -87,37 +87,34 @@ export const Clinic = () => {
 
   const therapeuticRunsTable = () => (
     <div>
-      <span style={{alignContent: 'center'}}>Anticoagulation Therapy Programs:</span>
-      <div>
-        <table style={{  width: '100%' }}>
-          <thead>
-            <tr>
-              <th>Patient</th>
-              <th>Age</th>
-              <th>Phase</th>
-              <th>Dose</th>
-              <th>Last INR</th>
-              <th>Alert</th>
-            </tr>
-          </thead>
-          <tbody>
-            {runs.map(
-              run => (
-                <tr key={run.id} onClick={() => toggleRunVisibility(run)}>
-                  <td>{run.status.patient.name}</td>
-                  <td>{run.status.patient.age}</td>
-                  <td>{run.status?.overview?.phase}</td>
-                  <td>{run.status?.overview?.dose}</td>
-                  <td>{run.status?.overview ? run.status?.overview["last-inr"] : null}</td>
-                  <td color={alertColor(run)}>{run.status?.overview?.alert?.text}</td>
-                  {(run.status.visible)
-                    ? <TherapyOverview run={run}></TherapyOverview>
-                    : null}
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
+      <table style={{ width: '100%' }}>
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Age</th>
+            <th>Phase</th>
+            <th>Dose</th>
+            <th>Last INR</th>
+            <th>Alert</th>
+          </tr>
+        </thead>
+        <tbody>
+          {runs.map(
+            run => (
+              <tr key={run.id} onClick={() => toggleRunVisibility(run)}>
+                <td>{run.status.patient.name}</td>
+                <td>{run.status.patient.age}</td>
+                <td>{run.status?.overview?.phase}</td>
+                <td>{run.status?.overview?.dose}</td>
+                <td>{run.status?.overview ? run.status?.overview["last-inr"] : null}</td>
+                <td color={alertColor(run)}>{run.status?.overview?.alert?.text}</td>
+                {(run.status.visible)
+                  ? <TherapyOverview run={run}></TherapyOverview>
+                  : null}
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   );
 
@@ -127,8 +124,10 @@ export const Clinic = () => {
 
   return (
     <div>
-      <div className="pt-6 grid grid-cols-6">
-        <h1>Anticoagulation Therapy</h1>
+      <div className="grid grid-cols-3 content-center">
+        <div className="flex items-center justify-center col-start-2 col-span-1">
+          Anticoagulation Therapy
+        </div>
       </div>
 
       <div className="pt-6 grid grid-cols-6">

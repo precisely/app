@@ -124,7 +124,7 @@ export async function getPatient(patientId: number): Promise<Patient> {
     throw "???";
   }
 }
-// query string format: state=running&status.patient-id=123&status.roles$=patient
+// query string format: state=running&status.patient-id=123&status.roles$contains=patient
 // FIXME: This should accept a JS object and convert it into this format string instead.
 export async function findRuns(query: string): Promise<Run[]> {
   const resp = await ApiUtils.api<Run[]>({
