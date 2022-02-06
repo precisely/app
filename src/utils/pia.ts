@@ -3,15 +3,57 @@ import { toast } from 'react-toastify';
 import * as ApiUtils from "~/src/utils/api";
 import { JSONData } from "~/src/utils/types";
 
+export interface IDMap {
+  [key: string]: string
+}
+
+export interface BasicStatus {
+  title: string,
+  "patient-id"?: number,
+  patient?: Patient,
+  [key: string]: any
+}
+
+export interface StatusAlert {
+  text: string,
+  level: "info" | "warning" | "attention"
+}
+
+export interface TherapyStatus extends BasicStatus {
+  runs?: {
+    lab?: IDMap,
+    patient?: IDMap,
+    pharmacy?: IDMap
+  },
+  overview?: { alert: StatusAlert } & {
+    [key: string]: string | number | { value: number, unit: string }
+  }
+}
+
+export interface LabStatus extends BasicStatus {
+
+}
+
+export interface PatientStatus extends BasicStatus {
+
+}
 
 //Need to think more about how args would be used in the runs - is the type an array of JSONDatastrings?
 export interface Run {
   id: string,
   state: "running" | "error" | "complete" | "interrupted",
-  status: { [key: string]: JSONData },
+  status: BasicStatus | TherapyStatus | LabStatus | PatientStatus
   output: [JSONData]
 }
 
+export interface Patient {
+  id: number,
+  sex: "male" | "female",
+  age: number,
+  name: string,
+  email: string,
+  race: string
+}
 
 export async function startRun(name: string, args: any[] = []): Promise<Run> {
   const resp = await ApiUtils.api<Run>({
@@ -66,6 +108,22 @@ export async function getRun(runId: string): Promise<Run> {
   }
 }
 
+export async function getPatient(patientId: number): Promise<Patient> {
+  const resp = await ApiUtils.api<Patient>({
+    method: "GET",
+    url: `${process.env.PIA_URL}/api/patients/${patientId}`
+  });
+  if (resp.ok) {
+    console.log("getPatient returned ", resp.data);
+    return resp.data;
+  }
+  else {
+    // FIXME: error handling
+    toast.error("getPatient failed");
+    console.log("getPatient failed", resp);
+    throw "???";
+  }
+}
 // query string format: state=running&status.patient-id=123&status.roles$=patient
 // FIXME: This should accept a JS object and convert it into this format string instead.
 export async function findRuns(query: string): Promise<Run[]> {

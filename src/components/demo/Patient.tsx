@@ -41,7 +41,7 @@ export const Patient = () => {
     () => {
       const go = async () => {
         try {
-          const resp = await PIAUtils.findRuns(`state=running&status.patient-id=${patientId}&status.roles$=patient`);
+          const resp = await PIAUtils.findRuns(`state=running&status.patient-id=${patientId}&status.roles$contains=patient`);
           setRuns(resp);
         }
         catch (error) {

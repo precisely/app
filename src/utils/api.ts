@@ -33,6 +33,7 @@ export async function api<T>(args: Args): Promise<Result<T>> {
   const url = args.query ?
     (`${args.url}?` + new URLSearchParams(args.query)) :
     args.url;
+  console.log("PIA API call:", args.method.toUpperCase(), url, JSON.stringify(body));
   const resp = await fetch(url, { method: args.method, headers, body });
   const res: Result<T> = {
     status: resp.status,
