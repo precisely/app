@@ -1,12 +1,8 @@
 import * as React from "react";
+
 import { UIProps } from "~/src/components/pia-ui/types";
 
-/**
- *
- * Displays a set of choices as buttons (for now)
- * We may include styles of choice in the future.
- *
- */
+
 export type ChoiceItemProps = {
   id: string,
   text: string,
@@ -15,12 +11,10 @@ export type ChoiceItemProps = {
 
 export interface ChoicesProps extends UIProps {
   type: "choices",
-  style?: "buttons" | "list",
-  choices: ChoiceItemProps[],
+  buttons: ChoiceItemProps[],
   text: string
 }
 
-// for now, ignore the style option - only display as buttons
 export const ChoiceItem = (props: ChoiceItemProps): JSX.Element =>
   <button
     key={props.id}
@@ -35,7 +29,7 @@ export const Choices = (props: ChoicesProps) => {
       <div>{props.text}</div>
       {...props.buttons.map(c => ChoiceItem({
         sendChoice: () => props.continueFn(c.id),
-        ... c
+        ...c
       }))}
     </div>
   );
