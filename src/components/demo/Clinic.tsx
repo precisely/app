@@ -12,8 +12,7 @@ import { RunUI } from "~/src/components/pia-ui/RunUI";
 import type { Run, Patient } from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
-import { TherapyOverview } from "~/src/components/demo/TherapyOverview";
-import { random } from "lodash";
+import { TherapyDetail } from "~/src/components/demo/TherapyDetail";
 
 export const Clinic = () => {
 
@@ -110,7 +109,7 @@ export const Clinic = () => {
 
   const detailRow = (run: Run) =>
     run.index.visible
-      ? <tr key={run.id + "_detail"}><td colSpan={6}><TherapyOverview run={run}></TherapyOverview></td></tr>
+      ? <tr key={run.id + "_detail"}><td colSpan={6}><TherapyDetail run={run}></TherapyDetail></td></tr>
       : null;
 
   const mainTable = () => (
