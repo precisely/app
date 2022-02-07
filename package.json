@@ -17,13 +17,6 @@
     "build-local": "NODE_ENV=production npx parcel build index.html -d build-local/ --public-url './'",
     "start-local": "npx serve --single build-local"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-typescript",
-      "@babel/preset-react"
-    ]
-  },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
@@ -63,10 +56,6 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.8",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/preset-typescript": "^7.16.7",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "@types/jest": "^26.0.10",
