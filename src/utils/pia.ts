@@ -7,34 +7,34 @@ export interface IDMap {
   [key: string]: string
 }
 
-export interface BasicStatus {
+export interface BasicIndex {
   title: string,
   "patient-id"?: number,
   patient?: Patient,
   [key: string]: any
 }
 
-export interface StatusAlert {
+export interface IndexAlert {
   text: string,
   level: "info" | "warning" | "attention"
 }
 
-export interface TherapyStatus extends BasicStatus {
+export interface TherapyIndex extends BasicIndex {
   runs?: {
     lab?: IDMap,
     patient?: IDMap,
     pharmacy?: IDMap
   },
-  overview?: { alert: StatusAlert } & {
+  overview?: { alert: IndexAlert } & {
     [key: string]: string | number | { value: number, unit: string }
   }
 }
 
-export interface LabStatus extends BasicStatus {
+export interface LabIndex extends BasicIndex {
 
 }
 
-export interface PatientStatus extends BasicStatus {
+export interface PatientIndex extends BasicIndex {
 
 }
 
@@ -42,7 +42,7 @@ export interface PatientStatus extends BasicStatus {
 export interface Run {
   id: string,
   state: "running" | "error" | "complete" | "interrupted",
-  status: BasicStatus | TherapyStatus | LabStatus | PatientStatus
+  index: BasicIndex | TherapyIndex | LabIndex | PatientIndex
   output: [JSONData]
 }
 
@@ -124,7 +124,7 @@ export async function getPatient(patientId: number): Promise<Patient> {
     throw "???";
   }
 }
-// query string format: state=running&status.patient-id=123&status.roles$contains=patient
+// query string format: state=running&index.patient-id=123&index.roles$=patient
 // FIXME: This should accept a JS object and convert it into this format string instead.
 export async function findRuns(query: string): Promise<Run[]> {
   const resp = await ApiUtils.api<Run[]>({

@@ -41,7 +41,7 @@ export const Patient = () => {
     () => {
       const go = async () => {
         try {
-          const resp = await PIAUtils.findRuns(`state=running&status.patient-id=${patientId}&status.roles$contains=patient`);
+          const resp = await PIAUtils.findRuns(`state=running&index.patient-id=${patientId}&index.roles$contains=patient`);
           setRuns(resp);
         }
         catch (error) {
@@ -81,7 +81,7 @@ export const Patient = () => {
           {runs.map(
             run => (
               <li key={run.id}>
-                <Button text={run.status.title.toString() || run.state}
+                <Button text={run.index.title.toString() || run.state}
                         color="cardinal"
                         callback={() => switchRun(run)} />
               </li>

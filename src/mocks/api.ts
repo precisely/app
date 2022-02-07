@@ -72,7 +72,7 @@ export function oneSignupConfirm() {
 
     return Promise.resolve({
       ok: true,
-      status: 200
+      index: 200
     });
   });
 }

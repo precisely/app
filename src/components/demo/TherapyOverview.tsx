@@ -57,16 +57,25 @@ export const TherapyOverview = (props: Props) => {
   return (
     <div>
       <div>
-        Activities:
+        Therapy Overview:
+        {/*
+        * Active runs indexed on th
+      */}
+        <div>
+        Lab Activities:
+        {Object.entries(run.index.runs?.labs || {}).map(([k, v]) => {
+
+        })}
+          </div>
         {/* <ul>
-          {run.status.runs.map(
+          {run.index.runs.map(
             (run: Run) => (
               <li key={run.id}>
-                <div>{run.status.patient.name}</div>
-                <div>{run.status.patient.age}</div>
+                <div>{run.index.patient.name}</div>
+                <div>{run.index.patient.age}</div>
               </li>
               // <li key={run.id}>
-              //   <Button text={run.status.title || run.id}
+              //   <Button text={run.index.title || run.id}
               //           color="cardinal"
               //           callback={() => switchRun(run)} />
               // </li>

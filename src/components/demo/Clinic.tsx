@@ -13,6 +13,7 @@ import type { Run, Patient } from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
 import { TherapyOverview } from "~/src/components/demo/TherapyOverview";
+import { random } from "lodash";
 
 export const Clinic = () => {
 
@@ -23,12 +24,12 @@ export const Clinic = () => {
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
   const getClinicRuns = async () => {
-    const resp = await PIAUtils.findRuns(`state=running&status.roles$contains=doctor`);
+    const resp = await PIAUtils.findRuns(`state=running&index.roles$contains=doctor`);
     return await Promise.all(resp.map(resolveClinicRun));
   };
 
   const resolveClinicRun = async (run: Run) => {
-    run.status.patient = await PIAUtils.getPatient(run.status["patient-id"]);
+    run.index.patient = await PIAUtils.getPatient(run.index["patient-id"]);
     return run;
   };
 
@@ -68,7 +69,7 @@ export const Clinic = () => {
   };
 
   const alertColor = (run: Run) => {
-    switch (run.status.overview?.alert?.level) {
+    switch (run.index.overview?.alert?.level) {
       case "info": return "green";
       case "warning": return "yellow";
       case "attention": return "red";
@@ -79,40 +80,49 @@ export const Clinic = () => {
   const toggleRunVisibility = (run: Run) => {
     setRuns(runs.map(r => {
       if (r.id == run.id) {
-        r.status.visible = !run.status.visible;
+        r.index.visible = !run.index.visible;
       }
       return r;
     }));
   };
 
-  const therapeuticRunsTable = () => (
+  const header = () =>
+    <thead key={"clinic-head"}>
+      <tr>
+        <th key={"therapeutic-patient"}>Patient</th>
+        <th key={"therapeutic-age"}>Age</th>
+        <th key={"therapeutic-phase"}>Phase</th>
+        <th key={"therapeutic-dose"}>Dose</th>
+        <th key={"therapeutic-last-inr"}>Last INR</th>
+        <th key={"therapeutic-alert"}>Alert</th>
+      </tr>
+    </thead>;
+
+  const patientRow = (run: Run) =>
+    <tr key={run.id} onClick={() => toggleRunVisibility(run)}>
+      <td key={run.id + "_p-name"} >{run.index.patient.name}</td>
+      <td key={run.id + "_p-age"} >{run.index.patient.age}</td>
+      <td key={run.id + "_p-phase"}>{run.index?.overview?.phase}</td>
+      <td key={run.id + "_p-dose"}>{run.index?.overview?.dose}</td>
+      <td key={run.id + "_p-last-inr"}>{run.index?.overview ? run.index?.overview["last-inr"] : null}</td>
+      <td key={run.id + "_p-alert"} color={alertColor(run)}>{run.index?.overview?.alert?.text}</td>
+    </tr>;
+
+  const detailRow = (run: Run) =>
+    run.index.visible
+      ? <tr key={run.id + "_detail"}><td colSpan={6}><TherapyOverview run={run}></TherapyOverview></td></tr>
+      : null;
+
+  const mainTable = () => (
     <div>
       <table style={{ width: '100%' }}>
-        <thead>
-          <tr>
-            <th>Patient</th>
-            <th>Age</th>
-            <th>Phase</th>
-            <th>Dose</th>
-            <th>Last INR</th>
-            <th>Alert</th>
-          </tr>
-        </thead>
-        <tbody>
+        {header()}
+        <tbody key={"clinic-body"}>
           {runs.map(
-            run => (
-              <tr key={run.id} onClick={() => toggleRunVisibility(run)}>
-                <td>{run.status.patient.name}</td>
-                <td>{run.status.patient.age}</td>
-                <td>{run.status?.overview?.phase}</td>
-                <td>{run.status?.overview?.dose}</td>
-                <td>{run.status?.overview ? run.status?.overview["last-inr"] : null}</td>
-                <td color={alertColor(run)}>{run.status?.overview?.alert?.text}</td>
-                {(run.status.visible)
-                  ? <TherapyOverview run={run}></TherapyOverview>
-                  : null}
-              </tr>
-            ))}
+            (run, idx) => [
+              patientRow(run),
+              detailRow(run)
+            ])}
         </tbody>
       </table>
     </div>
@@ -145,15 +155,14 @@ export const Clinic = () => {
             callback={() => newPatient(patientId)} />
         </div>
       </div>
-      <div>
 
+      <div>
         <div className="pt-6 grid grid-cols-6">
           <div className="col-start-2 col-span-4 pr-2">
-            {therapeuticRunsTable()}
+            {mainTable()}
           </div>
         </div>
       </div>
-
     </div>
   );
 

@@ -36,7 +36,7 @@ export async function api<T>(args: Args): Promise<Result<T>> {
   console.log("PIA API call:", args.method.toUpperCase(), url, JSON.stringify(body));
   const resp = await fetch(url, { method: args.method, headers, body });
   const res: Result<T> = {
-    status: resp.status,
+    index: resp.status,
     ok: resp.ok
   };
   // attempt JSONDatabody decode
