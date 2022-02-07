@@ -1,3 +1,11 @@
+body {
+  @apply font-sans bg-cloud text-ink;
+}
+
+.dark body {
+  @apply bg-ink text-cloud;
+}
+
 p {
   @apply pt-2;
 }
@@ -16,12 +24,10 @@ input[type=password]:invalid {
   @apply border-cardinal;
 }
 
-@media (prefers-color-scheme: dark) {
-  input[type=number],
-  input[type=text],
-  input[type=password] {
-    @apply bg-ink text-cloud;
-  }
+.dark input[type=number],
+.dark input[type=text],
+.dark input[type=password] {
+  @apply bg-ink text-cloud;
 }
 
 .ctr {

@@ -22,6 +22,16 @@ import "~/src/components/common.css";
 
 const Root = () => {
 
+  // deal with dark mode and especially the DISABLE_DARK_MODE environment variable
+  let disableDarkMode = (process.env.DISABLE_DARK_MODE || "").toLowerCase().trimLeft()[0];
+  if (!["t", "1", "y"].includes(disableDarkMode) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.classList.add("dark");
+  }
+  else {
+    document.documentElement.classList.remove("dark");
+  }
+
   const redirect = () => {
     if (SessionUtils.isAuthenticated()) {
       return (

@@ -2,17 +2,15 @@
 
 module.exports = {
   content: [
+    "index.html",
     "assets/**/*",
     "src/**/*.html",
     "src/**/*.jsx",
     "src/**/*.tsx"
   ],
+  darkMode: "class",
   theme: {
     extend: {
-      screens: {
-        light: { raw: "(prefers-color-scheme: light)" },
-        dark: { raw: "(prefers-color-scheme: dark)" }
-      },
       fontFamily: {
         sans: ["Ageo", "Helvetica", "Arial", "sans-serif"]
       },
@@ -50,29 +48,5 @@ module.exports = {
         aqua: "#00DFEC"
       },
     }
-  },
-  variants: {},
-  plugins: [
-    function ({ addBase, config }) {
-      addBase({
-        "@media (prefers-color-scheme: light)": {
-          body: {
-            color: config("theme.colors.ink"),
-            backgroundColor: config("theme.colors.coconut")
-          },
-        }
-      });
-      let darkMode = (process.env.DISABLE_DARK_MODE || '').toLowerCase().trimLeft()[0];
-      if (!['t', '1', 'y'].includes(darkMode)) {
-        addBase({
-          "@media (prefers-color-scheme: dark)": {
-            body: {
-              color: config("theme.colors.coconut"),
-              backgroundColor: config("theme.colors.ink")
-            }
-          }
-        });
-      }
-    }
-  ],
+  }
 }
