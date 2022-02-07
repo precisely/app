@@ -1,7 +1,8 @@
 // -*- eval: (rainbow-mode 1) -*-
 
 module.exports = {
-  purge: [
+  content: [
+    "assets/**/*",
     "src/**/*.html",
     "src/**/*.jsx",
     "src/**/*.tsx"
