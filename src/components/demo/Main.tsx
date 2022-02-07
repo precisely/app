@@ -21,6 +21,11 @@ export const Main = () => {
           <img className="w-20" src={imgEscutcheon} />
         </div>
       </div>
+      <div className="pt-8 text-lg">
+        <div className="flex justify-center">
+          Demo Driver
+        </div>
+      </div>
       <div className="pt-6 grid grid-cols-6">
         <div className="col-start-3 col-span-1 pr-2">
           <input className="w-full h-full"
@@ -50,6 +55,31 @@ export const Main = () => {
                   color="cardinal"
                   classes="w-full py-2"
                   callback={() => history.push("/demo/lab")} />
+        </div>
+      </div>
+      <div className="pt-8 text-base">
+        <div className="flex justify-center">
+          Theme
+        </div>
+      </div>
+      <div className="pt-2 grid grid-cols-9">
+        <div className="col-start-4 col-span-1 pr-2">
+          <Button text="Light Mode"
+                  color="coconut"
+                  classes="w-full h-full"
+                  callback={() => { localStorage.theme = "light"; window.location.reload(); }} />
+        </div>
+        <div className="col-start-5 col-span-1 pr-2">
+          <Button text="Dark Mode"
+                  color="ink"
+                  classes="w-full h-full"
+                  callback={() => { localStorage.theme = "dark"; window.location.reload(); }} />
+        </div>
+        <div className="col-start-6 col-span-1 pr-2">
+          <Button text="OS Mode"
+                  color="cobalt"
+                  classes="w-full h-full"
+                  callback={() => { localStorage.removeItem("theme"); window.location.reload(); }} />
         </div>
       </div>
       <RouterDOM.Switch>

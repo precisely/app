@@ -32,11 +32,6 @@ Make a personal `.env` file using `.env.sample` as a template.
 We use [Parcel 2](https://parceljs.org/) as our front-end application bundler. Think of it as webpack with the defaults most people need. Unfortunately, like every other front-end bundler, it can get in trouble when its configuration changes but it retains a stale cache of something it failed to invalidate. So restarting it can sometimes help, as will occasionally blowing away its cache and build artifacts (remove the `.parcel-cache` and `dist` directories from the project root).
 
 
-## Disabling Dark Mode
-
-Set the `DISABLE_DARK_MODE` variable in `.env` to `true` or `1`, do `yarn clean` and restart the server.
-
-
 ## Style
 
 Follow these guidelines:
