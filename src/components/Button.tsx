@@ -4,6 +4,7 @@ import "./Button.css";
 
 
 interface Props {
+  key?: string,
   color?: string,
   classes?: string,
   disabled?: boolean,
@@ -28,6 +29,7 @@ export const Button = (propsRaw: Props) => {
 
   return (
     <button
+      key={props.key}
       className={`btn btn-${props.color} ${props.classes}`}
       disabled={props.disabled}
       onClick={props.callback}>

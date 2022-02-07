@@ -7,7 +7,7 @@ import { JSONData } from "~/src/utils/types";
 import { UIProps, ContinueFn } from "~/src/components/pia-ui/types";
 
 import { Text } from "~/src/components/pia-ui/Text";
-import { Choices } from "~/src/components/pia-ui/Choices";
+import { Buttons } from "~/src/components/pia-ui/Buttons";
 
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
-  buttons: Choices,
+  buttons: Buttons,
   text: Text
 };
 

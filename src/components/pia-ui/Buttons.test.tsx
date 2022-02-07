@@ -1,25 +1,25 @@
 import * as React from "react";
 import { screen, render, createEvent, fireEvent } from "@testing-library/react";
 
-import { Choices } from "~/src/components/pia-ui/Choices";
+import { Buttons } from "~/src/components/pia-ui/Buttons";
 
 
-describe("Choices", () => {
+describe("Buttons", () => {
   var mockContinueFn: jest.Mock;
 
   beforeEach(() => {
     mockContinueFn =  jest.fn();
-    const choices: any = [
+    const buttons: any = [
       { id: "yes", text: "Yes!" },
       { id: "no", text: "No!" }
     ];
 
-    render(<Choices
-      type="choices"
+    render(<Buttons
+      type="buttons"
       id="foo"
       text="Make a choice"
       permit="the-permit"
-      choices={choices}
+      buttons={buttons}
       continueFn={mockContinueFn} />);
   });
 
