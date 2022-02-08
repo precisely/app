@@ -11,6 +11,7 @@ import { Main as DemoMain } from "~/src/components/demo/Main";
 import { Patient as DemoPatient } from "~/src/components/demo/patient/Main";
 import { Clinic as DemoClinic } from "~/src/components/demo/clinic/Main";
 import { Lab as DemoLab } from "~/src/components/demo/Lab";
+import { Pharmacy as DemoPharmacy } from "~/src/components/demo/Pharmacy";
 import { Terms } from "~/src/components/Terms";
 import { Privacy } from "~/src/components/Privacy";
 import { NotFound as ErrorNotFound } from "~/src/components/errors/NotFound";
@@ -45,6 +46,7 @@ const Root = () => {
           <RouterDOM.Route path="/demo/patient/:patientId" component={DemoPatient} />
           <RouterDOM.Route path="/demo/clinic" component={DemoClinic} />
           <RouterDOM.Route path="/demo/lab" component={DemoLab} />
+          <RouterDOM.Route path="/demo/pharmacy" component={DemoPharmacy} />
           <RouterDOM.Route exact path="/terms" component={Terms} />
           <RouterDOM.Route exact path="/privacy" component={Privacy} />
           <AuthRoute path="/app" component={AppMain} />

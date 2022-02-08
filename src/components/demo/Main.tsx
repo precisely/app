@@ -57,6 +57,14 @@ export const Main = () => {
                   callback={() => history.push("/demo/lab")} />
         </div>
       </div>
+      <div className="pt-6 grid grid-cols-3">
+        <div className="col-start-2">
+          <Button text="Pharmacy UI"
+                  color="cardinal"
+                  classes="w-full py-2"
+                  callback={() => history.push("/demo/pharmacy")} />
+        </div>
+      </div>
       <div className="pt-8 text-base">
         <div className="flex justify-center">
           Theme
