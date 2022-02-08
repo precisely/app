@@ -13,68 +13,23 @@ import type { Run, Patient } from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
 import { TherapyDetail } from "~/src/components/demo/TherapyDetail";
+import { useNotificationState, alertColorFromLevel, useUpdateRunEffect, findActiveRuns } from './common';
 
 export const Clinic = () => {
 
-  const [sse, setSse] = React.useState<EventSource>(
-    SSEUtils.connect(`${process.env.PIA_URL}/notifications/clinic/1`, (sse, event) => toast.info(event.data)));
+  const [sse, setSse] = useNotificationState('clinic');
   const [patientId, setPatientId] = React.useState<number>();
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
-  const getClinicRuns = async () => {
-    const resp = await PIAUtils.findRuns(`state=running&index.roles$contains=doctor`);
-    return await Promise.all(resp.map(resolveClinicRun));
-  };
-
-  const resolveClinicRun = async (run: Run) => {
-    run.index.patient = await PIAUtils.getPatient(run.index["patient-id"]);
-    return run;
-  };
-
-  React.useEffect(
-    () => {
-      const go = async () => {
-        try {
-          setRuns(await getClinicRuns());
-        }
-        catch (error) {
-          // TODO: Add proper error handling.
-          toast.error("PIA request broke!");
-        }
-      };
-      go();
-    },
-    // TODO: Change the empty list dependencies argument (below) to useEffect so it
-    // forces a refresh when the server informs the client that an invalidation of
-    // the run list has occurred.
-    []
-  );
+  useUpdateRunEffect('doctor', setRuns);
 
   const switchRun = (run: PIAUtils.Run) => {
     setCurrentRun(run);
     // use PIA utils here to switch to the run (continue?)
   };
 
-  const renderCurrentRun = () => {
-    if (undefined === currentRun) {
-      return (<div></div>);
-    }
-    else {
-      return (
-        <RunUI run={currentRun} />
-      );
-    }
-  };
-
-  const alertColor = (run: Run) => {
-    switch (run.index.overview?.alert?.level) {
-      case "info": return "green";
-      case "warning": return "yellow";
-      case "attention": return "red";
-      default: return "green";
-    }
-  };
+  const renderCurrentRun = () => currentRun ? <RunUI run={currentRun} /> : (<div></div>);
 
   const toggleRunVisibility = (run: Run) => {
     setRuns(runs.map(r => {
@@ -104,7 +59,7 @@ export const Clinic = () => {
       <td key={run.id + "_p-phase"}>{run.index?.overview?.phase}</td>
       <td key={run.id + "_p-dose"}>{run.index?.overview?.dose}</td>
       <td key={run.id + "_p-last-inr"}>{run.index?.overview ? run.index?.overview["last-inr"] : null}</td>
-      <td key={run.id + "_p-alert"} color={alertColor(run)}>{run.index?.overview?.alert?.text}</td>
+      <td key={run.id + "_p-alert"} color={alertColorFromLevel(run.index?.overview?.alert?.level)}>{run.index?.overview?.alert?.text}</td>
     </tr>;
 
   const detailRow = (run: Run) =>
@@ -127,8 +82,11 @@ export const Clinic = () => {
     </div>
   );
 
-  const newPatient = (patientId: number) => {
-    PIAUtils.startRun('anticoagulation', [patientId]).then(getClinicRuns).then(setRuns);
+  const newPatient = async (patientId: number) => {
+    console.log("newPatient:", patientId);
+    const newRun = await PIAUtils.startRun('anticoagulation', [patientId]);
+    console.log("newPatient => newRun =", newRun);
+    setRuns(await findActiveRuns('doctor'));
   };
 
   return (
