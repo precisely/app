@@ -27,6 +27,7 @@ module.exports = {
         cloud: "#F2F2F2",
         coconut: "#FEFEFE",
         // - reds and pinks
+        brick: "#D43857", 
         cardinal: "#E71F54",
         blush: "#F28599",
         puff: "#FDEDF2",

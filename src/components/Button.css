@@ -25,6 +25,10 @@
   @apply bg-coconut text-ink border-ink;
 }
 
+.btn-brick {
+  @apply bg-brick text-cloud border-cloud;
+}
+
 .btn-cardinal {
   @apply bg-cardinal text-cloud border-cloud;
 }
