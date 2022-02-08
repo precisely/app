@@ -11,7 +11,7 @@ import { Main as DemoMain } from "~/src/components/demo/Main";
 import { Patient as DemoPatient } from "~/src/components/demo/patient/Main";
 import { Clinic as DemoClinic } from "~/src/components/demo/Clinic";
 import { Lab as DemoLab } from "~/src/components/demo/Lab";
-import { Lab as DemoPharmacy } from "~/src/components/demo/Pharmacy";
+import { Pharmacy as DemoPharmacy } from "~/src/components/demo/Pharmacy";
 import { Terms } from "~/src/components/Terms";
 import { Privacy } from "~/src/components/Privacy";
 import { NotFound as ErrorNotFound } from "~/src/components/errors/NotFound";
