@@ -1,0 +1,5 @@
+.table {
+  grid-template-rows: min-content;
+  @apply grid grid-cols-6 gap-x-px 
+  bg-lightgrey h-full;
+}
