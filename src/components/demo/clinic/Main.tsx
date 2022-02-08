@@ -1,12 +1,13 @@
 import * as React from "react";
-import { Icon } from "./ui/Icon";
+import { Sidebar } from "./ui/Sidebar";
 
 export const Clinic = () => {
-  console.log("TEST");
   return (
-    <div>
-      <h1>Test</h1>
-      <Icon name="bell" size={64} color="blue" />
+    <div className="flex">
+      <div className="flex-none">
+        <Sidebar />
+      </div>
+      <div className="grid flex-1"></div>
     </div>
   );
 };
