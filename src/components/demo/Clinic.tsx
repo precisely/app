@@ -13,30 +13,21 @@ import type { Run, Patient } from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
 import { TherapyDetail } from "~/src/components/demo/TherapyDetail";
+import { alertColorFromLevel, useNotificationState, getActiveRuns } from './common';
 
 export const Clinic = () => {
 
-  const [sse, setSse] = React.useState<EventSource>(
-    SSEUtils.connect(`${process.env.PIA_URL}/notifications/clinic/1`, (sse, event) => toast.info(event.data)));
+  const [sse, setSse] = useNotificationState('clinic', 1);
   const [patientId, setPatientId] = React.useState<number>();
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
-  const getClinicRuns = async () => {
-    const resp = await PIAUtils.findRuns(`state=running&index.roles$contains=doctor`);
-    return await Promise.all(resp.map(resolveClinicRun));
-  };
-
-  const resolveClinicRun = async (run: Run) => {
-    run.index.patient = await PIAUtils.getPatient(run.index["patient-id"]);
-    return run;
-  };
 
   React.useEffect(
     () => {
       const go = async () => {
         try {
-          setRuns(await getClinicRuns());
+          setRuns(await getActiveRuns('clinic'));
         }
         catch (error) {
           // TODO: Add proper error handling.
@@ -67,15 +58,6 @@ export const Clinic = () => {
     }
   };
 
-  const alertColor = (run: Run) => {
-    switch (run.index.overview?.alert?.level) {
-      case "info": return "green";
-      case "warning": return "yellow";
-      case "attention": return "red";
-      default: return "green";
-    }
-  };
-
   const toggleRunVisibility = (run: Run) => {
     setRuns(runs.map(r => {
       if (r.id == run.id) {
@@ -88,6 +70,7 @@ export const Clinic = () => {
   const header = () =>
     <thead key={"clinic-head"}>
       <tr>
+      <th key={"therapeutic-patient-id"}>Id</th>
         <th key={"therapeutic-patient"}>Patient</th>
         <th key={"therapeutic-age"}>Age</th>
         <th key={"therapeutic-phase"}>Phase</th>
@@ -99,12 +82,13 @@ export const Clinic = () => {
 
   const patientRow = (run: Run) =>
     <tr key={run.id} onClick={() => toggleRunVisibility(run)}>
+      <td key={run.id + "_p-id"} >{run.index.patient.id}</td>
       <td key={run.id + "_p-name"} >{run.index.patient.name}</td>
       <td key={run.id + "_p-age"} >{run.index.patient.age}</td>
       <td key={run.id + "_p-phase"}>{run.index?.overview?.phase}</td>
       <td key={run.id + "_p-dose"}>{run.index?.overview?.dose}</td>
       <td key={run.id + "_p-last-inr"}>{run.index?.overview ? run.index?.overview["last-inr"] : null}</td>
-      <td key={run.id + "_p-alert"} color={alertColor(run)}>{run.index?.overview?.alert?.text}</td>
+      <td key={run.id + "_p-alert"} color={alertColorFromLevel(run)}>{run.index?.overview?.alert?.text}</td>
     </tr>;
 
   const detailRow = (run: Run) =>
@@ -127,8 +111,13 @@ export const Clinic = () => {
     </div>
   );
 
-  const newPatient = (patientId: number) => {
-    PIAUtils.startRun('anticoagulation', [patientId]).then(getClinicRuns).then(setRuns);
+  const refreshClinicRuns = async () => {
+    setRuns(await getClinicRuns());
+  }
+
+  const newPatient = async (patientId: number) => {
+    const run = await PIAUtils.startRun('anticoagulation', [patientId]);
+    refreshClinicRuns();
   };
 
   return (

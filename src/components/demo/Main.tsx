@@ -35,7 +35,7 @@ export const Main = () => {
                  min="1" />
         </div>
         <div className="col-start-4">
-          <Button text="Patient UI"
+          <Button text="Patient"
                   color="cardinal"
                   classes="w-full py-2 pr-2"
                   callback={() => history.push(`/demo/patient/${patientId}`)} />
@@ -43,7 +43,7 @@ export const Main = () => {
       </div>
       <div className="pt-6 grid grid-cols-3">
         <div className="col-start-2">
-          <Button text="Clinic UI"
+          <Button text="Clinic"
                   color="cardinal"
                   classes="w-full py-2"
                   callback={() => history.push("/demo/clinic")} />
@@ -51,12 +51,22 @@ export const Main = () => {
       </div>
       <div className="pt-6 grid grid-cols-3">
         <div className="col-start-2">
-          <Button text="Lab UI"
+          <Button text="Lab"
                   color="cardinal"
                   classes="w-full py-2"
                   callback={() => history.push("/demo/lab")} />
         </div>
       </div>
+
+      <div className="pt-6 grid grid-cols-3">
+        <div className="col-start-2">
+          <Button text="Pharmacy"
+                  color="cardinal"
+                  classes="w-full py-2"
+                  callback={() => history.push("/demo/pharmacy")} />
+        </div>
+      </div>
+
       <div className="pt-8 text-base">
         <div className="flex justify-center">
           Theme
