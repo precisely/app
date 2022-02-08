@@ -24,6 +24,7 @@ module.exports = {
         // - black and white
         ink: "#191818",
         lightgrey: "#EAEAEA",
+        silver: "#AFAFAF",
         grey: "#8D8D8D",
         cloud: "#F2F2F2",
         coconut: "#FEFEFE",

@@ -1,0 +1,6 @@
+.search-input {
+  outline: none;
+  border: none;
+
+  @apply px-1;
+}

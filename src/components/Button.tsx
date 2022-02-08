@@ -2,27 +2,25 @@ import * as React from "react";
 
 import "./Button.css";
 
-
 interface Props {
-  key?: string,
-  color?: string,
-  classes?: string,
-  disabled?: boolean,
-  text?: string,
-  type?: string,
-  callback?: () => void
+  key?: string;
+  color?: string;
+  classes?: string;
+  disabled?: boolean;
+  text?: string;
+  type?: string;
+  children?: React.ReactNode;
+  callback?: () => void;
 }
 
-
 export const Button = (propsRaw: Props) => {
-
   const propsDefault = {
     color: "ink",
     classes: "",
     disabled: false,
     text: "Button",
     type: "button",
-    callback: () => {}
+    callback: () => {},
   };
 
   const props = { ...propsDefault, ...propsRaw };
@@ -32,9 +30,9 @@ export const Button = (propsRaw: Props) => {
       key={props.key}
       className={`btn btn-${props.color} ${props.classes}`}
       disabled={props.disabled}
-      onClick={props.callback}>
-      {props.text}
+      onClick={props.callback}
+    >
+      {props.children ? props.children : props.text}
     </button>
   );
-
 };

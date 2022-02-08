@@ -1,13 +1,30 @@
 import * as React from "react";
+import { Button } from "~/src/components/Button";
+import { Header } from "./ui/Header";
+import { Icon } from "./ui/Icon";
+import { PageTitle } from "./ui/PageTitle";
 import { Sidebar } from "./ui/Sidebar";
 
 export const Clinic = () => {
   return (
-    <div className="flex">
+    <div className="flex bg-white">
       <div className="flex-none">
         <Sidebar />
       </div>
-      <div className="grid flex-1"></div>
+      <div className="flex-1">
+        <Header />
+        <PageTitle
+          title="Patients"
+          actions={
+            <Button color="brick">
+              <div className="flex items-center space-x-2">
+                <Icon name="folderPlus" size={24} color={"blush"} />
+                <span className="font-medium text-cloud">New Patient</span>
+              </div>
+            </Button>
+          }
+        />
+      </div>
     </div>
   );
 };

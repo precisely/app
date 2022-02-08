@@ -1,8 +1,10 @@
 import * as React from "react";
 
 import Bell from "jsx:~/assets/icons/bell.svg";
+import ChevronDown from "jsx:~/assets/icons/chevron-down.svg";
 import FolderPlus from "jsx:~/assets/icons/folder-plus.svg";
 import Integrations from "jsx:~/assets/icons/integrations.svg";
+import Search from "jsx:~/assets/icons/search.svg";
 import Settings from "jsx:~/assets/icons/settings.svg";
 import UpDownArrows from "jsx:~/assets/icons/up-down-arrows.svg";
 import User from "jsx:~/assets/icons/user.svg";
@@ -15,8 +17,10 @@ interface Props {
 
 const iconMap = {
   bell: Bell,
+  chevronDown: ChevronDown,
   folderPlus: FolderPlus,
   integrations: Integrations,
+  search: Search,
   settings: Settings,
   upDownArrows: UpDownArrows,
   user: User,
@@ -29,6 +33,7 @@ const colorMap = {
   // - black and white
   ink: "#191818",
   lightgrey: "#EAEAEA",
+  silver: "#AFAFAF",
   grey: "#8D8D8D",
   cloud: "#F2F2F2",
   coconut: "#FEFEFE",

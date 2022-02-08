@@ -1,13 +1,13 @@
 import * as React from "react";
-
-import "./Sidebar.css";
-import logo from "~/assets/images/logo/full-red-black.svg";
 import { NavigationItem } from "./NavigationItem";
+
+import logo from "~/assets/images/logo/full-red-black.svg";
+import "./Sidebar.css";
 
 export const Sidebar = () => {
   return (
-    <div className="border-x-2 border-lightgrey h-screen">
-      <div className="h-[30px] w-[148px] m-8 mb-14">
+    <div className="border-r border-lightgrey h-screen w-80 py-8">
+      <div className="h-[30px] w-[148px] mx-8 mb-14">
         <img src={logo} alt="Precisely Logo" />
       </div>
 

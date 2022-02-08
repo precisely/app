@@ -5,12 +5,8 @@ export const Layout = () => {
   return (
     <div>
       <div className="flex">
-        <div className="">
-
-        </div>
-        <div className="">
-          
-        </div>
+        <div className=""></div>
+        <div className=""></div>
       </div>
       <div className="grid grid-cols-3 content-center">
         <div className="flex items-center justify-center col-start-2 col-span-1">
