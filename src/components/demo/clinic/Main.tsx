@@ -6,7 +6,7 @@ import type { Run } from "~/src/utils/pia";
 import { Button } from "~/src/components/Button";
 import {
   findActiveRuns,
-  useUpdateRunEffect,
+  useEffectFindRuns,
 } from "~/src/components/demo/common";
 
 import { ClinicTable } from "~/src/components/demo/clinic/ClinicTable";
@@ -19,7 +19,7 @@ export const Clinic = () => {
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [patientId, setPatientId] = React.useState<number>();
 
-  useUpdateRunEffect("doctor", setRuns);
+  useEffectFindRuns("doctor", setRuns);
 
   const toggleRunVisibility = (run: Run) => {
     setRuns(
