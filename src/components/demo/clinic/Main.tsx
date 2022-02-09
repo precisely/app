@@ -53,7 +53,7 @@ export const Clinic = () => {
             <Input
               value={patientId}
               setValue={setNewPatient}
-              placeholder="Patient Number"
+              placeholder="Patient Id"
             />
             <Button color="brick" callback={newPatient}>
               <div className="flex items-center space-x-2">
