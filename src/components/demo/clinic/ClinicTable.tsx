@@ -23,6 +23,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
     <Table<Run>
       keyStr="clinic"
       headers={[
+        <TableHeader key="therapeutic-id" text="Id" />,
         <TableHeader
           key="therapeutic-patient"
           text="Patient Name"
@@ -50,6 +51,9 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
             onClick={() => onRowClick(run)}
             className={index % 2 == 0 ? "bg-platinum" : ""}
           >
+            <TableCell key={run.id + "_p-id"}>
+              <span>{run.index["patient-id"]}</span>
+            </TableCell>
             <TableCell key={run.id + "_p-name"}>
               <Avatar src={"https://i.pravatar.cc/32"} size={32} />
               <span>{run.index.patient.name}</span>
