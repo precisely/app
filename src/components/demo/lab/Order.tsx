@@ -53,8 +53,8 @@ export const Order = (props: Props) => {
     else {
       return (
         <div>
-          <RouterDOM.Link to={`/demo/patient/${patientId}`}>
-        &lt; Return to run list
+          <RouterDOM.Link to={`/demo/lab/${labId}/${runId}`}>
+        &lt; Return to orders
           </RouterDOM.Link>
           <RunUI run={currentRun} />
         </div>
