@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
-import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 
@@ -16,7 +15,10 @@ export const Patient = () => {
 
   const { patientId } = Router.useParams<{patientId: string}>();
 
-  const [_sse, _setSse] = React.useState<EventSource>(Common.serverSideEventSource("patient", parseInt(patientId)));
+  React.useEffect(
+    Common.serverSideEventSource("patient", parseInt(patientId)),
+    [] // only connect once
+  );
 
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
   Common.useEffectGetPatient(parseInt(patientId), setPatient);
