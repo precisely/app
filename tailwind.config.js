@@ -26,6 +26,7 @@ module.exports = {
         lightgrey: "#EAEAEA",
         silver: "#AFAFAF",
         grey: "#8D8D8D",
+        platinum: "#FCFCFC",
         cloud: "#F2F2F2",
         coconut: "#FEFEFE",
         // - reds and pinks

@@ -1,5 +1,8 @@
 .table {
-  grid-template-rows: min-content;
-  @apply grid grid-cols-6 gap-x-px 
-  bg-lightgrey h-full;
+  @apply table-auto w-full h-full border-collapse;
+}
+
+.table td:nth-child(1),
+.table th:nth-child(1) {
+  padding-left: 1rem;
 }
