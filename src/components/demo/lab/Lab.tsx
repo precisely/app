@@ -7,20 +7,14 @@ import { Order } from '~/src/components/demo/lab/Order';
 import { Orders } from '~/src/components/demo/lab/Orders';
 
 import * as Common from "~/src/components/demo/common";
-
+import * as PIAUtils from '~/src/utils/pia';
 import "./common.css";
 
-
 export const Lab = () => {
-
   const { labIdParam, runId } = Router.useParams<{ labIdParam: string, runId: string }>();
   const labId = parseInt(labIdParam);
 
-  const [_sse, _setSse] = Common.useStateConnectNotificationSSE("lab", labId);
-
-  // const [patient, setPatient] = React.useState<PIAUtils.Patient>();
-  // Common.useEffectGetPatient(parseInt(patientId), setPatient);
-
+  // const [_sse, _setSse] = Common.useStateConnectNotificationSSE("lab", labId);
 
   const renderHelper = () => {
     if (undefined === labId) {
@@ -43,7 +37,11 @@ export const Lab = () => {
     }
 
   };
-  return <div>{ labId==1 ? "Labcorp" : {renderHelper()}</div>;
+  return (
+    <div>
+      <div>{labId == 1 ? "Labcorp" : "Genetics Lab"}</div>
+      {renderHelper()}
+    </div>);
 }
 // export const Lab = () => {
 

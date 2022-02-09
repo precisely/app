@@ -1,13 +1,11 @@
 import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
-import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 
-import { Button } from "~/src/components/Button";
-
 import { RunUI } from "~/src/components/pia-ui/RunUI";
+import * as Common from "~/src/components/demo/common";
 
 import "~/src/components/demo/common.css";
 
@@ -22,29 +20,7 @@ export const Order = (props: Props) => {
   const labId = parseInt(labIdParam);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
-  React.useEffect(
-    () => {
-      const getRun = async (runId: string) => {
-        try {
-          const resp = await PIAUtils.getRun(runId);
-          setCurrentRun(resp);
-        }
-        catch (error) {
-          // TODO: Add proper error handling.
-          toast.error("PIA request broke!");
-        }
-      };
-      // if the run has been passed into this component through RouterDOM.Link
-      // state, use it; otherwise use the run id to retrieve it
-      if (location.state && location.state.run) {
-        setCurrentRun(location.state.run);
-      }
-      else {
-        getRun(runId);
-      }
-    },
-    []
-  );
+  React.useEffect(Common.getRunEffect(() => runId, setCurrentRun));
 
   const renderHelper = () => {
     if (undefined === currentRun) {
@@ -53,7 +29,7 @@ export const Order = (props: Props) => {
     else {
       return (
         <div>
-          <RouterDOM.Link to={`/demo/lab/${labId}/${runId}`}>
+          <RouterDOM.Link to={`/demo/lab/${labId}`}>
         &lt; Return to orders
           </RouterDOM.Link>
           <RunUI run={currentRun} />

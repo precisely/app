@@ -16,7 +16,7 @@ export const Patient = () => {
 
   const { patientId } = Router.useParams<{patientId: string}>();
 
-  const [_sse, _setSse] = Common.useStateConnectNotificationSSE("patient", parseInt(patientId));
+  const [_sse, _setSse] = React.useState<EventSource>(Common.serverSideEventSource("patient", parseInt(patientId)));
 
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
   Common.useEffectGetPatient(parseInt(patientId), setPatient);

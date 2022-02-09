@@ -9,8 +9,7 @@ import "~/src/components/demo/common.css";
 
 
 interface Props {
-  labId: number,
-  runId: string
+  labId: number
 }
 
 
