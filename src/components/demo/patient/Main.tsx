@@ -16,10 +16,10 @@ export const Patient = () => {
 
   const { patientId } = Router.useParams<{patientId: string}>();
 
-  const [_sse, _setSse] = Common.useNotificationState("patient", parseInt(patientId));
+  const [_sse, _setSse] = Common.useStateConnectNotificationSSE("patient", parseInt(patientId));
 
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
-  Common.useGetPatientEffect(parseInt(patientId), setPatient);
+  Common.useEffectGetPatient(parseInt(patientId), setPatient);
 
   const renderHelper = () => {
     if (undefined === patient) {

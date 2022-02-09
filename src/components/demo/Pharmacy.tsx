@@ -11,18 +11,18 @@ import type { Run, Patient } from "~/src/utils/pia";
 import { Button } from "~/src/components/Button";
 import { TherapyDetail } from "~/src/components/demo/TherapyDetail";
 
-import { useNotificationState, useUpdateRunEffect } from '~/src/components/demo/common';
+import { useStateConnectNotificationSSE, useEffectFindRuns } from '~/src/components/demo/common';
 /**
  * The Pharmacy component
  * @returns
  */
 export const Pharmacy = () => {
 
-  const [sse, setSse] = useNotificationState('pharmacy');
+  const [sse, setSse] = useStateConnectNotificationSSE('pharmacy');
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
-  useUpdateRunEffect('pharmacy', setRuns);
+  useEffectFindRuns('pharmacy', setRuns);
 
   const switchRun = (run: PIAUtils.Run) => {
     setCurrentRun(run);

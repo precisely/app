@@ -8,37 +8,17 @@ import * as SSEUtils from "~/src/utils/sse";
 
 import { Activities } from "~/src/components/demo/patient/Activities";
 import { Run } from "~/src/components/demo/patient/Run";
+import { RunUI } from "~/src/components/pia-ui/RunUI";
 
 import "~/src/components/demo/common.css";
-import { RunUI } from '../pia-ui/RunUI';
 
-export const useUpdateRunsEffect = (role: string, setRuns: React.Dispatch<React.SetStateAction<PIAUtils.Run[]>>) => {
-  return React.useEffect(
-    () => {
-      const go = async () => {
-        try {
-          setRuns(await findActiveRuns(role));
-        }
-        catch (error) {
-          // TODO: Add proper error handling.
-          toast.error("PIA request broke!");
-        }
-      };
-      go();
-    },
-    // TODO: Change the empty list dependencies argument (below) to useEffect so it
-    // forces a refresh when the server informs the client that an invalidation of
-    // the run list has occurred.
-    []
-  );
-}
 
-export const useUpdateRunEffect = (role: string, setRuns: React.Dispatch<React.SetStateAction<PIAUtils.Run[]>>) => {
+export const useEffectFindRuns = (role: string, setRunsFn: (_: PIAUtils.Run[]) => void, extras: string = "") => {
   React.useEffect(
     () => {
       const go = async () => {
         try {
-          setRuns(await findActiveRuns(role));
+          setRunsFn(await findActiveRuns(role, extras));
         }
         catch (error) {
           // TODO: Add proper error handling.
@@ -54,7 +34,7 @@ export const useUpdateRunEffect = (role: string, setRuns: React.Dispatch<React.S
   );
 };
 
-export const useNotificationState = (role: string, id: number = 1) => {
+export const useStateConnectNotificationSSE = (role: string, id: number = 1) => {
   return React.useState<EventSource>(
     SSEUtils.connect(
       `${process.env.PIA_URL}/notifications/${role}/${id}`,
@@ -71,11 +51,12 @@ export const useNotificationState = (role: string, id: number = 1) => {
           }
         );
       }
-    ));
+  ));
 };
 
-export const findActiveRuns = async (role: string) => {
-  const resp = await PIAUtils.findRuns(`state=running&index.roles$contains=${role}`);
+export const findActiveRuns = async (role: string, extras: string = "") => {
+  const realExtras = ("" === extras || extras.startsWith("&")) ? extras : ("&" + extras);
+  const resp = await PIAUtils.findRuns(`state=running&index.roles$contains=${role}${realExtras}`);
   return await Promise.all(resp.map(resolveRunPatient));
 };
 
@@ -84,13 +65,13 @@ export const resolveRunPatient = async (run: PIAUtils.Run) => {
   return run;
 };
 
-export const useGetPatientEffect = (patientId: number, setterFn: (_: PIAUtils.Patient) => void) => {
+export const useEffectGetPatient = (patientId: number, setPatientsFn: (_: PIAUtils.Patient) => void) => {
   React.useEffect(
     () => {
       const getPatient = async () => {
         try {
           const resp = await PIAUtils.getPatient(patientId);
-          setterFn(resp);
+          setPatientsFn(resp);
         }
         catch (error) {
           // TODO: Add proper error handling.

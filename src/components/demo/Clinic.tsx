@@ -13,16 +13,16 @@ import type { Run, Patient } from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
 import { TherapyDetail } from "~/src/components/demo/TherapyDetail";
-import { useNotificationState, alertColorFromLevel, useUpdateRunEffect, findActiveRuns } from './common';
+import { useStateConnectNotificationSSE, alertColorFromLevel, useEffectFindRuns, findActiveRuns } from './common';
 
 export const Clinic = () => {
 
-  const [sse, setSse] = useNotificationState('clinic');
+  const [sse, setSse] = useStateConnectNotificationSSE('clinic');
   const [patientId, setPatientId] = React.useState<number>();
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
-  useUpdateRunEffect('doctor', setRuns);
+  useEffectFindRuns('doctor', setRuns);
 
   const switchRun = (run: PIAUtils.Run) => {
     setCurrentRun(run);
