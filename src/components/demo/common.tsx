@@ -84,6 +84,25 @@ export const resolveRunPatient = async (run: PIAUtils.Run) => {
   return run;
 };
 
+export const useGetPatientEffect = (patientId: number, setterFn: (_: PIAUtils.Patient) => void) => {
+  React.useEffect(
+    () => {
+      const getPatient = async () => {
+        try {
+          const resp = await PIAUtils.getPatient(patientId);
+          setterFn(resp);
+        }
+        catch (error) {
+          // TODO: Add proper error handling.
+          toast.error("PIA request broke!");
+        }
+      };
+      getPatient();
+    },
+    []
+  );
+};
+
 
 export const alertColorFromLevel = (level: string) => {
   switch (level) {

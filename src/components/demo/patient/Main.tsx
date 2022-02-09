@@ -19,23 +19,7 @@ export const Patient = () => {
   const [_sse, _setSse] = Common.useNotificationState("patient", parseInt(patientId));
 
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
-
-  React.useEffect(
-    () => {
-      const getPatient = async () => {
-        try {
-          const resp = await PIAUtils.getPatient(parseInt(patientId));
-          setPatient(resp);
-        }
-        catch (error) {
-          // TODO: Add proper error handling.
-          toast.error("PIA request broke!");
-        }
-      };
-      getPatient();
-    },
-    []
-  );
+  Common.useGetPatientEffect(parseInt(patientId), setPatient);
 
   const renderHelper = () => {
     if (undefined === patient) {
