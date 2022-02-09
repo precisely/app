@@ -4,6 +4,7 @@
 .dir-locals.el
 .idea
 .parcel-cache
+.vscode/settings.json
 
 # environment handling: ignore all .env files except .env.sample and .env.test
 .env*

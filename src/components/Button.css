@@ -1,8 +1,8 @@
 .btn {
-  @apply
-  flex justify-center
+  @apply flex justify-center
   font-bold
-  border rounded cursor-pointer;
+  border rounded-md cursor-pointer
+  px-4 py-3;
 }
 
 .btn:hover {
@@ -23,6 +23,10 @@
 
 .btn-coconut {
   @apply bg-coconut text-ink border-ink;
+}
+
+.btn-brick {
+  @apply bg-brick text-cloud border-cloud;
 }
 
 .btn-cardinal {

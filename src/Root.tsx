@@ -9,7 +9,7 @@ import { Main as LandingMain } from "~/src/components/landing/Main";
 import { Main as AppMain } from "~/src/components/app/Main";
 import { Main as DemoMain } from "~/src/components/demo/Main";
 import { Patient as DemoPatient } from "~/src/components/demo/patient/Main";
-import { Clinic as DemoClinic } from "~/src/components/demo/Clinic";
+import { Clinic as DemoClinic } from "~/src/components/demo/clinic/Main";
 import { Lab as DemoLab } from "~/src/components/demo/Lab";
 import { Pharmacy as DemoPharmacy } from "~/src/components/demo/Pharmacy";
 import { Terms } from "~/src/components/Terms";
@@ -20,19 +20,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "~/src/toast.css";
 import "~/src/components/common.css";
 
-
 const Root = () => {
-
   const redirect = () => {
     if (SessionUtils.isAuthenticated()) {
-      return (
-        <RouterDOM.Redirect to="/app" />
-      );
-    }
-    else {
-      return (
-        <RouterDOM.Redirect to="/demo" />
-      );
+      return <RouterDOM.Redirect to="/app" />;
+    } else {
+      return <RouterDOM.Redirect to="/demo" />;
     }
   };
 
@@ -43,7 +36,10 @@ const Root = () => {
           <RouterDOM.Route exact path="/" render={redirect} />
           <RouterDOM.Route path="/landing" component={LandingMain} />
           <RouterDOM.Route exact path="/demo" component={DemoMain} />
-          <RouterDOM.Route path="/demo/patient/:patientId" component={DemoPatient} />
+          <RouterDOM.Route
+            path="/demo/patient/:patientId"
+            component={DemoPatient}
+          />
           <RouterDOM.Route path="/demo/clinic" component={DemoClinic} />
           <RouterDOM.Route path="/demo/lab/:patientId" component={DemoLab} />
           <RouterDOM.Route path="/demo/pharmacy" component={DemoPharmacy} />
@@ -56,11 +52,10 @@ const Root = () => {
       <Toast.ToastContainer
         autoClose={3500}
         position="top-right"
-        hideProgressBar={true} />
+        hideProgressBar={true}
+      />
     </div>
   );
-
 };
-
 
 ReactDOM.render(<Root />, document.getElementById("root"));

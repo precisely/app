@@ -6,27 +6,31 @@ module.exports = {
     "assets/**/*",
     "src/**/*.html",
     "src/**/*.jsx",
-    "src/**/*.tsx"
+    "src/**/*.tsx",
   ],
   darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Ageo", "Helvetica", "Arial", "sans-serif"]
+        sans: ["Ageo", "Helvetica", "Arial", "sans-serif"],
       },
       fontSize: {
         "3xs": ".5rem",
         "2xs": ".6rem",
-        "7xl": "5rem"
+        "7xl": "5rem",
       },
       colors: {
         // primary:
         // - black and white
         ink: "#191818",
+        lightgrey: "#EAEAEA",
+        silver: "#AFAFAF",
         grey: "#8D8D8D",
+        platinum: "#FCFCFC",
         cloud: "#F2F2F2",
         coconut: "#FEFEFE",
         // - reds and pinks
+        brick: "#D43857",
         cardinal: "#E71F54",
         blush: "#F28599",
         puff: "#FDEDF2",
@@ -38,15 +42,15 @@ module.exports = {
         // secondary:
         clover: "#20C882",
         monarch: "#FA6400", // warning messages
-        flame: "#E74C3C",   // error messages
+        flame: "#E74C3C", // error messages
         proton: "#7451F0",
         butterscotch: "#F7B500",
-        lapis: "#0080FF",   // info messages
+        lapis: "#0080FF", // info messages
         salamander: "#FF4400",
         royal: "#7700F4",
         bubblegum: "#FF14B0",
-        aqua: "#00DFEC"
+        aqua: "#00DFEC",
       },
-    }
-  }
-}
+    },
+  },
+};
