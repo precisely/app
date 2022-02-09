@@ -16,7 +16,12 @@ export const Lab = () => {
   const { patientId } = Router.useParams<{patientId: string}>();
 
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
-  Common.useEffectFindRuns("lab", setRuns, `index.patient-id=${patientId}`);
+
+  React.useEffect(Common.findRunsEffect('lab', setRuns, `index.patient-id=${patientId}`),
+    // TODO: Change the empty list dependencies argument (below) to useEffect so it
+    // forces a refresh when the server informs the client that an invalidation of
+    // the run list has occurred.
+    []);
 
   const renderHelper = () => {
     if (undefined === runs || runs.length < 1) {
