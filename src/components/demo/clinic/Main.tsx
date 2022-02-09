@@ -4,10 +4,7 @@ import * as PIAUtils from "~/src/utils/pia";
 import type { Run } from "~/src/utils/pia";
 
 import { Button } from "~/src/components/Button";
-import {
-  findActiveRuns,
-  useEffectFindRuns,
-} from "~/src/components/demo/common";
+import * as Common from "~/src/components/demo/common";
 
 import { ClinicTable } from "~/src/components/demo/clinic/ClinicTable";
 import { Icon } from "~/src/components/demo/clinic/ui/Icon";
@@ -19,7 +16,11 @@ export const Clinic = () => {
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [patientId, setPatientId] = React.useState<number>();
 
-  useEffectFindRuns("doctor", setRuns);
+  React.useEffect(Common.findRunsEffect('doctor', setRuns),
+    // TODO: Change the empty list dependencies argument (below) to useEffect so it
+    // forces a refresh when the server informs the client that an invalidation of
+    // the run list has occurred.
+    []);
 
   const toggleRunVisibility = (run: Run) => {
     setRuns(
@@ -40,7 +41,7 @@ export const Clinic = () => {
     console.log("newPatient:", patientId);
     const newRun = await PIAUtils.startRun("anticoagulation", [patientId]);
     console.log("newPatient => newRun =", newRun);
-    setRuns(await findActiveRuns("doctor"));
+    setRuns(await Common.findActiveRuns("doctor"));
     setPatientId(null);
   };
 
