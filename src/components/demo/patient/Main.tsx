@@ -4,8 +4,8 @@ import * as RouterDOM from "react-router-dom";
 import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
-import * as SSEUtils from "~/src/utils/sse";
 
+import * as Common from "~/src/components/demo/common";
 import { Activities} from "~/src/components/demo/patient/Activities";
 import { Run } from "~/src/components/demo/patient/Run";
 
@@ -16,23 +16,7 @@ export const Patient = () => {
 
   const { patientId } = Router.useParams<{patientId: string}>();
 
-  const [sse, setSse] = React.useState<EventSource>(
-    SSEUtils.connect(
-      `${process.env.PIA_URL}/notifications/patient/${patientId}`,
-      (sse, event) => {
-        const raw = event.data;
-        const data = JSON.parse(raw);
-        console.log(event);
-        console.log(data);
-        toast.info(
-          <a href={data["run-id"]}>{data["message"]}</a>,
-          {
-            autoClose: false,
-            closeOnClick: false
-          }
-        );
-      }
-  ));
+  const [_sse, _setSse] = Common.useNotificationState("patient", parseInt(patientId));
 
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
 
