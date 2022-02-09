@@ -6,7 +6,7 @@ import "./Sidebar.css";
 
 export const Sidebar = () => {
   return (
-    <div className="border-r border-lightgrey h-screen w-80 py-8">
+    <div className="border-r border-lightgrey h-screen py-8 w-64">
       <div className="h-[30px] w-[148px] mx-8 mb-14">
         <img src={logo} alt="Precisely Logo" />
       </div>
