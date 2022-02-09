@@ -45,7 +45,7 @@ const Root = () => {
           <RouterDOM.Route exact path="/demo" component={DemoMain} />
           <RouterDOM.Route path="/demo/patient/:patientId" component={DemoPatient} />
           <RouterDOM.Route path="/demo/clinic" component={DemoClinic} />
-          <RouterDOM.Route path="/demo/lab" component={DemoLab} />
+          <RouterDOM.Route path="/demo/lab/:patientId" component={DemoLab} />
           <RouterDOM.Route path="/demo/pharmacy" component={DemoPharmacy} />
           <RouterDOM.Route exact path="/terms" component={Terms} />
           <RouterDOM.Route exact path="/privacy" component={Privacy} />

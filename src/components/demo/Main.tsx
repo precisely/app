@@ -13,6 +13,7 @@ export const Main = () => {
   const history = RouterDOM.useHistory();
 
   const [patientId, setPatientId] = React.useState(1);
+  const [patientIdForLabUI, setPatientIdForLabUI] = React.useState(1);
 
   return (
     <div>
@@ -49,12 +50,19 @@ export const Main = () => {
                   callback={() => history.push("/demo/clinic")} />
         </div>
       </div>
-      <div className="pt-6 grid grid-cols-3">
-        <div className="col-start-2">
+      <div className="pt-6 grid grid-cols-6">
+        <div className="col-start-3 col-span-1 pr-2">
+          <input className="w-full h-full"
+                 type="number"
+                 value={patientIdForLabUI}
+                 onChange={(event) => setPatientIdForLabUI(parseInt(event.target.value))}
+                 min="1" />
+        </div>
+        <div className="col-start-4">
           <Button text="Lab UI"
                   color="cardinal"
                   classes="w-full py-2"
-                  callback={() => history.push("/demo/lab")} />
+                  callback={() => history.push(`/demo/lab/${patientIdForLabUI}`)} />
         </div>
       </div>
       <div className="pt-6 grid grid-cols-3">
