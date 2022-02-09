@@ -35,6 +35,7 @@ export const useEffectFindRuns = (role: string, setRunsFn: (_: PIAUtils.Run[]) =
 };
 
 export const useStateConnectNotificationSSE = (role: string, id: number = 1) => {
+  // FIXME: This should be useEffect and it should use a cleanup function to disconnect.
   return React.useState<EventSource>(
     SSEUtils.connect(
       `${process.env.PIA_URL}/notifications/${role}/${id}`,

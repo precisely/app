@@ -8,6 +8,7 @@ import { UIProps, ContinueFn } from "~/src/components/pia-ui/types";
 
 import { Text } from "~/src/components/pia-ui/Text";
 import { Buttons } from "~/src/components/pia-ui/Buttons";
+import { Form } from "~/src/components/pia-ui/Form";
 
 
 interface Props {
@@ -16,32 +17,39 @@ interface Props {
 
 const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
   buttons: Buttons,
-  text: Text
+  text: Text,
+  form: Form
 };
 
 export const RunUI = (props: Props) => {
+
   const [run, setRun] = React.useState(props.run);
+  const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
   const renderHelper = () => {
-    return convertRunOutputToUIProps(run.output).map(makeComponent);
+    const stage1 = (undefined === postContinueRun ? "" : "hidden");
+    const stage2 = (undefined !== postContinueRun ? "" : "hidden");
+    return (
+      <React.Fragment>
+        <div className={stage1}>
+          {convertRunOutputToUIProps(run.output).map(makeComponent)}
+        </div>
+        <div className={stage2}>
+          all done
+        </div>
+      </React.Fragment>
+    );
   };
-
-  const safelySetRun = async (runPromise: Promise<Run>) => {
-    try {
-      setRun(await runPromise);
-    } catch {
-      // TODO: Add proper error handling.
-      toast.error("PIA request broke!");
-    }
-  }
 
   const convertRunOutputToUIProps = (elements: JSONData[]): UIProps[] => {
     return elements.map(makeUIProps).filter(x => !!x);
   };
 
   const makeContinueFn = (run: Run, permit: JSONData): ContinueFn =>
-    async (data: JSONData = null) =>
-      await safelySetRun(PIAUtils.continueRun(run.id, data, permit));
+    async (data: JSONData = null) => {
+      const newRun = await PIAUtils.continueRun(run.id, data, permit);
+      setPostContinueRun(newRun);
+    };
 
   const makeComponent = (element: UIProps, index: number) => {
     let component = ComponentMap[element['type']];
