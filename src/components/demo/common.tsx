@@ -7,7 +7,7 @@ import * as PIAUtils from "~/src/utils/pia";
 import * as SSEUtils from "~/src/utils/sse";
 
 import { Activities } from "~/src/components/demo/patient/Activities";
-import { Run } from "~/src/components/demo/patient/Run";
+import { Run } from "~/src/components/demo/patient/Activity";
 import { RunUI } from "~/src/components/pia-ui/RunUI";
 
 import "~/src/components/demo/common.css";

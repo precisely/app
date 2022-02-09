@@ -25,7 +25,7 @@ interface LocationState {
 }
 
 
-export const Run = (props: Props) => {
+export const Activity = (props: Props) => {
 
   const { patientId, runId } = Router.useParams<{patientId: string, runId: string}>();
   const location = Router.useLocation<LocationState>();
