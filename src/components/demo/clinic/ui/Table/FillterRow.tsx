@@ -11,8 +11,8 @@ const FillerCell = () => {
 export const FillerRow = ({ columns }: Props) => {
   return (
     <tr key="filler-row" className="h-full">
-      {Array.from(Array(columns)).map((i) => (
-        <FillerCell key={i} />
+      {Array.from(Array(columns)).map((_, index) => (
+        <FillerCell key={index} />
       ))}
     </tr>
   );

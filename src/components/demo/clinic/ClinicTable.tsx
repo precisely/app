@@ -12,6 +12,12 @@ interface Props {
   onRowClick: (run: Run) => void;
 }
 
+const colorMap = {
+  green: "parakeet",
+  yellow: "butterscotch",
+  red: "brick",
+};
+
 export const ClinicTable = ({ data, onRowClick }: Props) => {
   return (
     <Table<Run>
@@ -38,9 +44,9 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
       ]}
       data={data}
       renderItem={(run, index) => (
-        <>
+        <React.Fragment key={run.id}>
           <tr
-            key={run.id}
+            key={run.id + "_row"}
             onClick={() => onRowClick(run)}
             className={index % 2 == 0 ? "bg-platinum" : ""}
           >
@@ -55,18 +61,25 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
               {run.index?.overview?.phase}
             </TableCell>
             <TableCell key={run.id + "_p-dose"}>
-              {run.index?.overview?.dose}
+              {/* {run.index?.overview?.dose} */}
+              7.5mg
             </TableCell>
             <TableCell key={run.id + "_p-last-inr"}>
-              {run.index?.overview ? run.index?.overview["last-inr"] : null}
+              {/* {run.index?.overview ? run.index?.overview["last-inr"] : null} */}
+              1.8
             </TableCell>
             <TableCell key={run.id + "_p-alert"}>
-              <span
+              {/* <span
                 className={alertColorFromLevel(
                   run.index?.overview?.alert?.level
                 )}
               >
                 {run.index?.overview?.alert?.text}
+              </span> */}
+              <span
+                className={`text-${colorMap[alertColorFromLevel("green")]}`}
+              >
+                Review Rx recommendation
               </span>
             </TableCell>
           </tr>
@@ -80,7 +93,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
               </td>
             </tr>
           )}
-        </>
+        </React.Fragment>
       )}
     />
   );
