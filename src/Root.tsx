@@ -19,6 +19,7 @@ import { NotFound as ErrorNotFound } from "~/src/components/errors/NotFound";
 import "react-toastify/dist/ReactToastify.css";
 import "~/src/toast.css";
 import "~/src/components/common.css";
+import { GenericEndpoint } from './components/demo/generic-endpoint/GenericEndpoint';
 
 const Root = () => {
   const redirect = () => {
@@ -41,8 +42,7 @@ const Root = () => {
             component={DemoPatient}
           />
           <RouterDOM.Route path="/demo/clinic" component={DemoClinic} />
-          <RouterDOM.Route path="/demo/lab/:labId" component={DemoLab} />
-          <RouterDOM.Route path="/demo/pharmacy" component={DemoPharmacy} />
+          <RouterDOM.Route path="/demo/:endpointType/:endpointId" component={GenericEndpoint} />
           <RouterDOM.Route exact path="/terms" component={Terms} />
           <RouterDOM.Route exact path="/privacy" component={Privacy} />
           <AuthRoute path="/app" component={AppMain} />

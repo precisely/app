@@ -8,18 +8,17 @@ import { RunUI } from "~/src/components/pia-ui/RunUI";
 import * as Common from "~/src/components/demo/common";
 
 import "~/src/components/demo/common.css";
-import { toast } from 'react-toastify';
 
 interface Props {
-  labId: number,
+  endpointId: number,
   runId: string
 }
 
 export const Order = (props: Props) => {
 
-  const { labId, runId } = Router.useParams<{labId: string, runId: string}>();
+  const { endpointId, runId, endpointType } = Router.useParams<{endpointType: string, endpointId: string, runId: string}>();
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
-  const labIdInt = parseInt(labId);
+  const endpointIdInt = parseInt(endpointId);
 
   React.useEffect(Common.getRunEffect(() => runId,
     () => currentRun,
@@ -32,7 +31,7 @@ export const Order = (props: Props) => {
     else {
       return (
         <div>
-          <RouterDOM.Link to={`/demo/lab/${labId}`}>
+          <RouterDOM.Link to={`/demo/${endpointType}/${endpointId}`}>
         &lt; Return to orders
           </RouterDOM.Link>
           <RunUI run={currentRun} />

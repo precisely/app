@@ -14,6 +14,7 @@ export const Main = () => {
 
   const [patientId, setPatientId] = React.useState(1);
   const [patientIdForLabUI, setPatientIdForLabUI] = React.useState(1);
+  const [patientIdForPharmacyUI, setPatientIdForPharmacyUI] = React.useState(1);
 
   return (
     <div>
@@ -65,12 +66,20 @@ export const Main = () => {
                   callback={() => history.push(`/demo/lab/${patientIdForLabUI}`)} />
         </div>
       </div>
-      <div className="pt-6 grid grid-cols-3">
-        <div className="col-start-2">
+
+      <div className="pt-6 grid grid-cols-6">
+        <div className="col-start-3 col-span-1 pr-2">
+          <input className="w-full h-full"
+                 type="number"
+                 value={patientIdForPharmacyUI}
+                 onChange={(event) => setPatientIdForPharmacyUI(parseInt(event.target.value))}
+                 min="1" />
+        </div>
+        <div className="col-start-4">
           <Button text="Pharmacy UI"
                   color="cardinal"
                   classes="w-full py-2"
-                  callback={() => history.push("/demo/pharmacy")} />
+                  callback={() => history.push(`/demo/pharmacy/${patientIdForPharmacyUI}`)} />
         </div>
       </div>
       <div className="pt-8 text-base">
