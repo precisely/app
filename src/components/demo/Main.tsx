@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as RouterDOM from "react-router-dom";
 
+import { useTitle } from "~/src/utils/react";
+
 import { Button } from "~/src/components/Button";
 import { Footer } from "~/src/components/Footer";
 
@@ -9,6 +11,8 @@ import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
 
 
 export const Main = () => {
+
+  useTitle("Precise.ly: Demo Driver");
 
   const history = RouterDOM.useHistory();
 

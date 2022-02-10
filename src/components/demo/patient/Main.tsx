@@ -3,6 +3,7 @@ import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
 import * as PIAUtils from "~/src/utils/pia";
+import { useTitle } from "~/src/utils/react";
 
 import * as Common from "~/src/components/demo/common";
 import { Activities} from "~/src/components/demo/patient/Activities";
@@ -12,6 +13,8 @@ import "~/src/components/demo/common.css";
 
 
 export const Patient = () => {
+
+  useTitle("Precise.ly: Patient UI");
 
   const { patientId } = Router.useParams<{patientId: string}>();
 

@@ -34,3 +34,14 @@ export function routedComponent(renderFn: RenderFn, argsRaw: RoutedComponentArgs
     </RouterDOM.Router>
   );
 }
+
+
+export function useTitle(title: string) {
+  React.useEffect(() => {
+    const prevTitle = document.title;
+    document.title = title;
+    return () => {
+      document.title = prevTitle;
+    }
+  });
+}
