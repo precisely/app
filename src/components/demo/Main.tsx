@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as RouterDOM from "react-router-dom";
 
+import { useTitle } from "~/src/utils/react";
+
 import { Button } from "~/src/components/Button";
 import { Footer } from "~/src/components/Footer";
 
@@ -10,10 +12,13 @@ import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
 
 export const Main = () => {
 
+  useTitle("Precise.ly: Demo Driver");
+
   const history = RouterDOM.useHistory();
 
   const [patientId, setPatientId] = React.useState(1);
   const [patientIdForLabUI, setPatientIdForLabUI] = React.useState(1);
+  const [patientIdForPharmacyUI, setPatientIdForPharmacyUI] = React.useState(1);
 
   return (
     <div>
@@ -25,6 +30,14 @@ export const Main = () => {
       <div className="pt-8 text-lg">
         <div className="flex justify-center">
           Demo Driver
+        </div>
+      </div>
+      <div className="pt-6 grid grid-cols-3">
+        <div className="col-start-2">
+          <Button text="Clinic UI"
+                  color="cardinal"
+                  classes="w-full py-2"
+                  callback={() => history.push("/demo/clinic")} />
         </div>
       </div>
       <div className="pt-6 grid grid-cols-6">
@@ -42,14 +55,6 @@ export const Main = () => {
                   callback={() => history.push(`/demo/patient/${patientId}`)} />
         </div>
       </div>
-      <div className="pt-6 grid grid-cols-3">
-        <div className="col-start-2">
-          <Button text="Clinic UI"
-                  color="cardinal"
-                  classes="w-full py-2"
-                  callback={() => history.push("/demo/clinic")} />
-        </div>
-      </div>
       <div className="pt-6 grid grid-cols-6">
         <div className="col-start-3 col-span-1 pr-2">
           <input className="w-full h-full"
@@ -65,12 +70,20 @@ export const Main = () => {
                   callback={() => history.push(`/demo/lab/${patientIdForLabUI}`)} />
         </div>
       </div>
-      <div className="pt-6 grid grid-cols-3">
-        <div className="col-start-2">
+
+      <div className="pt-6 grid grid-cols-6">
+        <div className="col-start-3 col-span-1 pr-2">
+          <input className="w-full h-full"
+                 type="number"
+                 value={patientIdForPharmacyUI}
+                 onChange={(event) => setPatientIdForPharmacyUI(parseInt(event.target.value))}
+                 min="1" />
+        </div>
+        <div className="col-start-4">
           <Button text="Pharmacy UI"
                   color="cardinal"
                   classes="w-full py-2"
-                  callback={() => history.push("/demo/pharmacy")} />
+                  callback={() => history.push(`/demo/pharmacy/${patientIdForPharmacyUI}`)} />
         </div>
       </div>
       <div className="pt-8 text-base">

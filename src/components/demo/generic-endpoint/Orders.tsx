@@ -8,14 +8,15 @@ import * as Common from "~/src/components/demo/common";
 import "~/src/components/demo/common.css";
 
 interface Props {
-  labId: number
+  endpointId: number,
+  endpointType: string
 }
 
 export const Orders = (props: Props) => {
 
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   React.useEffect(
-    Common.findRunsEffect('lab', setRuns, `index.lab-id=${props.labId}`),
+    Common.findRunsEffect(props.endpointType, setRuns, `index.${props.endpointType}-id=${props.endpointId}`),
     // TODO: Change the empty list dependencies argument (below) to useEffect so it
     // forces a refresh when the server informs the client that an invalidation of
     // the run list has occurred.
@@ -33,7 +34,7 @@ export const Orders = (props: Props) => {
                 className="underline" >
                 <RouterDOM.Link
                   to={{
-                    pathname: `/demo/lab/${props.labId}/${run.id}`,
+                    pathname: `/demo/${props.endpointType}/${props.endpointId}/${run.id}`,
                     state: { run }
                   }}>
                   <span>{run.index['patient-id']}</span>

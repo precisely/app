@@ -2,6 +2,8 @@ import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 import * as PIAUtils from "~/src/utils/pia";
+import { useTitle } from "~/src/utils/react";
+
 import * as Common from "~/src/components/demo/common";
 import { HomePage } from "./pages/home/HomePage";
 import { PatientProvider } from "./common";
@@ -9,6 +11,8 @@ import { ActivityPage } from "./pages/activity/ActivityPage";
 
 export const Patient = () => {
   const { patientId } = Router.useParams<{ patientId: string }>();
+
+  useTitle("Precise.ly: Patient UI");
 
   React.useEffect(
     Common.serverSideEventSource("patient", parseInt(patientId)),

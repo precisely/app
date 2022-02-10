@@ -50,6 +50,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
       renderItem={(run, index) => (
         <React.Fragment key={run.id}>
           <tr
+            title={`patient ID: ${run.index.patient.id}`}
             key={run.id + "_row"}
             onClick={() => onRowClick(run)}
             className={index % 2 == 0 ? "bg-platinum" : ""}
@@ -68,25 +69,22 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
               {run.index?.overview?.phase}
             </TableCell>
             <TableCell key={run.id + "_p-dose"}>
-              {/* {run.index?.overview?.dose} */}
-              7.5mg
+              {run.index?.overview?.dose || "N/A"}
             </TableCell>
             <TableCell key={run.id + "_p-last-inr"}>
-              {/* {run.index?.overview ? run.index?.overview["last-inr"] : null} */}
-              1.8
+              {run.index?.overview
+                ? run.index?.overview["last-inr"] || "N/A"
+                : "N/A"}
             </TableCell>
             <TableCell key={run.id + "_p-alert"}>
-              {/* <span
-                className={alertColorFromLevel(
-                  run.index?.overview?.alert?.level
-                )}
+              <span
+                className={`span-${
+                  colorMap[
+                    alertColorFromLevel(run.index?.overview?.alert?.level)
+                  ]
+                }`}
               >
                 {run.index?.overview?.alert?.text}
-              </span> */}
-              <span
-                className={`span-${colorMap[alertColorFromLevel("green")]}`}
-              >
-                Review Rx recommendation
               </span>
             </TableCell>
           </tr>
