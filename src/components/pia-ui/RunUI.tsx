@@ -1,5 +1,4 @@
 import * as React from "react";
-import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 import { Run } from "~/src/utils/pia";
@@ -20,72 +19,8 @@ const ComponentMap: { [key: string]: (props: any) => JSX.Element } = {
   form: Form,
 };
 
-const sampleRun: PIAUtils.Run = {
-  id: "b86cb46d-5a89-492c-b25b-aa9c07004f58",
-  state: "running",
-  output: [
-    {
-      type: "text",
-      text: "Please go get your labwork done",
-    },
-    {
-      buttons: [
-        {
-          id: "cancel",
-          text: "Stop reminding me",
-        },
-      ],
-      schema: {
-        oneOf: [
-          {
-            allOf: [
-              {
-                type: "string",
-              },
-              {
-                enum: ["cancel"],
-              },
-            ],
-          },
-          {
-            type: "null",
-          },
-        ],
-      },
-      type: "buttons",
-      permit: null,
-    },
-    {
-      type: "form",
-      elements: [
-        {
-          id: "0",
-          label: "INR#",
-          type: "number",
-        },
-        {
-          id: "1",
-          label: "mult",
-          type: "multiple-choice",
-          items: [
-            { id: "11", label: "label11" },
-            { id: "22", label: "label22" },
-            { id: "33", label: "label33" },
-          ],
-        },
-      ],
-      schema: {},
-    },
-  ],
-  index: {
-    title: "Anticoagulation labwork",
-    roles: ["patient"],
-    "patient-id": 32,
-  },
-};
-
 export const RunUI = (props: Props) => {
-  const [run, setRun] = React.useState(sampleRun);
+  const [run, setRun] = React.useState(props.run);
   const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
   console.log(run, postContinueRun);
@@ -107,7 +42,6 @@ export const RunUI = (props: Props) => {
       console.log("Unrecognized component ", element, " in RunUI");
       return null;
     } else {
-      //TODO: remove
       console.log("Creating component", element["type"]);
       return component({ key: JSON.stringify(index), ...element });
     }

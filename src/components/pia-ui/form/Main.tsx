@@ -67,7 +67,9 @@ export const Form = (props: FormProps) => {
         </div>
       </Message>
       <div className="flex justify-end mt-6">
-        <Button type="submit">Submit</Button>
+        <Button type="submit" color="cardinal">
+          Submit
+        </Button>
       </div>
     </form>
   );

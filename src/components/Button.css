@@ -49,6 +49,14 @@
   @apply bg-grey text-cloud;
 }
 
+.btn-battleship {
+  @apply bg-battleship text-cloud;
+}
+
+.btn-battleship-inv {
+  @apply text-battleship border-battleship;
+}
+
 .btn-grey200 {
   @apply bg-grey200;
 }
