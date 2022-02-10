@@ -8,56 +8,107 @@ import { UIProps, ContinueFn } from "~/src/components/pia-ui/types";
 
 import { Text } from "~/src/components/pia-ui/Text";
 import { Buttons } from "~/src/components/pia-ui/Buttons";
-import { Form } from "~/src/components/pia-ui/Form";
-
+import { Form } from "~/src/components/pia-ui/form/Main";
 
 interface Props {
-  run: Run
+  run: Run;
 }
 
-const ComponentMap: { [key: string]: ((props: any) => JSX.Element) } = {
+const ComponentMap: { [key: string]: (props: any) => JSX.Element } = {
   buttons: Buttons,
   text: Text,
-  form: Form
+  form: Form,
+};
+
+const sampleRun: PIAUtils.Run = {
+  id: "b86cb46d-5a89-492c-b25b-aa9c07004f58",
+  state: "running",
+  output: [
+    {
+      type: "text",
+      text: "Please go get your labwork done",
+    },
+    {
+      buttons: [
+        {
+          id: "cancel",
+          text: "Stop reminding me",
+        },
+      ],
+      schema: {
+        oneOf: [
+          {
+            allOf: [
+              {
+                type: "string",
+              },
+              {
+                enum: ["cancel"],
+              },
+            ],
+          },
+          {
+            type: "null",
+          },
+        ],
+      },
+      type: "buttons",
+      permit: null,
+    },
+    {
+      type: "form",
+      elements: [
+        {
+          id: "0",
+          label: "INR#",
+          type: "number",
+        },
+        {
+          id: "1",
+          label: "mult",
+          type: "multiple-choice",
+          items: [
+            { id: "11", label: "label11" },
+            { id: "22", label: "label22" },
+            { id: "33", label: "label33" },
+          ],
+        },
+      ],
+      schema: {},
+    },
+  ],
+  index: {
+    title: "Anticoagulation labwork",
+    roles: ["patient"],
+    "patient-id": 32,
+  },
 };
 
 export const RunUI = (props: Props) => {
-
-  const [run, setRun] = React.useState(props.run);
+  const [run, setRun] = React.useState(sampleRun);
   const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
-  const renderHelper = () => {
-    const stage1 = (undefined === postContinueRun ? "" : "hidden");
-    const stage2 = (undefined !== postContinueRun ? "" : "hidden");
-    return (
-      <React.Fragment>
-        <div className={stage1}>
-          {convertRunOutputToUIProps(run.output).map(makeComponent)}
-        </div>
-        <div className={stage2}>
-          all done
-        </div>
-      </React.Fragment>
-    );
-  };
+  console.log(run, postContinueRun);
 
   const convertRunOutputToUIProps = (elements: JSONData[]): UIProps[] => {
-    return elements.map(makeUIProps).filter(x => !!x);
+    return elements.map(makeUIProps).filter((x) => !!x);
   };
 
-  const makeContinueFn = (run: Run, permit: JSONData): ContinueFn =>
+  const makeContinueFn =
+    (run: Run, permit: JSONData): ContinueFn =>
     async (data: JSONData = null) => {
       const newRun = await PIAUtils.continueRun(run.id, data, permit);
       setPostContinueRun(newRun);
     };
 
   const makeComponent = (element: UIProps, index: number) => {
-    let component = ComponentMap[element['type']];
+    const component = ComponentMap[element["type"]];
     if (!component) {
       console.log("Unrecognized component ", element, " in RunUI");
       return null;
-    }
-    else {
+    } else {
+      //TODO: remove
+      console.log("Creating component", element["type"]);
       return component({ key: JSON.stringify(index), ...element });
     }
   };
@@ -65,16 +116,16 @@ export const RunUI = (props: Props) => {
   const makeUIProps = (elt: JSONData, idx: number): UIProps | null => {
     let id = `${idx}`;
     switch (typeof elt) {
-      case 'string':
-        return { id, type: 'message', text: elt, continueFn: null };
+      case "string":
+        return { id, type: "message", text: elt, continueFn: null };
 
-      case 'object':
-        if ('type' in elt && typeof elt.type === 'string') {
+      case "object":
+        if ("type" in elt && typeof elt.type === "string") {
           return {
             id,
             type: elt.type,
             ...elt,
-            continueFn: makeContinueFn(run, elt.permit)
+            continueFn: makeContinueFn(run, elt.permit),
           };
         }
     }
@@ -83,9 +134,12 @@ export const RunUI = (props: Props) => {
   };
 
   return (
-    <div>
-      {renderHelper()}
+    <div className="flex flex-col space-y-6 py-4">
+      {postContinueRun === undefined ? (
+        convertRunOutputToUIProps(run.output).map(makeComponent)
+      ) : (
+        <div>all done</div>
+      )}
     </div>
   );
-
 };

@@ -1,0 +1,4 @@
+input[type="number"].input,
+input[type="text"].input {
+  @apply flex-1 border-0 outline-none text-base px-2 py-3;
+}

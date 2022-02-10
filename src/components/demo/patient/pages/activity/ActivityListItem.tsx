@@ -16,7 +16,7 @@ export const ActivityListItem = ({ run }: Props) => {
     <RouterDOM.Link
       to={{ pathname: `/demo/patient/${patient.id}/${run.id}`, state: { run } }}
     >
-      <div className="flex bg-white rounded-md items-center p-4 shadow-md shadow-ink/5">
+      <div className="flex bg-white rounded-md items-center p-4 shadow-lg shadow-ink/5">
         <div className="flex-1">
           <h4 className="font-semibold">{run.index.title.toString()}</h4>
           <p>{run.index.subtitle ?? "Waiting for update"}</p>

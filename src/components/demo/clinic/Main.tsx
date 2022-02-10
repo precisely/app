@@ -10,17 +10,19 @@ import { ClinicTable } from "~/src/components/demo/clinic/ClinicTable";
 import { Icon } from "~/src/components/demo/Icon";
 import { Layout } from "~/src/components/demo/clinic/ui/Layout";
 import { PageTitle } from "~/src/components/demo/clinic/ui/PageTitle";
-import { Input } from "~/src/components/demo/clinic/ui/Input";
+import { Input } from "~/src/components/demo/Input";
 
 export const Clinic = () => {
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [patientId, setPatientId] = React.useState<number>();
 
-  React.useEffect(Common.findRunsEffect('doctor', setRuns),
+  React.useEffect(
+    Common.findRunsEffect("doctor", setRuns),
     // TODO: Change the empty list dependencies argument (below) to useEffect so it
     // forces a refresh when the server informs the client that an invalidation of
     // the run list has occurred.
-    []);
+    []
+  );
 
   const toggleRunVisibility = (run: Run) => {
     setRuns(
@@ -33,7 +35,8 @@ export const Clinic = () => {
     );
   };
 
-  const setNewPatient = (value: string | null) => {
+  const setNewPatient = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
     if (value) {
       setPatientId(parseInt(value));
     } else {
@@ -55,11 +58,14 @@ export const Clinic = () => {
         title="Patients"
         actions={
           <div className="flex items-center space-x-2">
-            <Input
-              value={patientId}
-              setValue={setNewPatient}
-              placeholder="Patient Id"
-            />
+            <div className="w-72">
+              <Input
+                type="number"
+                value={patientId}
+                onChange={setNewPatient}
+                placeholder="Patient Id"
+              />
+            </div>
             <Button color="brick" callback={newPatient}>
               <div className="flex items-center space-x-2">
                 <Icon name="folderPlus" size={24} color={"blush"} />

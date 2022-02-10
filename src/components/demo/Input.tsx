@@ -1,9 +1,12 @@
 import * as React from "react";
 
-interface Props {
-  value: string | number | readonly string[];
-  setValue: (val: string | null) => void;
+import "~/src/components/demo/Input.css";
 
+interface Props {
+  value?: string | number | readonly string[];
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+
+  classes?: string;
   type?: React.HTMLInputTypeAttribute;
   placeholder?: string;
   leading?: React.ReactNode;
@@ -11,21 +14,20 @@ interface Props {
 
 export const Input = ({
   value,
-  setValue,
-  type,
+  onChange,
+  classes = "",
+  type = "text",
   leading,
   placeholder,
 }: Props) => {
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
-
   return (
-    <div className="flex items-center rounded border border-lightgrey">
+    <div
+      className={"flex items-center rounded border border-lightgrey " + classes}
+    >
       {leading}
       <input
         type={type}
-        className="border-0 outline-none text-base px-2 w-96 py-3"
+        className="input"
         value={value}
         onChange={onChange}
         placeholder={placeholder}
