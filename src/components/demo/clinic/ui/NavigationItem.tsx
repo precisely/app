@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { Icon } from "./Icon";
-
+import { Icon } from "~/src/components/demo/Icon";
+import "~/src/components/demo/textColor.css";
 interface Props {
   icon: string;
   name: string;

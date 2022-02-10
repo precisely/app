@@ -4,6 +4,7 @@ import "./Button.css";
 
 interface Props {
   key?: string;
+  size?: "regular" | "slim";
   color?: string;
   classes?: string;
   disabled?: boolean;
@@ -20,6 +21,7 @@ export const Button = (propsRaw: Props) => {
     disabled: false,
     text: "Button",
     type: "button",
+    size: "regular",
     callback: () => {},
   };
 
@@ -28,7 +30,7 @@ export const Button = (propsRaw: Props) => {
   return (
     <button
       key={props.key}
-      className={`btn btn-${props.color} ${props.classes}`}
+      className={`btn btn-${props.color} btn-${props.size} ${props.classes}`}
       disabled={props.disabled}
       onClick={props.callback}
     >

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Avatar } from "./Avatar";
-import { Icon } from "./Icon";
+import { Icon } from "~/src/components/demo/Icon";
 
 export const AccountDropdown = () => {
   return (

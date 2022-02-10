@@ -1,6 +1,7 @@
 // -*- eval: (rainbow-mode 1) -*-
 
 module.exports = {
+  mode: "jit",
   content: [
     "index.html",
     "assets/**/*",
@@ -23,12 +24,22 @@ module.exports = {
         // primary:
         // - black and white
         ink: "#191818",
-        lightgrey: "#EAEAEA",
-        silver: "#AFAFAF",
-        grey: "#8D8D8D",
-        platinum: "#FCFCFC",
         cloud: "#F2F2F2",
+        platinum: "#FCFCFC",
         coconut: "#FEFEFE",
+        // TODO: update the color names with grey
+        battleship: "#7E7E7E",
+        grey: "#8D8D8D",
+        silver: "#AFAFAF",
+        lightgrey: "#EAEAEA",
+        // - greys
+        grey600: "#7E7E7E",
+        grey500: "#8D8D8D",
+        grey400: "#AFAFAF",
+        grey300: "#D7D7D7",
+        grey200: "#EDEDED",
+        grey100: "#EAEAEA",
+        grey50: "#F6F6F6",
         // - reds and pinks
         brick: "#D43857",
         cardinal: "#E71F54",

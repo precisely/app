@@ -5,6 +5,10 @@
   px-4 py-3;
 }
 
+.btn-slim {
+  @apply py-2 px-3 border-0;
+}
+
 .btn:hover {
   filter: brightness(85%);
 }
@@ -43,4 +47,8 @@
 
 .btn-grey {
   @apply bg-grey text-cloud;
+}
+
+.btn-grey200 {
+  @apply bg-grey200;
 }

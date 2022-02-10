@@ -7,6 +7,8 @@ import { Table } from "./ui/Table/Main";
 import { TableCell } from "./ui/Table/TableCell";
 import { TableHeader } from "./ui/Table/TableHeader";
 
+import "~/src/components/demo/textColor.css";
+
 interface Props {
   data: Run[];
   onRowClick: (run: Run) => void;
@@ -81,7 +83,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
                 {run.index?.overview?.alert?.text}
               </span> */}
               <span
-                className={`text-${colorMap[alertColorFromLevel("green")]}`}
+                className={`span-${colorMap[alertColorFromLevel("green")]}`}
               >
                 Review Rx recommendation
               </span>

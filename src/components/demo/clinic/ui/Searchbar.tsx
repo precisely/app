@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Icon } from "./Icon";
+import { Icon } from "~/src/components/demo/Icon";
 import { Input } from "./Input";
 
 export const Searchbar = () => {

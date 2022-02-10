@@ -1,0 +1,18 @@
+/* Text Color Definitions */
+/* TODO: Issue with dynamically setting font color - Tailwind doesn't include
+the necessary classes. */
+.span-ink {
+  @apply text-ink;
+}
+
+.span-brick {
+  @apply text-brick;
+}
+
+.span-parakeet {
+  @apply text-parakeet;
+}
+
+.span-butterscotch {
+  @apply text-butterscotch;
+}

@@ -10,7 +10,7 @@ import {
 } from "~/src/components/demo/common";
 
 import { ClinicTable } from "~/src/components/demo/clinic/ClinicTable";
-import { Icon } from "~/src/components/demo/clinic/ui/Icon";
+import { Icon } from "~/src/components/demo/Icon";
 import { Layout } from "~/src/components/demo/clinic/ui/Layout";
 import { PageTitle } from "~/src/components/demo/clinic/ui/PageTitle";
 import { Input } from "~/src/components/demo/clinic/ui/Input";
