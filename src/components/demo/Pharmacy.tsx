@@ -11,18 +11,24 @@ import type { Run, Patient } from "~/src/utils/pia";
 import { Button } from "~/src/components/Button";
 import { TherapyDetail } from "~/src/components/demo/TherapyDetail";
 
-import { useStateConnectNotificationSSE, useEffectFindRuns } from '~/src/components/demo/common';
-/**
- * The Pharmacy component
- * @returns
- */
+import * as Common from '~/src/components/demo/common';
+
+
 export const Pharmacy = () => {
 
-  const [sse, setSse] = useStateConnectNotificationSSE('pharmacy');
+  React.useEffect(
+    Common.serverSideEventSource("pharmacy", 0), // FIXME: Need an entity ID here.
+    [] // only connect once
+  );
+
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
 
-  useEffectFindRuns('pharmacy', setRuns);
+  React.useEffect(Common.findRunsEffect('pharmacy', setRuns),
+    // TODO: Change the empty list dependencies argument (below) to useEffect so it
+    // forces a refresh when the server informs the client that an invalidation of
+    // the run list has occurred.
+    []);
 
   const switchRun = (run: PIAUtils.Run) => {
     setCurrentRun(run);

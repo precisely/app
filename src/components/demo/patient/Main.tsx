@@ -10,9 +10,9 @@ import { RunPage } from "./pages/RunPage";
 export const Patient = () => {
   const { patientId } = Router.useParams<{ patientId: string }>();
 
-  const [_sse, _setSse] = Common.useStateConnectNotificationSSE(
-    "patient",
-    parseInt(patientId)
+  React.useEffect(
+    Common.serverSideEventSource("patient", parseInt(patientId)),
+    [] // only connect once
   );
 
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
@@ -44,13 +44,12 @@ export const Patient = () => {
 // import * as React from "react";
 // import * as Router from "react-router";
 // import * as RouterDOM from "react-router-dom";
-// import { toast } from "react-toastify";
 
 // import * as PIAUtils from "~/src/utils/pia";
 
 // import * as Common from "~/src/components/demo/common";
 // import { Activities} from "~/src/components/demo/patient/Activities";
-// import { Run } from "~/src/components/demo/patient/Run";
+// import { Activity } from "~/src/components/demo/patient/Activity";
 
 // import "~/src/components/demo/common.css";
 
@@ -58,7 +57,10 @@ export const Patient = () => {
 
 //   const { patientId } = Router.useParams<{patientId: string}>();
 
-//   const [_sse, _setSse] = Common.useStateConnectNotificationSSE("patient", parseInt(patientId));
+// React.useEffect(
+//   Common.serverSideEventSource("patient", parseInt(patientId)),
+//   [] // only connect once
+// );
 
 //   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
 //   Common.useEffectGetPatient(parseInt(patientId), setPatient);
@@ -74,7 +76,7 @@ export const Patient = () => {
 //           <RouterDOM.BrowserRouter>
 //             <RouterDOM.Switch>
 //               <RouterDOM.Route path="/demo/patient/:patientId/:runId"
-//                                render={(_props) => <Run patient={patient} />} />
+//                                render={(_props) => <Activity patient={patient} />} />
 //               <RouterDOM.Route path="/demo/patient/:patientId"
 //                                render={(_props) => <Activities patient={patient} />} />
 //             </RouterDOM.Switch>
