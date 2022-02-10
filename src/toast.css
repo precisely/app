@@ -1,15 +1,15 @@
 .Toastify__toast {
-  @apply text-center font-bold;
+  @apply font-sans !text-center !font-semibold !rounded !shadow-lg !shadow-ink/5;
 }
 
 .Toastify__toast--info {
-  @apply bg-lapis;
+  @apply bg-parakeet text-cloud;
 }
 
 .Toastify__toast--warning {
-  @apply bg-monarch;
+  @apply bg-butterscotch text-ink;
 }
 
 .Toastify__toast--error {
-  @apply bg-flame;
+  @apply bg-cardinal text-cloud;
 }
