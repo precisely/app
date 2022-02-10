@@ -61,25 +61,16 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
               {run.index?.overview?.phase}
             </TableCell>
             <TableCell key={run.id + "_p-dose"}>
-              {/* {run.index?.overview?.dose} */}
-              7.5mg
+              {run.index?.overview?.dose || 'N/A'}
+
             </TableCell>
             <TableCell key={run.id + "_p-last-inr"}>
-              {/* {run.index?.overview ? run.index?.overview["last-inr"] : null} */}
-              1.8
+              {run.index?.overview ? run.index?.overview["last-inr"] || 'N/A' : 'N/A'}
             </TableCell>
             <TableCell key={run.id + "_p-alert"}>
-              {/* <span
-                className={alertColorFromLevel(
-                  run.index?.overview?.alert?.level
-                )}
-              >
-                {run.index?.overview?.alert?.text}
-              </span> */}
               <span
-                className={`text-${colorMap[alertColorFromLevel("green")]}`}
-              >
-                Review Rx recommendation
+                className={`text-${colorMap[alertColorFromLevel(run.index?.overview?.alert?.level)]}`}>
+                {run.index?.overview?.alert?.text}
               </span>
             </TableCell>
           </tr>
