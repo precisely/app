@@ -3,7 +3,7 @@ import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
 import { useTitle } from "~/src/utils/react";
-
+import { capitalize } from "lodash";
 import { Order } from '~/src/components/demo/generic-endpoint/Order';
 import { Orders } from '~/src/components/demo/generic-endpoint/Orders';
 
@@ -15,7 +15,7 @@ export const GenericEndpoint = () => {
   const { endpointId, runId, endpointType } = Router.useParams<{ endpointId: string, runId: string, endpointType: string }>();
   const endpointIdInt = parseInt(endpointId);
 
-  useTitle(`Precise.ly: ${endpointType.substring(0, 1).toUpperCase() + endpointType.substring(1).toLowerCase()} UI`);
+  useTitle(`Precise.ly: ${capitalize(endpointType)} UI`);
 
   const renderHelper = () => {
     if (undefined === endpointId) {
