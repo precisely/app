@@ -46,6 +46,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
       renderItem={(run, index) => (
         <React.Fragment key={run.id}>
           <tr
+            title={`patient ID: ${run.index.patient.id}`}
             key={run.id + "_row"}
             onClick={() => onRowClick(run)}
             className={index % 2 == 0 ? "bg-platinum" : ""}
