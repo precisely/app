@@ -28,9 +28,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
       return <RunUI run={run}></RunUI>;
     } else {
       var fakeRun = Object.assign({}, run);
-      fakeRun.output = [
-        { "type": "text", "text": "No action needed" }
-      ];
+      fakeRun.output = [{ type: "text", text: "No action needed" }];
       return <RunUI run={fakeRun} />;
     }
   };
@@ -65,7 +63,9 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
             title={`patient ID: ${run.index.patient.id}`}
             key={run.id + "_row"}
             onClick={() => onRowClick(run)}
-            className={index % 2 == 0 ? "bg-platinum" : ""}
+            className={`hover:bg-grey50 hover:cursor-pointer ${
+              index % 2 == 0 ? "bg-platinum" : ""
+            }`}
           >
             <TableCell key={run.id + "_p-id"}>
               <span>{run.index["patient-id"]}</span>
@@ -90,10 +90,11 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
             </TableCell>
             <TableCell key={run.id + "_p-alert"}>
               <span
-                className={`span-${colorMap[
-                  alertColorFromLevel(run.index?.overview?.alert?.level)
+                className={`span-${
+                  colorMap[
+                    alertColorFromLevel(run.index?.overview?.alert?.level)
                   ]
-                  }`}
+                }`}
               >
                 {run.index?.overview?.alert?.text}
               </span>
@@ -104,9 +105,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
               key={run.id + "_detail"}
               className={index % 2 == 0 ? "bg-platinum" : ""}
             >
-              <td colSpan={6}>
-                {renderRun(run)}
-              </td>
+              <td colSpan={6}>{renderRun(run)}</td>
             </tr>
           )}
         </React.Fragment>

@@ -1,5 +1,5 @@
 .table {
-  @apply table-auto w-full h-full border-collapse;
+  @apply flex-1 table-auto w-full border-collapse;
 }
 
 .table td:nth-child(1),

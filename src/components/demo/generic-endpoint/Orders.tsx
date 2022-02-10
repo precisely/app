@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as RouterDOM from "react-router-dom";
-import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 import * as Common from "~/src/components/demo/common";
@@ -18,6 +17,7 @@ interface Props {
 
 export const Orders = (props: Props) => {
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
+  const history = RouterDOM.useHistory();
   React.useEffect(
     Common.findRunsEffect(
       props.endpointType,
@@ -33,7 +33,7 @@ export const Orders = (props: Props) => {
   return (
     <div className="flex flex-col flex-1">
       <PageTitle title="Orders" />
-      <div className="flex-1">
+      <div className="flex flex-1">
         <Table<PIAUtils.Run>
           headers={[
             <TableHeader key="patient-id" text="Id" />,
@@ -42,23 +42,31 @@ export const Orders = (props: Props) => {
               text="Patient Name"
               sortable={true}
             />,
-            <TableHeader key="patient-state" text="State" sortable={true} />,
-            <TableHeader key="run-id" text="Run Id" sortable={true} />,
+            <TableHeader
+              key="patient-description"
+              text="Description"
+              sortable={true}
+            />,
+            <TableHeader key="run-id" text="Tracking Id" sortable={true} />,
           ]}
           data={runs}
-          renderItem={(run) => (
-            <tr key={run.id}>
-              <RouterDOM.Link
-                to={{
-                  pathname: `/demo/${props.endpointType}/${props.endpointId}/${run.id}`,
-                  state: { run },
-                }}
-              >
-                <TableCell>{run.index["patient-id"]}</TableCell>
-                <TableCell>{run.index.patient.name}</TableCell>
-                <TableCell>{run.index.title.toString() || run.state}</TableCell>
-                <TableCell>{run.id}</TableCell>
-              </RouterDOM.Link>
+          renderItem={(run, index) => (
+            <tr
+              key={run.id}
+              className={`hover:bg-grey50 hover:cursor-pointer ${
+                index % 2 == 0 ? "bg-platinum" : ""
+              }`}
+              onClick={() => {
+                history.push(
+                  `/demo/${props.endpointType}/${props.endpointId}/${run.id}`,
+                  { run }
+                );
+              }}
+            >
+              <TableCell>{run.index["patient-id"]}</TableCell>
+              <TableCell>{run.index.patient.name}</TableCell>
+              <TableCell>{run.index.title.toString() || run.state}</TableCell>
+              <TableCell>{run.id}</TableCell>
             </tr>
           )}
         />
