@@ -8,6 +8,7 @@ import { TableCell } from "./ui/Table/TableCell";
 import { TableHeader } from "./ui/Table/TableHeader";
 
 import "~/src/components/demo/textColor.css";
+import { getAvatarSrc } from "../RandomAvatar";
 
 interface Props {
   data: Run[];
@@ -57,7 +58,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
               <span>{run.index["patient-id"]}</span>
             </TableCell>
             <TableCell key={run.id + "_p-name"}>
-              <Avatar src={"https://i.pravatar.cc/32"} size={32} />
+              <Avatar src={getAvatarSrc(run.index["patient-id"])} size={32} />
               <span>{run.index.patient.name}</span>
             </TableCell>
             <TableCell key={run.id + "_p-age"}>

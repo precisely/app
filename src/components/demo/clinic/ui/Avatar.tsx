@@ -7,7 +7,9 @@ interface Props {
 export const Avatar = ({ size, src }: Props) => {
   return (
     <img
-      className={`w-[${size}] h-[${size}] rounded-full`}
+      height={size}
+      width={size}
+      className="rounded-full"
       src={src}
       alt="Avatar"
     />
