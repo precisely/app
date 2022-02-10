@@ -22,7 +22,7 @@ export const GenericEndpoint = () => {
           <RouterDOM.BrowserRouter>
             <RouterDOM.Switch>
               <RouterDOM.Route path={`/demo/${endpointType}/:endpointId/:runId`}
-                render={(_props) => <Order endpointId={endpointIdInt} runId={runId} />} />
+                render={(_props) => <Order endpointId={endpointIdInt} runId={runId} endpointType={endpointType} />} />
               <RouterDOM.Route path={`/demo/${endpointType}/:endpointId`}
                 render={(_props) => <Orders endpointId={endpointIdInt} endpointType={endpointType} />} />
             </RouterDOM.Switch>

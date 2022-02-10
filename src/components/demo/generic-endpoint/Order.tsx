@@ -10,13 +10,14 @@ import * as Common from "~/src/components/demo/common";
 import "~/src/components/demo/common.css";
 
 interface Props {
+  endpointType: string,
   endpointId: number,
   runId: string
 }
 
 export const Order = (props: Props) => {
 
-  const { endpointId, runId, endpointType } = Router.useParams<{endpointType: string, endpointId: string, runId: string}>();
+  const { endpointId, runId } = Router.useParams<{endpointId: string, runId: string}>();
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
   const endpointIdInt = parseInt(endpointId);
 
@@ -31,7 +32,7 @@ export const Order = (props: Props) => {
     else {
       return (
         <div>
-          <RouterDOM.Link to={`/demo/${endpointType}/${endpointId}`}>
+          <RouterDOM.Link to={`/demo/${props.endpointType}/${endpointId}`}>
         &lt; Return to orders
           </RouterDOM.Link>
           <RunUI run={currentRun} />
