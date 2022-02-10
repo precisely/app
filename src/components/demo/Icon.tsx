@@ -17,6 +17,7 @@ import Settings2 from "jsx:~/assets/icons/patient/settings.svg";
 import Data from "jsx:~/assets/icons/patient/data.svg";
 import Home from "jsx:~/assets/icons/patient/home.svg";
 import ChevronRight from "jsx:~/assets/icons/patient/chevron-right.svg";
+import ChevronLeft from "jsx:~/assets/icons/patient/chevron-left.svg";
 
 interface Props {
   name: string;
@@ -42,6 +43,7 @@ const iconMap = {
     data: Data,
     home: Home,
     chevronRight: ChevronRight,
+    chevronLeft: ChevronLeft,
   },
 };
 

@@ -5,6 +5,7 @@ import * as PIAUtils from "~/src/utils/pia";
 import * as Common from "~/src/components/demo/common";
 import { HomePage } from "./pages/HomePage";
 import { PatientProvider } from "./common";
+import { RunPage } from "./pages/RunPage";
 
 export const Patient = () => {
   const { patientId } = Router.useParams<{ patientId: string }>();
@@ -26,8 +27,10 @@ export const Patient = () => {
     <PatientProvider value={patient}>
       <RouterDOM.BrowserRouter>
         <RouterDOM.Switch>
-          {/* <RouterDOM.Route path="/demo/patient/:patientId/:runId"
-        render={(_props) => <Run patient={patient} />} /> */}
+          <RouterDOM.Route
+            path="/demo/patient/:patientId/:runId"
+            render={(_props) => <RunPage />}
+          />
           <RouterDOM.Route
             path="/demo/patient/:patientId"
             render={(_props) => <HomePage />}

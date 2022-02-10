@@ -32,8 +32,12 @@ export const Clinic = () => {
     );
   };
 
-  const setNewPatient = (value: string) => {
-    setPatientId(parseInt(value));
+  const setNewPatient = (value: string | null) => {
+    if (value) {
+      setPatientId(parseInt(value));
+    } else {
+      setPatientId(null);
+    }
   };
 
   const newPatient = async () => {
