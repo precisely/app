@@ -82,7 +82,7 @@ export const Pharmacy = () => {
     <div>
       <div className="grid grid-cols-3 content-center">
         <div className="flex items-center justify-center col-start-2 col-span-1">
-          Lab Orders
+          Prescription Orders
         </div>
       </div>
 
