@@ -7,17 +7,15 @@ import * as Common from "~/src/components/demo/common";
 
 import "~/src/components/demo/common.css";
 
-
 interface Props {
   labId: number
 }
-
 
 export const Orders = (props: Props) => {
 
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   React.useEffect(
-    () => { Common.findActiveRuns('lab', `index.lab-id=${props.labId}`); },
+    Common.findRunsEffect('lab', setRuns, `index.lab-id=${props.labId}`),
     // TODO: Change the empty list dependencies argument (below) to useEffect so it
     // forces a refresh when the server informs the client that an invalidation of
     // the run list has occurred.
@@ -40,7 +38,9 @@ export const Orders = (props: Props) => {
                   }}>
                   <span>{run.index['patient-id']}</span>
                   <span>{run.index.patient.name}</span>
-                  {run.index.title.toString() || run.state}
+                  <span>{run.index.title.toString() || run.state}</span>
+                  <span>{run.id}</span>
+
                 </RouterDOM.Link>
               </li>
             ))}

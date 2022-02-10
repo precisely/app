@@ -8,6 +8,7 @@ import { RunUI } from "~/src/components/pia-ui/RunUI";
 import * as Common from "~/src/components/demo/common";
 
 import "~/src/components/demo/common.css";
+import { toast } from 'react-toastify';
 
 interface Props {
   labId: number,
@@ -16,11 +17,18 @@ interface Props {
 
 export const Order = (props: Props) => {
 
-  const { labIdParam, runId } = Router.useParams<{labIdParam: string, runId: string}>();
-  const labId = parseInt(labIdParam);
+  const { labId, runId } = Router.useParams<{labId: string, runId: string}>();
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
+  const labIdInt = parseInt(labId);
 
-  React.useEffect(Common.getRunEffect(() => runId, setCurrentRun));
+  React.useEffect(Common.getRunEffect(() => runId,
+    (run: PIAUtils.Run) => {
+      if (run.index['lab-id'] == labIdInt) {
+        setCurrentRun(run);
+      } else {
+        toast.error("Access denied");
+      }
+  } ));
 
   const renderHelper = () => {
     if (undefined === currentRun) {

@@ -12,17 +12,17 @@ import { Button } from "~/src/components/Button";
 import { TherapyDetail } from "~/src/components/demo/TherapyDetail";
 
 import * as Common from '~/src/components/demo/common';
-/**
- * The Pharmacy component
- * @returns
- */
+
+
 export const Pharmacy = () => {
 
-    //useStateConnectNotificationSSE('pharmacy');
+  React.useEffect(
+    Common.serverSideEventSource("pharmacy", 0), // FIXME: Need an entity ID here.
+    [] // only connect once
+  );
+
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
-
-  React.useEffect(Common.serverSideEventEffect('pharmacy'));
 
   React.useEffect(Common.findRunsEffect('pharmacy', setRuns),
     // TODO: Change the empty list dependencies argument (below) to useEffect so it

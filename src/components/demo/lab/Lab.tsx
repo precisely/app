@@ -8,11 +8,11 @@ import { Orders } from '~/src/components/demo/lab/Orders';
 
 import * as Common from "~/src/components/demo/common";
 import * as PIAUtils from '~/src/utils/pia';
-import "./common.css";
+import "~/src/components/demo/common.css";
 
 export const Lab = () => {
-  const { labIdParam, runId } = Router.useParams<{ labIdParam: string, runId: string }>();
-  const labId = parseInt(labIdParam);
+  const { labId, runId } = Router.useParams<{ labId: string, runId: string }>();
+  const labIdInt = parseInt(labId);
 
   // const [_sse, _setSse] = Common.useStateConnectNotificationSSE("lab", labId);
 
@@ -27,9 +27,9 @@ export const Lab = () => {
           <RouterDOM.BrowserRouter>
             <RouterDOM.Switch>
               <RouterDOM.Route path="/demo/lab/:labId/:runId"
-                render={(_props) => <Order labId={labId} runId={runId} />} />
+                render={(_props) => <Order labId={labIdInt} runId={runId} />} />
               <RouterDOM.Route path="/demo/lab/:labId"
-                render={(_props) => <Orders labId={labId} />} />
+                render={(_props) => <Orders labId={labIdInt} />} />
             </RouterDOM.Switch>
           </RouterDOM.BrowserRouter>
         </div>
@@ -37,9 +37,10 @@ export const Lab = () => {
     }
 
   };
+  console.log("In Lab.tsx, labId=", labId)
   return (
     <div>
-      <div>{labId == 1 ? "Labcorp" : "Genetics Lab"}</div>
+      <div>{labIdInt == 1 ? "Labcorp" : "Genetics Lab"}</div>
       {renderHelper()}
     </div>);
 }
