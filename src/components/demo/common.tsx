@@ -71,9 +71,12 @@ export const getRunEffect = (
   return () => {
     const runId = runIdAccessor();
     const currentRun = getCurrentRun();
+    console.log('getRunEffect', runId, currentRun);
+
     const getRun = async () => {
       try {
-        const resp = await PIAUtils.getRun(runIdAccessor());
+        console.log('attempting to get run');
+        const resp = await PIAUtils.getRun(runId);
         setRun(resp);
       }
       catch (error) {
@@ -82,7 +85,7 @@ export const getRunEffect = (
       }
 
     };
-    if (currentRun && currentRun.id != runId) {
+    if (!currentRun || currentRun.id != runId) {
       getRun();
     }
   };
