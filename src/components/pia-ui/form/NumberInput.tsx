@@ -6,13 +6,16 @@ import "~/src/components/pia-ui/form/NumberInput.css";
 export interface Props {
   id: string;
   label: string;
+  value: number;
   onChange: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
-export const NumberInput = ({ id, label, onChange }: Props) => {
+export const NumberInput = ({ id, label, value, onChange }: Props) => {
   return (
     <Input
+      name={id}
       classes="form-number-input"
+      value={value}
       leading={
         <label className="ml-2" htmlFor={id}>
           {label}
