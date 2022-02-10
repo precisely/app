@@ -9,6 +9,7 @@ import { TableHeader } from "./ui/Table/TableHeader";
 
 import "~/src/components/demo/textColor.css";
 import { getAvatarSrc } from "../RandomAvatar";
+import { RunUI } from "~/src/components/pia-ui/RunUI";
 
 interface Props {
   data: Run[];
@@ -22,6 +23,17 @@ const colorMap = {
 };
 
 export const ClinicTable = ({ data, onRowClick }: Props) => {
+  const renderRun = (run: Run) => {
+    if (run.output.length > 0) {
+      return <RunUI run={run}></RunUI>;
+    } else {
+      var fakeRun = Object.assign({}, run);
+      fakeRun.output = [
+        { "type": "text", "text": "No action needed" }
+      ];
+      return <RunUI run={fakeRun} />;
+    }
+  };
   return (
     <Table<Run>
       keyStr="clinic"
@@ -78,11 +90,10 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
             </TableCell>
             <TableCell key={run.id + "_p-alert"}>
               <span
-                className={`span-${
-                  colorMap[
-                    alertColorFromLevel(run.index?.overview?.alert?.level)
+                className={`span-${colorMap[
+                  alertColorFromLevel(run.index?.overview?.alert?.level)
                   ]
-                }`}
+                  }`}
               >
                 {run.index?.overview?.alert?.text}
               </span>
@@ -94,7 +105,7 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
               className={index % 2 == 0 ? "bg-platinum" : ""}
             >
               <td colSpan={6}>
-                <TherapyDetail run={run}></TherapyDetail>
+                {renderRun(run)}
               </td>
             </tr>
           )}
