@@ -43,7 +43,7 @@ export interface Run {
   id: string,
   state: "running" | "error" | "complete" | "interrupted",
   index: BasicIndex | TherapyIndex | LabIndex | PatientIndex
-  output: [JSONData]
+  output: JSONData[]
 }
 
 export interface Patient {

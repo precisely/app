@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Run } from "~/src/utils/pia";
 import { alertColorFromLevel } from "../common";
-import { TherapyDetail } from "../TherapyDetail";
 import { Avatar } from "./ui/Avatar";
 import { Table } from "./ui/Table/Main";
 import { TableCell } from "./ui/Table/TableCell";
 import { TableHeader } from "./ui/Table/TableHeader";
+import { RunUI } from '../../pia-ui/RunUI';
+import { Button } from "~/src/components/Button";
 
 interface Props {
   data: Run[];
@@ -18,6 +19,18 @@ const colorMap = {
   red: "brick",
 };
 
+const hackRun = (run: Run) => {
+  if (run.output.length == 0) {
+    run.output = [{
+      "type": "buttons",
+      "buttons": [
+        { "id": "Interrupt therapy" },
+        { "id": "Continue therapy" }
+      ]
+    }]
+  }
+  return run;
+}
 export const ClinicTable = ({ data, onRowClick }: Props) => {
   return (
     <Table<Run>
@@ -89,7 +102,20 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
               className={index % 2 == 0 ? "bg-platinum" : ""}
             >
               <td colSpan={6}>
-                <TherapyDetail run={run}></TherapyDetail>
+                <div className="grid gap-4 grid-cols-3 grid-rows-1">
+                  <Button text="Stop Therapy"
+                    color="cardinal"
+                    classes="py-1 px-8"
+                  />
+                  <Button text="Schedule Visit"
+                    color="cobalt"
+                    classes="py-1 px-8"
+                  />
+                  <Button text="Change Dosage"
+                    color="grey"
+                    classes="py-1 px-8"
+                  />
+                </div>
               </td>
             </tr>
           )}
