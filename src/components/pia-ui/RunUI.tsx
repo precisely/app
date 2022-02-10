@@ -23,8 +23,6 @@ export const RunUI = (props: Props) => {
   const [run, setRun] = React.useState(props.run);
   const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
-  console.log(run, postContinueRun);
-
   const convertRunOutputToUIProps = (elements: JSONData[]): UIProps[] => {
     return elements.map(makeUIProps).filter((x) => !!x);
   };
