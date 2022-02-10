@@ -2,14 +2,20 @@ import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 
+import { useTitle } from "~/src/utils/react";
+
 import { Order } from '~/src/components/demo/generic-endpoint/Order';
 import { Orders } from '~/src/components/demo/generic-endpoint/Orders';
 
 import "~/src/components/demo/common.css";
 
+
 export const GenericEndpoint = () => {
+
   const { endpointId, runId, endpointType } = Router.useParams<{ endpointId: string, runId: string, endpointType: string }>();
   const endpointIdInt = parseInt(endpointId);
+
+  useTitle(`Precise.ly: ${endpointType.substring(0, 1).toUpperCase() + endpointType.substring(1).toLowerCase()} UI`);
 
   const renderHelper = () => {
     if (undefined === endpointId) {
@@ -30,11 +36,12 @@ export const GenericEndpoint = () => {
         </div>
       );
     }
-
   };
 
   return (
     <div>
       {renderHelper()}
-    </div>);
+    </div>
+  );
+
 }
