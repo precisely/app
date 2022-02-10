@@ -6,7 +6,7 @@ import * as PIAUtils from "~/src/utils/pia";
 
 import * as Common from "~/src/components/demo/common";
 import { Activities} from "~/src/components/demo/patient/Activities";
-import { Run } from "~/src/components/demo/patient/Run";
+import { Activity } from "~/src/components/demo/patient/Activity";
 
 import "~/src/components/demo/common.css";
 
@@ -34,7 +34,7 @@ export const Patient = () => {
           <RouterDOM.BrowserRouter>
             <RouterDOM.Switch>
               <RouterDOM.Route path="/demo/patient/:patientId/:runId"
-                               render={(_props) => <Run patient={patient} />} />
+                               render={(_props) => <Activity patient={patient} />} />
               <RouterDOM.Route path="/demo/patient/:patientId"
                                render={(_props) => <Activities patient={patient} />} />
             </RouterDOM.Switch>

@@ -1,15 +1,8 @@
 import * as React from "react";
-import * as Router from "react-router";
-import * as RouterDOM from "react-router-dom";
 import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 import * as SSEUtils from "~/src/utils/sse";
-
-import { Activities } from "~/src/components/demo/patient/Activities";
-import { Run } from "~/src/components/demo/patient/Run";
-import { RunUI } from "~/src/components/pia-ui/RunUI";
-
 import "~/src/components/demo/common.css";
 
 
@@ -46,7 +39,9 @@ export const serverSideEventSource = (role: string, id: number = 1) => {
             closeOnClick: false
           }
         );
-    });
+      });
+
+    SSEUtils.connect
     // return a cleanup function
     return () => {
       sse.close();
@@ -69,6 +64,79 @@ export const findRunsEffect = (role: string, setRunsFn: (_: PIAUtils.Run[]) => v
   };
 };
 
+export const getRunEffect = (
+  runIdAccessor: () => string,
+  getCurrentRun: () => PIAUtils.Run,
+  setRun: React.Dispatch<React.SetStateAction<PIAUtils.Run>>) => {
+  return () => {
+    const runId = runIdAccessor();
+    const currentRun = getCurrentRun();
+    const getRun = async () => {
+      try {
+        const resp = await PIAUtils.getRun(runIdAccessor());
+        setRun(resp);
+      }
+      catch (error) {
+        // TODO: Add proper error handling.
+        toast.error("PIA request broke!");
+      }
+
+    };
+    if (currentRun && currentRun.id != runId) {
+      getRun();
+    }
+  };
+  // // if the run has been passed into this component through RouterDOM.Link
+  // // state, use it; otherwise use the run id to retrieve it
+  // if (location.state && location.state.run) {
+  //   setRun(location.state.run);
+  // }
+  // else {
+  //   getRun(runId);
+  // }
+};
+
+// export const useEffectFindRuns = (role: string, setRunsFn: (_: PIAUtils.Run[]) => void, extras: string = "") => {
+//   React.useEffect(
+//     () => {
+//       const go = async () => {
+//         try {
+//           setRunsFn(await findActiveRuns(role, extras));
+//         }
+//         catch (error) {
+//           // TODO: Add proper error handling.
+//           toast.error("PIA request broke!");
+//         }
+//       };
+//       go();
+//     },
+//     // TODO: Change the empty list dependencies argument (below) to useEffect so it
+//     // forces a refresh when the server informs the client that an invalidation of
+//     // the run list has occurred.
+//     []
+//   );
+// };
+
+// export const useStateConnectNotificationSSE = (role: string, id: number = 1) => {
+//   // FIXME: This should be useEffect and it should use a cleanup function to disconnect.
+//   return React.useState<EventSource>(
+//     SSEUtils.connect(
+//       `${process.env.PIA_URL}/notifications/${role}/${id}`,
+//       (sse, event) => {
+//         const raw = event.data;
+//         const data = JSON.parse(raw);
+//         console.log(event);
+//         console.log(data);
+//         toast.info(
+//           <a href={data["run-id"]}>{data["message"]}</a>,
+//           {
+//             autoClose: false,
+//             closeOnClick: false
+//           }
+//         );
+//       }
+//     ));
+// };
 export const findActiveRuns = async (role: string, extras: string = "") => {
   const realExtras = ("" === extras || extras.startsWith("&")) ? extras : ("&" + extras);
   const resp = await PIAUtils.findRuns(`state=running&index.roles$contains=${role}${realExtras}`);
