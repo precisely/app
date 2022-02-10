@@ -1,36 +1,14 @@
 import * as React from "react";
 import * as PIAUtils from "~/src/utils/pia";
 
-import { toast } from "react-toastify";
 import { Button } from "~/src/components/Button";
 import { ActivityListItem } from "./ActivityListItem";
-import { PatientContext } from "./common";
 
-export const ActivityList = () => {
-  const patient = React.useContext(PatientContext);
-  const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
+interface Props {
+  runs: PIAUtils.Run[];
+}
 
-  React.useEffect(
-    () => {
-      const getActivities = async () => {
-        try {
-          const resp = await PIAUtils.findRuns(
-            `state=running&index.patient-id=${patient.id}&index.roles$contains=patient`
-          );
-          setRuns(resp);
-        } catch (error) {
-          // TODO: Add proper error handling.
-          toast.error("PIA request broke!");
-        }
-      };
-      getActivities();
-    },
-    // TODO: Change the empty list dependencies argument (below) to useEffect so it
-    // forces a refresh when the server informs the client that an invalidation of
-    // the run list has occurred.
-    []
-  );
-
+export const ActivityList = ({ runs }: Props) => {
   return (
     <div className="flex flex-col flex-1 px-5">
       <h1 className="font-medium text-battleship mb-2">Activity List</h1>

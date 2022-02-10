@@ -3,9 +3,9 @@ import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 import * as PIAUtils from "~/src/utils/pia";
 import * as Common from "~/src/components/demo/common";
-import { HomePage } from "./pages/HomePage";
+import { HomePage } from "./pages/home/HomePage";
 import { PatientProvider } from "./common";
-import { RunPage } from "./pages/RunPage";
+import { ActivityPage } from "./pages/activity/ActivityPage";
 
 export const Patient = () => {
   const { patientId } = Router.useParams<{ patientId: string }>();
@@ -18,7 +18,6 @@ export const Patient = () => {
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
   Common.useEffectGetPatient(parseInt(patientId), setPatient);
 
-  // return <HomePage />;
   if (patient === undefined) {
     return <div></div>;
   }
@@ -29,7 +28,7 @@ export const Patient = () => {
         <RouterDOM.Switch>
           <RouterDOM.Route
             path="/demo/patient/:patientId/:runId"
-            render={(_props) => <RunPage />}
+            render={(_props) => <ActivityPage />}
           />
           <RouterDOM.Route
             path="/demo/patient/:patientId"

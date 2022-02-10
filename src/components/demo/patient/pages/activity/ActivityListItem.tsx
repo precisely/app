@@ -3,7 +3,7 @@ import * as RouterDOM from "react-router-dom";
 
 import { Icon } from "~/src/components/demo/Icon";
 import { Run } from "~/src/utils/pia";
-import { PatientContext } from "./common";
+import { PatientContext } from "~/src/components/demo/patient/common";
 
 interface Props {
   run: Run;
