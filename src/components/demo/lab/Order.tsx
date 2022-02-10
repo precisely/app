@@ -22,13 +22,8 @@ export const Order = (props: Props) => {
   const labIdInt = parseInt(labId);
 
   React.useEffect(Common.getRunEffect(() => runId,
-    (run: PIAUtils.Run) => {
-      if (run.index['lab-id'] == labIdInt) {
-        setCurrentRun(run);
-      } else {
-        toast.error("Access denied");
-      }
-  } ));
+    () => currentRun,
+    setCurrentRun));
 
   const renderHelper = () => {
     if (undefined === currentRun) {

@@ -66,30 +66,35 @@ export const findRunsEffect = (role: string, setRunsFn: (_: PIAUtils.Run[]) => v
 
 export const getRunEffect = (
   runIdAccessor: () => string,
-  setRun: (value: React.SetStateAction<PIAUtils.Run>) => void) => {
+  getCurrentRun: () => PIAUtils.Run,
+  setRun: React.Dispatch<React.SetStateAction<PIAUtils.Run>>) => {
   return () => {
-      const getRun = async () => {
-        try {
-          const resp = await PIAUtils.getRun(runIdAccessor());
-          setRun(resp);
-        }
-        catch (error) {
-          // TODO: Add proper error handling.
-          toast.error("PIA request broke!");
-        }
+    const runId = runIdAccessor();
+    const currentRun = getCurrentRun();
+    const getRun = async () => {
+      try {
+        const resp = await PIAUtils.getRun(runIdAccessor());
+        setRun(resp);
+      }
+      catch (error) {
+        // TODO: Add proper error handling.
+        toast.error("PIA request broke!");
+      }
 
-      };
-      getRun();
     };
-    // // if the run has been passed into this component through RouterDOM.Link
-    // // state, use it; otherwise use the run id to retrieve it
-    // if (location.state && location.state.run) {
-    //   setRun(location.state.run);
-    // }
-    // else {
-    //   getRun(runId);
-    // }
+    if (currentRun && currentRun.id != runId) {
+      getRun();
+    }
   };
+  // // if the run has been passed into this component through RouterDOM.Link
+  // // state, use it; otherwise use the run id to retrieve it
+  // if (location.state && location.state.run) {
+  //   setRun(location.state.run);
+  // }
+  // else {
+  //   getRun(runId);
+  // }
+};
 
 // export const useEffectFindRuns = (role: string, setRunsFn: (_: PIAUtils.Run[]) => void, extras: string = "") => {
 //   React.useEffect(
