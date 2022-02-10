@@ -67,7 +67,7 @@ export const Pharmacy = () => {
     <div>
       <table style={{ width: '100%' }}>
         {header()}
-        <tbody key={"lab-body"}>
+        <tbody key={"rx-body"}>
           {runs.map(
             (run, idx) => [
               patientRow(run, idx),
