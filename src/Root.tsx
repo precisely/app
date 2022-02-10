@@ -10,7 +10,7 @@ import { Main as AppMain } from "~/src/components/app/Main";
 import { Main as DemoMain } from "~/src/components/demo/Main";
 import { Patient as DemoPatient } from "~/src/components/demo/patient/Main";
 import { Clinic as DemoClinic } from "~/src/components/demo/clinic/Main";
-import { Lab as DemoLab } from "~/src/components/demo/Lab";
+import { Lab as DemoLab } from "~/src/components/demo/lab/Lab";
 import { Pharmacy as DemoPharmacy } from "~/src/components/demo/Pharmacy";
 import { Terms } from "~/src/components/Terms";
 import { Privacy } from "~/src/components/Privacy";
@@ -41,7 +41,7 @@ const Root = () => {
             component={DemoPatient}
           />
           <RouterDOM.Route path="/demo/clinic" component={DemoClinic} />
-          <RouterDOM.Route path="/demo/lab/:patientId" component={DemoLab} />
+          <RouterDOM.Route path="/demo/lab/:labId" component={DemoLab} />
           <RouterDOM.Route path="/demo/pharmacy" component={DemoPharmacy} />
           <RouterDOM.Route exact path="/terms" component={Terms} />
           <RouterDOM.Route exact path="/privacy" component={Privacy} />
