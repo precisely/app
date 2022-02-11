@@ -11,6 +11,7 @@ import { Form } from "~/src/components/pia-ui/form/Main";
 
 interface Props {
   run: Run;
+  defaultOutput?: JSONData[];
 }
 
 const ComponentMap: { [key: string]: (props: any) => JSX.Element } = {
@@ -28,10 +29,10 @@ export const RunUI = (props: Props) => {
 
   const makeContinueFn =
     (run: Run, permit: JSONData): ContinueFn =>
-    async (data: JSONData = null) => {
-      const newRun = await PIAUtils.continueRun(run.id, data, permit);
-      _setRun(newRun);
-    };
+      async (data: JSONData = null) => {
+        const newRun = await PIAUtils.continueRun(run.id, data, permit);
+        _setRun(newRun);
+      };
 
   const makeComponent = (element: UIProps, index: number) => {
     // XXX: This variable _must_ be capitalized because it _must_ be used in
@@ -72,9 +73,15 @@ export const RunUI = (props: Props) => {
     return null;
   };
 
+  const renderRunUI = () => {
+    const uiProps = run.output.length > 0
+      ? convertRunOutputToUIProps(run.output)
+      : convertRunOutputToUIProps(props.defaultOutput || [{ type: "text", text: "No further actions needed" }]);
+    return uiProps.map(makeComponent);
+  };
   return (
     <div className="flex flex-col space-y-6 py-4">
-      { convertRunOutputToUIProps(run.output).map(makeComponent)}
+      {renderRunUI()}
     </div>
   );
 };
