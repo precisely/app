@@ -3,6 +3,7 @@ import * as React from "react";
 import "~/src/components/demo/Input.css";
 
 interface Props {
+  name?: string;
   value?: string | number | readonly string[];
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export const Input = ({
+  name,
   value,
   onChange,
   classes = "",
@@ -26,6 +28,7 @@ export const Input = ({
     >
       {leading}
       <input
+        name={name}
         type={type}
         className="input"
         value={value}

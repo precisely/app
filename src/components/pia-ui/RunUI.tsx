@@ -20,10 +20,9 @@ const ComponentMap: { [key: string]: (props: any) => JSX.Element } = {
 };
 
 export const RunUI = (props: Props) => {
-  const [run, setRun] = React.useState(props.run);
-  const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
-  console.log(run, postContinueRun);
+  const [run, _setRun] = React.useState(props.run);
+  const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
   const convertRunOutputToUIProps = (elements: JSONData[]): UIProps[] => {
     return elements.map(makeUIProps).filter((x) => !!x);
@@ -37,13 +36,21 @@ export const RunUI = (props: Props) => {
     };
 
   const makeComponent = (element: UIProps, index: number) => {
-    const component = ComponentMap[element["type"]];
-    if (!component) {
+    // XXX: This variable _must_ be capitalized because it _must_ be used in
+    // JSX. If it is a lowercase variable and used as a component constructor
+    // function call, React will throw its "Rendered fewer hooks than expected"
+    // error.
+    const Component = ComponentMap[element["type"]];
+    if (!Component) {
       console.log("Unrecognized component ", element, " in RunUI");
       return null;
     } else {
       console.log("Creating component", element["type"]);
-      return component({ key: JSON.stringify(index), ...element });
+      return (
+        <React.Fragment key={JSON.stringify(index)}>
+          <Component {...element} />
+        </React.Fragment>
+      );
     }
   };
 
@@ -76,4 +83,5 @@ export const RunUI = (props: Props) => {
       )}
     </div>
   );
+
 };

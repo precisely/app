@@ -12,7 +12,7 @@ export const ActivityList = ({ runs }: Props) => {
   return (
     <div className="flex flex-col flex-1 px-5">
       <h1 className="font-medium text-battleship mb-2">Activity List</h1>
-      <div className="flex flex-col space-x-2">
+      <div className="flex flex-col space-y-4">
         {runs.map((run) => (
           <ActivityListItem key={run.id} run={run} />
         ))}

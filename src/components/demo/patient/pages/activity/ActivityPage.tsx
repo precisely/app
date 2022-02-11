@@ -1,15 +1,14 @@
 import * as React from "react";
 import { Header } from "~/src/components/demo/patient/ui/Header";
 import { Layout } from "~/src/components/demo/patient/ui/Layout";
-import { Icon } from "~/src/components/demo/Icon";
 
 import * as Router from "react-router";
-import * as RouterDOM from "react-router-dom";
 import { toast } from "react-toastify";
 
 import * as PIAUtils from "~/src/utils/pia";
 
 import { RunUI } from "~/src/components/pia-ui/RunUI";
+import { Breadcrumb } from "~/src/components/demo/patient/ui/Breadcrumb";
 
 import "~/src/components/demo/common.css";
 
@@ -52,17 +51,7 @@ export const ActivityPage = () => {
     <Layout>
       <Header />
       <div className="flex flex-col flex-1 px-5">
-        <RouterDOM.Link to={`/demo/patient/${patientId}`}>
-          <div className="flex items-center mb-2">
-            <Icon
-              name="chevronLeft"
-              size={24}
-              color="battleship"
-              family="mobile"
-            />
-            <h1 className="font-medium text-battleship">Activity List</h1>
-          </div>
-        </RouterDOM.Link>
+        <Breadcrumb to={`/demo/patient/${patientId}`} text="Activity List" />
 
         <RunUI run={currentRun} />
       </div>

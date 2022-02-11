@@ -13,9 +13,7 @@ import { Layout } from "~/src/components/demo/clinic/ui/Layout";
 import { PageTitle } from "~/src/components/demo/clinic/ui/PageTitle";
 import { Input } from "~/src/components/demo/Input";
 
-
 export const Clinic = () => {
-
   useTitle("Precise.ly: Clinic UI");
 
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
@@ -80,7 +78,7 @@ export const Clinic = () => {
           </div>
         }
       />
-      <div className="flex-1">
+      <div className="flex flex-1">
         <ClinicTable data={runs} onRowClick={toggleRunVisibility} />
       </div>
     </Layout>

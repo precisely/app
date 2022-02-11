@@ -4,7 +4,7 @@ import { Logo } from "~/src/components/demo/Logo";
 
 export const Sidebar = () => {
   return (
-    <div className="border-r border-lightgrey h-screen py-8 w-64">
+    <div className="border-r border-lightgrey h-screen py-8">
       <div className="h-[30px] w-[148px] mx-8 mb-14">
         <Logo />
       </div>

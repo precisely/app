@@ -18,25 +18,27 @@ export interface FormProps extends UIProps {
 export const Form = (props: FormProps) => {
   const [formState, setFormState] = React.useState({});
 
-  const makeFormElement = (element: JSONData, idx: number) => {
+  const makeFormElement = (element: JSONData) => {
     switch (element["type"]) {
       case "number":
         return (
           <NumberInput
-            key={idx}
+            key={`input-${element["id"]}`}
             id={element["id"]}
             label={element["label"]}
             onChange={onFormChange}
+            value={formState[element["id"]] ?? ""}
           />
         );
       case "multiple-choice":
         return (
           <MultipleChoiceInput
-            key={idx}
+            key={`input-${element["id"]}`}
             id={element["id"]}
             label={element["label"]}
             items={element["items"]}
             onChange={onFormChange}
+            value={formState[element["id"]] ?? ""}
           />
         );
     }
@@ -45,7 +47,6 @@ export const Form = (props: FormProps) => {
   };
 
   const onFormChange = (event: React.FormEvent<HTMLInputElement>) => {
-    event.preventDefault();
     const formStateCopy = { ...formState };
     formStateCopy[event.currentTarget.name] = event.currentTarget.value;
     setFormState(formStateCopy);
