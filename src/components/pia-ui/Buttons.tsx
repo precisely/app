@@ -5,7 +5,7 @@ import { UIProps } from "~/src/components/pia-ui/types";
 
 export type ButtonItemProps = {
   id: string;
-  text: string;
+  label: string;
   level?: number;
   callback: () => Promise<void>;
 };
@@ -18,7 +18,7 @@ export interface ButtonsProps extends UIProps {
 
 export const ButtonItem = ({
   id,
-  text,
+  label,
   level = 1,
   callback,
 }: ButtonItemProps): JSX.Element => {
@@ -31,7 +31,7 @@ export const ButtonItem = ({
     <Button
       key={id}
       callback={callback}
-      text={text}
+      text={label}
       color={level in colorMap ? colorMap[level] : "cardinal"}
     />
   );
