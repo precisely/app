@@ -28,12 +28,14 @@ export const ButtonItem = ({
     3: "battleship-inv",
   };
   return (
-    <Button
-      key={id}
-      callback={callback}
-      text={text}
-      color={level in colorMap ? colorMap[level] : "cardinal"}
-    />
+    <div className="m-1">
+      <Button
+        key={id}
+        callback={callback}
+        text={text}
+        color={level in colorMap ? colorMap[level] : "cardinal"}
+      />
+    </div>
   );
 };
 
@@ -41,7 +43,7 @@ export const Buttons = (props: ButtonsProps) => {
   return (
     <div
       key={props.id}
-      className="flex flex-row justify-end space-x-2 space-y-2 max-w-[75%] flex-wrap ml-auto"
+      className="flex flex-row justify-end max-w-[75%] flex-wrap ml-auto -m-1"
     >
       {props.buttons.map((c) =>
         ButtonItem({

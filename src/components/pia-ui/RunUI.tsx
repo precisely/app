@@ -20,7 +20,6 @@ const ComponentMap: { [key: string]: (props: any) => JSX.Element } = {
 };
 
 export const RunUI = (props: Props) => {
-
   const [run, _setRun] = React.useState(props.run);
   const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
@@ -76,9 +75,13 @@ export const RunUI = (props: Props) => {
   // can think of is to keep the original run's UI elements around and mark them
   // hidden.
   return (
-    <div className="flex flex-col space-y-6 py-4">
+    <div>
       <React.Fragment>
-        <div className={postContinueRun === undefined ? "" : "hidden"}>
+        <div
+          className={`flex flex-col space-y-6 py-4 ${
+            postContinueRun === undefined ? "" : "hidden"
+          }`}
+        >
           {convertRunOutputToUIProps(run.output).map(makeComponent)}
         </div>
         <div className={postContinueRun === undefined ? "hidden" : ""}>
@@ -87,5 +90,4 @@ export const RunUI = (props: Props) => {
       </React.Fragment>
     </div>
   );
-
 };
