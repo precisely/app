@@ -20,7 +20,8 @@ const ComponentMap: { [key: string]: (props: any) => JSX.Element } = {
 };
 
 export const RunUI = (props: Props) => {
-  const [run, setRun] = React.useState(props.run);
+
+  const [run, _setRun] = React.useState(props.run);
   const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
   const convertRunOutputToUIProps = (elements: JSONData[]): UIProps[] => {
@@ -65,13 +66,26 @@ export const RunUI = (props: Props) => {
     return null;
   };
 
+  // XXX: Note the hideous dispatch on postContinueRun to set divs as `hidden`.
+  // This is necessary to avoid the "Rendered fewer hooks than expected" error
+  // which occurs when a component rerenders but has a different number of hooks
+  // running in the rerender than in the initial render. This gets triggered in
+  // this case because some components created dynamically by RunUI have their own
+  // useState hooks. After the run has been continued, these components may not
+  // rerender, their hooks do not run, and React errors out. The only workaround I
+  // can think of is to keep the original run's UI elements around and mark them
+  // hidden.
   return (
     <div className="flex flex-col space-y-6 py-4">
-      {postContinueRun === undefined ? (
-        convertRunOutputToUIProps(run.output).map(makeComponent)
-      ) : (
-        <div>all done</div>
-      )}
+      <React.Fragment>
+        <div className={postContinueRun === undefined ? "" : "hidden"}>
+          {convertRunOutputToUIProps(run.output).map(makeComponent)}
+        </div>
+        <div className={postContinueRun === undefined ? "hidden" : ""}>
+          all done
+        </div>
+      </React.Fragment>
     </div>
   );
+
 };
