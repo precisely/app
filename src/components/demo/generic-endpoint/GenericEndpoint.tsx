@@ -17,15 +17,13 @@ export const GenericEndpoint = () => {
   }>();
   const endpointIdInt = parseInt(endpointId);
 
-  useTitle(`Precise.ly: ${capitalize(endpointType)} UI`);
-
   const renderEndpointName = (endpointType: string, endpointId: string) => {
     const definedEndpoints = () => {
       switch (endpointType) {
         case "pharmacy":
           return (
             {
-              "1": "CVS Pharmacy",
+              "1": "True Pill Online Pharmacy",
               "2": "Walgreens Pharmacy",
             }[endpointId] || "Unknown Pharmacy"
           );
@@ -34,7 +32,7 @@ export const GenericEndpoint = () => {
             {
               "1": "Labcorp Lab",
               "2": "Akesogen Genetics",
-            }[endpointId] || "Unknonw Lab"
+            }[endpointId] || "Unknown Lab"
           );
       }
       return null;
@@ -43,6 +41,8 @@ export const GenericEndpoint = () => {
       definedEndpoints() || `${endpointType.toUpperCase()} # ${endpointId}`
     );
   };
+
+  useTitle(`Precise.ly: ${renderEndpointName(endpointType, endpointId)} Endpoint`);
 
   const renderHelper = () => {
     if (undefined === endpointId) {

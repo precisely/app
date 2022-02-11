@@ -12,8 +12,6 @@ import { ActivityPage } from "./pages/activity/ActivityPage";
 export const Patient = () => {
   const { patientId } = Router.useParams<{ patientId: string }>();
 
-  useTitle("Precise.ly: Patient UI");
-
   React.useEffect(
     Common.serverSideEventSource("patient", parseInt(patientId)),
     [] // only connect once
@@ -21,6 +19,9 @@ export const Patient = () => {
 
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
   Common.useEffectGetPatient(parseInt(patientId), setPatient);
+
+  useTitle(`Precise.ly: ${patient ? `Patient ${patient.name}` : "Patient UI"}`);
+
 
   if (patient === undefined) {
     return <div></div>;
