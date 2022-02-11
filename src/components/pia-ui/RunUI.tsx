@@ -35,13 +35,21 @@ export const RunUI = (props: Props) => {
     };
 
   const makeComponent = (element: UIProps, index: number) => {
-    const component = ComponentMap[element["type"]];
-    if (!component) {
+    // XXX: This variable _must_ be capitalized because it _must_ be used in
+    // JSX. If it is a lowercase variable and used as a component constructor
+    // function call, React will throw its "Rendered fewer hooks than expected"
+    // error.
+    const Component = ComponentMap[element["type"]];
+    if (!Component) {
       console.log("Unrecognized component ", element, " in RunUI");
       return null;
     } else {
       console.log("Creating component", element["type"]);
-      return component({ key: JSON.stringify(index), ...element });
+      return (
+        <React.Fragment key={JSON.stringify(index)}>
+          <Component {...element} />
+        </React.Fragment>
+      );
     }
   };
 
@@ -65,29 +73,13 @@ export const RunUI = (props: Props) => {
     return null;
   };
 
-  // XXX: Note the hideous dispatch on postContinueRun to set divs as `hidden`.
-  // This is necessary to avoid the "Rendered fewer hooks than expected" error
-  // which occurs when a component rerenders but has a different number of hooks
-  // running in the rerender than in the initial render. This gets triggered in
-  // this case because some components created dynamically by RunUI have their own
-  // useState hooks. After the run has been continued, these components may not
-  // rerender, their hooks do not run, and React errors out. The only workaround I
-  // can think of is to keep the original run's UI elements around and mark them
-  // hidden.
   return (
-    <div>
-      <React.Fragment>
-        <div
-          className={`flex flex-col space-y-6 py-4 ${
-            postContinueRun === undefined ? "" : "hidden"
-          }`}
-        >
-          {convertRunOutputToUIProps(run.output).map(makeComponent)}
-        </div>
-        <div className={postContinueRun === undefined ? "hidden" : ""}>
-          all done
-        </div>
-      </React.Fragment>
+    <div className="flex flex-col space-y-6 py-4">
+      {postContinueRun === undefined ? (
+        convertRunOutputToUIProps(run.output).map(makeComponent)
+      ) : (
+        <div>all done</div>
+      )}
     </div>
   );
 };
