@@ -100,47 +100,6 @@ export const getRunEffect = (
   // }
 };
 
-// export const useEffectFindRuns = (role: string, setRunsFn: (_: PIAUtils.Run[]) => void, extras: string = "") => {
-//   React.useEffect(
-//     () => {
-//       const go = async () => {
-//         try {
-//           setRunsFn(await findActiveRuns(role, extras));
-//         }
-//         catch (error) {
-//           // TODO: Add proper error handling.
-//           toast.error("PIA request broke!");
-//         }
-//       };
-//       go();
-//     },
-//     // TODO: Change the empty list dependencies argument (below) to useEffect so it
-//     // forces a refresh when the server informs the client that an invalidation of
-//     // the run list has occurred.
-//     []
-//   );
-// };
-
-// export const useStateConnectNotificationSSE = (role: string, id: number = 1) => {
-//   // FIXME: This should be useEffect and it should use a cleanup function to disconnect.
-//   return React.useState<EventSource>(
-//     SSEUtils.connect(
-//       `${process.env.PIA_URL}/notifications/${role}/${id}`,
-//       (sse, event) => {
-//         const raw = event.data;
-//         const data = JSON.parse(raw);
-//         console.log(event);
-//         console.log(data);
-//         toast.info(
-//           <a href={data["run-id"]}>{data["message"]}</a>,
-//           {
-//             autoClose: false,
-//             closeOnClick: false
-//           }
-//         );
-//       }
-//     ));
-// };
 export const findActiveRuns = async (role: string, extras: string = "") => {
   const realExtras =
     "" === extras || extras.startsWith("&") ? extras : "&" + extras;

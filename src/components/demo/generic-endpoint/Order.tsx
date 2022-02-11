@@ -19,7 +19,6 @@ export const Order = (props: Props) => {
 
   const { endpointId, runId } = Router.useParams<{endpointId: string, runId: string}>();
   const [currentRun, setCurrentRun] = React.useState<PIAUtils.Run>();
-  const endpointIdInt = parseInt(endpointId);
 
   React.useEffect(Common.getRunEffect(() => runId,
     () => currentRun,
