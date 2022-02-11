@@ -21,7 +21,6 @@ const ComponentMap: { [key: string]: (props: any) => JSX.Element } = {
 
 export const RunUI = (props: Props) => {
   const [run, _setRun] = React.useState(props.run);
-  const [postContinueRun, setPostContinueRun] = React.useState<PIAUtils.Run>();
 
   const convertRunOutputToUIProps = (elements: JSONData[]): UIProps[] => {
     return elements.map(makeUIProps).filter((x) => !!x);
@@ -31,7 +30,7 @@ export const RunUI = (props: Props) => {
     (run: Run, permit: JSONData): ContinueFn =>
     async (data: JSONData = null) => {
       const newRun = await PIAUtils.continueRun(run.id, data, permit);
-      setPostContinueRun(newRun);
+      _setRun(newRun);
     };
 
   const makeComponent = (element: UIProps, index: number) => {
@@ -75,11 +74,7 @@ export const RunUI = (props: Props) => {
 
   return (
     <div className="flex flex-col space-y-6 py-4">
-      {postContinueRun === undefined ? (
-        convertRunOutputToUIProps(run.output).map(makeComponent)
-      ) : (
-        <div>all done</div>
-      )}
+      { convertRunOutputToUIProps(run.output).map(makeComponent)}
     </div>
   );
 };
