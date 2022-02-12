@@ -2,15 +2,23 @@ import * as React from "react";
 import { Input } from "~/src/components/demo/Input";
 
 import "~/src/components/pia-ui/form/NumberInput.css";
+import { FormUpdateFunction } from "./Main";
 
 export interface Props {
   id: string;
   label: string;
   value: number;
-  onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+  onChange: FormUpdateFunction;
 }
 
 export const NumberInput = ({ id, label, value, onChange }: Props) => {
+  function onInputChange(event: React.FormEvent<HTMLInputElement>) {
+    const value = event.currentTarget.value
+      ? parseInt(event.currentTarget.value)
+      : null;
+    onChange(event.currentTarget.name, value);
+  }
+
   return (
     <Input
       name={id}
@@ -21,7 +29,7 @@ export const NumberInput = ({ id, label, value, onChange }: Props) => {
           {label}
         </label>
       }
-      onChange={onChange}
+      onChange={onInputChange}
       placeholder="Enter number here"
     />
   );

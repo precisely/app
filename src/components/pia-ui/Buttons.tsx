@@ -45,12 +45,9 @@ export const Buttons = (props: ButtonsProps) => {
       key={props.id}
       className="flex flex-row justify-end max-w-[75%] flex-wrap ml-auto -m-1"
     >
-      {props.buttons.map((c) =>
-        ButtonItem({
-          callback: () => props.continueFn(c.id),
-          ...c,
-        })
-      )}
+      {props.buttons.map((c) => (
+        <ButtonItem key={c.id} {...c} callback={() => props.continueFn(c.id)} />
+      ))}
     </div>
   );
 };

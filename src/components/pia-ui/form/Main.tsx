@@ -15,6 +15,9 @@ export interface FormProps extends UIProps {
   schema: JSONData;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FormUpdateFunction = (target: string, value: any) => void;
+
 export const Form = (props: FormProps) => {
   const [formState, setFormState] = React.useState({});
 
@@ -46,9 +49,9 @@ export const Form = (props: FormProps) => {
     return null;
   };
 
-  const onFormChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const onFormChange: FormUpdateFunction = (target, value) => {
     const formStateCopy = { ...formState };
-    formStateCopy[event.currentTarget.name] = event.currentTarget.value;
+    formStateCopy[target] = value;
     setFormState(formStateCopy);
   };
 
