@@ -21,7 +21,7 @@ const ComponentMap: { [key: string]: (props: any) => JSX.Element } = {
 };
 
 export const RunUI = (props: Props) => {
-  const [run, _setRun] = React.useState(props.run);
+  const [run, setRun] = React.useState(props.run);
 
   const convertRunOutputToUIProps = (elements: JSONData[]): UIProps[] => {
     return elements.map(makeUIProps).filter((x) => !!x);
@@ -31,7 +31,7 @@ export const RunUI = (props: Props) => {
     (run: Run, permit: JSONData): ContinueFn =>
       async (data: JSONData = null) => {
         const newRun = await PIAUtils.continueRun(run.id, data, permit);
-        _setRun(newRun);
+        setRun(newRun);
       };
 
   const makeComponent = (element: UIProps, index: number) => {
