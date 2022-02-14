@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as PIAUtils from "~/src/utils/pia";
 
-import type { Run } from "~/src/utils/pia";
 import { useTitle } from "~/src/utils/react";
 
 import { Button } from "~/src/components/Button";
@@ -26,17 +25,6 @@ export const Clinic = () => {
     // the run list has occurred.
     []
   );
-
-  const toggleRunVisibility = (run: Run) => {
-    setRuns(
-      runs.map((r) => {
-        if (r.id == run.id) {
-          r.index.visible = !run.index.visible;
-        }
-        return r;
-      })
-    );
-  };
 
   const setNewPatient = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
@@ -79,7 +67,7 @@ export const Clinic = () => {
         }
       />
       <div className="flex flex-1">
-        <ClinicTable data={runs} onRowClick={toggleRunVisibility} />
+        <ClinicTable data={runs} />
       </div>
     </Layout>
   );

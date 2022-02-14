@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Run } from "~/src/utils/pia";
+import * as PIAUtils from "~/src/utils/pia";
 import { alertColorFromLevel } from "../common";
-import { TherapyDetail } from "../TherapyDetail";
 import { Avatar } from "./ui/Avatar";
 import { Table } from "./ui/Table/Main";
 import { TableCell } from "./ui/Table/TableCell";
@@ -12,8 +11,7 @@ import { getAvatarSrc } from "../RandomAvatar";
 import { RunUI } from "~/src/components/pia-ui/RunUI";
 
 interface Props {
-  data: Run[];
-  onRowClick: (run: Run) => void;
+  data: PIAUtils.Run[];
 }
 
 const colorMap = {
@@ -22,43 +20,51 @@ const colorMap = {
   red: "brick",
 };
 
-export const ClinicTable = ({ data, onRowClick }: Props) => {
-  const renderRun = (run: Run) =>
-    <RunUI run={run} defaultOutput={[{ type: "text", text: "No action needed" }]}></RunUI>;
+export const ClinicTable = ({ data }: Props) => {
+  const [selectedRun, setSelectedRun] = React.useState<PIAUtils.Run>(null);
+
+  const onClickRow = (run: PIAUtils.Run) => {
+    setSelectedRun(selectedRun?.id === run.id ? null : run);
+  };
 
   return (
-    <Table<Run>
-      keyStr="clinic"
-      headers={[
-        <TableHeader key="therapeutic-id" text="Id" />,
-        <TableHeader
-          key="therapeutic-patient"
-          text="Patient Name"
-          sortable={true}
-        />,
-        <TableHeader key="therapeutic-age" text="Age" sortable={true} />,
-        <TableHeader key="therapeutic-phase" text="Phase" sortable={true} />,
-        <TableHeader
-          key="therapeutic-dose"
-          text="Current Dose"
-          sortable={true}
-        />,
-        <TableHeader
-          key="therapeutic-last-inr"
-          text="Last INR"
-          sortable={true}
-        />,
-        <TableHeader key="therapeutic-alert" text="Alerts" />,
-      ]}
-      data={data}
-      renderItem={(run, index) => (
-        <React.Fragment key={run.id}>
+    <div className="flex-1 flex">
+      <Table<PIAUtils.Run>
+        keyStr="clinic"
+        headers={[
+          <TableHeader key="therapeutic-id" text="Id" />,
+          <TableHeader
+            key="therapeutic-patient"
+            text="Patient Name"
+            sortable={true}
+          />,
+          <TableHeader key="therapeutic-age" text="Age" sortable={true} />,
+          <TableHeader key="therapeutic-phase" text="Phase" sortable={true} />,
+          <TableHeader
+            key="therapeutic-dose"
+            text="Current Dose"
+            sortable={true}
+          />,
+          <TableHeader
+            key="therapeutic-last-inr"
+            text="Last INR"
+            sortable={true}
+          />,
+          <TableHeader key="therapeutic-alert" text="Alerts" />,
+        ]}
+        data={data}
+        renderItem={(run, index) => (
           <tr
             title={`patient ID: ${run.index.patient.id}`}
             key={run.id + "_row"}
-            onClick={() => onRowClick(run)}
-            className={`hover:bg-grey50 hover:cursor-pointer ${index % 2 == 0 ? "bg-platinum" : ""
-              }`}
+            onClick={() => onClickRow(run)}
+            className={`hover:bg-grey50 hover:cursor-pointer ${
+              selectedRun?.id === run.id
+                ? "!bg-blush/10"
+                : index % 2 == 0
+                ? "bg-platinum"
+                : ""
+            }`}
           >
             <TableCell key={run.id + "_p-id"}>
               <span>{run.index["patient-id"]}</span>
@@ -83,25 +89,23 @@ export const ClinicTable = ({ data, onRowClick }: Props) => {
             </TableCell>
             <TableCell key={run.id + "_p-alert"}>
               <span
-                className={`span-${colorMap[
-                  alertColorFromLevel(run.index?.overview?.alert?.level)
+                className={`span-${
+                  colorMap[
+                    alertColorFromLevel(run.index?.overview?.alert?.level)
                   ]
-                  }`}
+                }`}
               >
                 {run.index?.overview?.alert?.text}
               </span>
             </TableCell>
           </tr>
-          {run.index.visible && (
-            <tr
-              key={run.id + "_detail"}
-              className={index % 2 == 0 ? "bg-platinum" : ""}
-            >
-              <td colSpan={6}>{renderRun(run)}</td>
-            </tr>
-          )}
-        </React.Fragment>
+        )}
+      />
+      {selectedRun && (
+        <div className="flex-none p-5 bg-grey50 w-96">
+          <RunUI run={selectedRun}></RunUI>
+        </div>
       )}
-    />
+    </div>
   );
 };
