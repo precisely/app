@@ -57,7 +57,7 @@ export const RunUI = (props: Props) => {
     let id = `${idx}`;
     switch (typeof elt) {
       case "string":
-        return { id, type: "message", text: elt, continueFn: null };
+        return { id, type: "text", text: elt, continueFn: null };
 
       case "object":
         if ("type" in elt && typeof elt.type === "string") {
