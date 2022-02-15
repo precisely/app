@@ -28,7 +28,7 @@ export const ClinicTable = ({ data }: Props) => {
   };
 
   return (
-    <div className="flex-1 flex relative">
+    <div className="flex-1 flex relative overflow-x-hidden">
       <Table<PIAUtils.Run>
         keyStr="clinic"
         headers={[
@@ -101,11 +101,13 @@ export const ClinicTable = ({ data }: Props) => {
           </tr>
         )}
       />
-      {selectedRun && (
-        <div className="absolute p-5 bg-grey50 w-96 right-0 top-0 bottom-0 border-l border-lightgrey">
-          <RunUI run={selectedRun}></RunUI>
-        </div>
-      )}
+      <div
+        className={`absolute p-5 bg-grey50 w-96 ${
+          selectedRun ? "right-0" : "-right-96"
+        } top-0 bottom-0 border-l border-lightgrey transition-all`}
+      >
+        {selectedRun && <RunUI run={selectedRun}></RunUI>}
+      </div>
     </div>
   );
 };
