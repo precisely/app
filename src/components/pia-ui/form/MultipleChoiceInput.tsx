@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FieldSetWrapper } from "./FieldSetWrapper";
+import { FormUpdateFunction } from "./Main";
 
 interface MultipleChoiceItem {
   id: string;
@@ -11,7 +12,7 @@ interface Props {
   label: string;
   items: MultipleChoiceItem[];
   value: string;
-  onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+  onChange: FormUpdateFunction;
 }
 
 export const MultipleChoiceInput = ({
@@ -21,6 +22,9 @@ export const MultipleChoiceInput = ({
   value,
   onChange,
 }: Props) => {
+  function onInputChange(event: React.FormEvent<HTMLInputElement>) {
+    onChange(event.currentTarget.name, event.currentTarget.value);
+  }
   return (
     <FieldSetWrapper label={label}>
       <div className="flex flex-wrap space-x-2 items-center">
@@ -32,7 +36,7 @@ export const MultipleChoiceInput = ({
                 type="radio"
                 id={item.id}
                 name={id}
-                onChange={onChange}
+                onChange={onInputChange}
                 value={item.id}
                 checked={item.id === value}
               />
