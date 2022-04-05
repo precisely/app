@@ -29,18 +29,19 @@ export const MultipleChoiceInput = ({
     <FieldSetWrapper label={label}>
       <div className="flex flex-wrap space-x-2 items-center">
         {items.map((item: MultipleChoiceItem) => {
+          const key = `${id}-option-${item.id}`;
           return (
-            <div key={`${id}-option-${item.id}`}>
+            <div key={key}>
               <input
                 className="inline-block"
                 type="radio"
-                id={item.id}
+                id={key}
                 name={id}
                 onChange={onInputChange}
                 value={item.id}
                 checked={item.id === value}
               />
-              <label className="ml-2" htmlFor={item.id}>
+              <label className="ml-2" htmlFor={key}>
                 {item.label}
               </label>
             </div>

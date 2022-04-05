@@ -21,6 +21,10 @@ export type FormUpdateFunction = (target: string, value: any) => void;
 export const Form = (props: FormProps) => {
   const [formState, setFormState] = React.useState({});
 
+  React.useEffect(() => {
+    setFormState({});
+  }, [props]);
+
   const makeFormElement = (element: JSONData) => {
     switch (element["type"]) {
       case "number":
@@ -50,6 +54,7 @@ export const Form = (props: FormProps) => {
   };
 
   const onFormChange: FormUpdateFunction = (target, value) => {
+    console.log(target, value);
     const formStateCopy = { ...formState };
     formStateCopy[target] = value;
     setFormState(formStateCopy);
@@ -60,6 +65,8 @@ export const Form = (props: FormProps) => {
     console.log(formState);
     props.continueFn(formState);
   };
+
+  console.log(formState);
 
   return (
     <form key={props.key} onSubmit={onSubmit}>
