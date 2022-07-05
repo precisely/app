@@ -2,12 +2,12 @@ import * as React from "react";
 import * as Router from "react-router";
 import * as RouterDOM from "react-router-dom";
 import * as PIAUtils from "~/src/utils/pia";
-import { useTitle } from "~/src/utils/react";
 
 import * as Common from "~/src/components/demo/common";
 import { HomePage } from "./pages/home/HomePage";
 import { PatientProvider } from "./common";
 import { ActivityPage } from "./pages/activity/ActivityPage";
+import { Helmet } from "react-helmet";
 
 export const Patient = () => {
   const { patientId } = Router.useParams<{ patientId: string }>();
@@ -20,8 +20,6 @@ export const Patient = () => {
   const [patient, setPatient] = React.useState<PIAUtils.Patient>();
   Common.useEffectGetPatient(parseInt(patientId), setPatient);
 
-  useTitle(`Precise.ly: ${patient ? `Patient ${patient.name}` : "Patient UI"}`);
-
 
   if (patient === undefined) {
     return <div></div>;
@@ -29,6 +27,7 @@ export const Patient = () => {
 
   return (
     <PatientProvider value={patient}>
+      <Helmet><title>Precise.ly: {patient ? `Patient ${patient.name}` : "Patient UI"}</title></Helmet>
       <RouterDOM.BrowserRouter>
         <RouterDOM.Switch>
           <RouterDOM.Route

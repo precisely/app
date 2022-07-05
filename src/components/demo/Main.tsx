@@ -1,20 +1,16 @@
 import * as React from "react";
-import * as RouterDOM from "react-router-dom";
-
-import { useTitle } from "~/src/utils/react";
 
 import { Button } from "~/src/components/Button";
 import { Footer } from "~/src/components/Footer";
 
 import "./common.css";
 import imgEscutcheon from "~/assets/images/escutcheon/red.svg";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 
 export const Main = () => {
-
-  useTitle("Precise.ly: Demo Driver");
-
-  const history = RouterDOM.useHistory();
+  const navigate = useNavigate();
 
   const [patientId, setPatientId] = React.useState(1);
   const [patientIdForLabUI, setPatientIdForLabUI] = React.useState(1);
@@ -22,6 +18,9 @@ export const Main = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Precise.ly: Demo Driver</title>
+      </Helmet>
       <div className="pt-8">
         <div className="flex justify-center">
           <img className="w-20" src={imgEscutcheon} />
@@ -37,7 +36,7 @@ export const Main = () => {
           <Button text="Clinic UI"
                   color="cardinal"
                   classes="w-full py-2"
-                  callback={() => history.push("/demo/clinic")} />
+                  callback={() => navigate("/clinic")} />
         </div>
       </div>
       <div className="pt-6 grid grid-cols-6">
@@ -52,7 +51,7 @@ export const Main = () => {
           <Button text="Patient UI"
                   color="cardinal"
                   classes="w-full py-2 pr-2"
-                  callback={() => history.push(`/demo/patient/${patientId}`)} />
+                  callback={() => navigate(`/patient/${patientId}`)} />
         </div>
       </div>
       <div className="pt-6 grid grid-cols-6">
@@ -67,7 +66,7 @@ export const Main = () => {
           <Button text="Lab UI"
                   color="cardinal"
                   classes="w-full py-2"
-                  callback={() => history.push(`/demo/lab/${patientIdForLabUI}`)} />
+                  callback={() => navigate(`/lab/${patientIdForLabUI}`)} />
         </div>
       </div>
 
@@ -83,7 +82,7 @@ export const Main = () => {
           <Button text="Pharmacy UI"
                   color="cardinal"
                   classes="w-full py-2"
-                  callback={() => history.push(`/demo/pharmacy/${patientIdForPharmacyUI}`)} />
+                  callback={() => navigate(`/pharmacy/${patientIdForPharmacyUI}`)} />
         </div>
       </div>
       <div className="pt-8 text-base">
@@ -111,9 +110,7 @@ export const Main = () => {
                   callback={() => { localStorage.removeItem("theme"); window.location.reload(); }} />
         </div>
       </div>
-      <RouterDOM.Switch>
-      </RouterDOM.Switch>
-      <Footer showLogout={false} />
+      <Footer />
     </div>
   );
 

@@ -1,8 +1,6 @@
 import * as React from "react";
 import * as PIAUtils from "~/src/utils/pia";
 
-import { useTitle } from "~/src/utils/react";
-
 import { Button } from "~/src/components/Button";
 import * as Common from "~/src/components/demo/common";
 
@@ -11,9 +9,9 @@ import { Icon } from "~/src/components/demo/Icon";
 import { Layout } from "~/src/components/demo/clinic/ui/Layout";
 import { PageTitle } from "~/src/components/demo/clinic/ui/PageTitle";
 import { Input } from "~/src/components/demo/Input";
+import { Helmet } from "react-helmet";
 
 export const Clinic = () => {
-  useTitle("Precise.ly: Clinic UI");
 
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
   const [patientId, setPatientId] = React.useState<number>();
@@ -45,6 +43,9 @@ export const Clinic = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Precise.ly: Clinic UI</title>
+      </Helmet>
       <PageTitle
         title="Patients"
         actions={

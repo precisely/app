@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as RouterDOM from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import * as PIAUtils from "~/src/utils/pia";
 import * as Common from "~/src/components/demo/common";
@@ -17,7 +17,7 @@ interface Props {
 
 export const Orders = (props: Props) => {
   const [runs, setRuns] = React.useState<PIAUtils.Run[]>([]);
-  const history = RouterDOM.useHistory();
+  const navigate = useNavigate();
   React.useEffect(
     Common.findRunsEffect(
       props.endpointType,
@@ -57,9 +57,9 @@ export const Orders = (props: Props) => {
                 index % 2 == 0 ? "bg-platinum" : ""
               }`}
               onClick={() => {
-                history.push(
-                  `/demo/${props.endpointType}/${props.endpointId}/${run.id}`,
-                  { run }
+                navigate(
+                  `/${props.endpointType}/${props.endpointId}/${run.id}`,
+                  { state: { run } }
                 );
               }}
             >
@@ -74,28 +74,3 @@ export const Orders = (props: Props) => {
     </div>
   );
 };
-
-// return (
-//   <div>
-//     <div>
-//       Orders:
-//       <ul>
-//         {runs.map((run) => (
-//           <li key={run.id} className="underline">
-//             <RouterDOM.Link
-//               to={{
-//                 pathname: `/demo/${props.endpointType}/${props.endpointId}/${run.id}`,
-//                 state: { run },
-//               }}
-//             >
-//               <span>{run.index["patient-id"]}</span>
-//               <span>{run.index.patient.name}</span>
-//               <span>{run.index.title.toString() || run.state}</span>
-//               <span>{run.id}</span>
-//             </RouterDOM.Link>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   </div>
-// );

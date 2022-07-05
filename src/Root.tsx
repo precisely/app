@@ -1,55 +1,32 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import * as RouterDOM from "react-router-dom";
-import * as Toast from "react-toastify";
-
-import * as SessionUtils from "~/src/utils/session";
-import { AuthRoute } from "~/src/AuthRoute";
-import { Main as LandingMain } from "~/src/components/landing/Main";
-import { Main as AppMain } from "~/src/components/app/Main";
-import { Main as DemoMain } from "~/src/components/demo/Main";
-import { Patient as DemoPatient } from "~/src/components/demo/patient/Main";
-import { Clinic as DemoClinic } from "~/src/components/demo/clinic/Main";
-import { Lab as DemoLab } from "~/src/components/demo/lab/Lab";
-import { Pharmacy as DemoPharmacy } from "~/src/components/demo/Pharmacy";
-import { Terms } from "~/src/components/Terms";
-import { Privacy } from "~/src/components/Privacy";
-import { NotFound as ErrorNotFound } from "~/src/components/errors/NotFound";
+import React from "react";
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { NotFound } from "~/src/components/errors/NotFound";
+import { Main } from "~/src/components/demo/Main";
+import { Clinic } from "~/src/components/demo/clinic/Main";
+import { Patient } from "~/src/components/demo/patient/Main";
+import { GenericEndpoint } from "~/src/components/demo/generic-endpoint/GenericEndpoint";
 
 import "react-toastify/dist/ReactToastify.css";
-import "~/src/toast.css";
-import "~/src/components/common.css";
-import { GenericEndpoint } from './components/demo/generic-endpoint/GenericEndpoint';
+import "~/assets/css/toast.css";
+import "~/assets/css/common.css";
 
 const Root = () => {
-  const redirect = () => {
-    if (SessionUtils.isAuthenticated()) {
-      return <RouterDOM.Redirect to="/app" />;
-    } else {
-      return <RouterDOM.Redirect to="/demo" />;
-    }
-  };
-
   return (
     <div>
-      <RouterDOM.BrowserRouter>
-        <RouterDOM.Switch>
-          <RouterDOM.Route exact path="/" render={redirect} />
-          <RouterDOM.Route path="/landing" component={LandingMain} />
-          <RouterDOM.Route exact path="/demo" component={DemoMain} />
-          <RouterDOM.Route
-            path="/demo/patient/:patientId"
-            component={DemoPatient}
-          />
-          <RouterDOM.Route path="/demo/clinic" component={DemoClinic} />
-          <RouterDOM.Route path="/demo/:endpointType/:endpointId" component={GenericEndpoint} />
-          <RouterDOM.Route exact path="/terms" component={Terms} />
-          <RouterDOM.Route exact path="/privacy" component={Privacy} />
-          <AuthRoute path="/app" component={AppMain} />
-          <RouterDOM.Route path="*" component={ErrorNotFound} />
-        </RouterDOM.Switch>
-      </RouterDOM.BrowserRouter>
-      <Toast.ToastContainer
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Main />} />
+            <Route path="/clinic" element={<Clinic />} />
+            <Route path="/patient/:patientId" element={<Patient />} />
+            <Route path="/:endpointType/:endpointId/*" element={<GenericEndpoint />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer
         autoClose={3500}
         position="top-right"
         hideProgressBar={true}
@@ -58,4 +35,6 @@ const Root = () => {
   );
 };
 
-ReactDOM.render(<Root />, document.getElementById("root"));
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<Root />);

@@ -1,20 +1,14 @@
 import * as React from "react";
-import * as Router from "react-router";
-import * as RouterDOM from "react-router-dom";
-import { useTitle } from "~/src/utils/react";
-import { capitalize } from "lodash";
 import { Order } from "~/src/components/demo/generic-endpoint/Order";
 import { Orders } from "~/src/components/demo/generic-endpoint/Orders";
 
 import "~/src/components/demo/common.css";
 import { PageTitle } from "../clinic/ui/PageTitle";
+import { Helmet } from "react-helmet";
+import { Outlet, Route, Routes, useParams } from "react-router-dom";
 
 export const GenericEndpoint = () => {
-  const { endpointId, runId, endpointType } = Router.useParams<{
-    endpointId: string;
-    runId: string;
-    endpointType: string;
-  }>();
+  const { endpointId, runId, endpointType } = useParams();
   const endpointIdInt = parseInt(endpointId);
 
   const renderEndpointName = (endpointType: string, endpointId: string) => {
@@ -42,8 +36,6 @@ export const GenericEndpoint = () => {
     );
   };
 
-  useTitle(`Precise.ly: ${renderEndpointName(endpointType, endpointId)} Endpoint`);
-
   const renderHelper = () => {
     if (undefined === endpointId) {
       return <div></div>;
@@ -51,33 +43,42 @@ export const GenericEndpoint = () => {
       return (
         <div className="flex flex-col min-h-screen bg-white">
           <PageTitle title={renderEndpointName(endpointType, endpointId)} />
-          <RouterDOM.BrowserRouter>
-            <RouterDOM.Switch>
-              <RouterDOM.Route
-                path={`/demo/${endpointType}/:endpointId/:runId`}
-                render={(_props) => (
-                  <Order
-                    endpointId={endpointIdInt}
-                    runId={runId}
-                    endpointType={endpointType}
-                  />
-                )}
-              />
-              <RouterDOM.Route
-                path={`/demo/${endpointType}/:endpointId`}
-                render={(_props) => (
-                  <Orders
-                    endpointId={endpointIdInt}
-                    endpointType={endpointType}
-                  />
-                )}
-              />
-            </RouterDOM.Switch>
-          </RouterDOM.BrowserRouter>
+          <Outlet />
+          <Routes>
+            <Route
+              path={`:runId`}
+              element={
+                <Order
+                  endpointId={endpointIdInt}
+                  runId={runId}
+                  endpointType={endpointType}
+                />
+              }
+            ></Route>
+
+            <Route
+              index
+              element={
+                <Orders
+                  endpointId={endpointIdInt}
+                  endpointType={endpointType}
+                />
+              }
+            />
+          </Routes>
         </div>
       );
     }
   };
 
-  return <div>{renderHelper()}</div>;
+  return (
+    <div>
+      <Helmet>
+        <title>
+          Precise.ly: {renderEndpointName(endpointType, endpointId)} Endpoint
+        </title>
+      </Helmet>
+      {renderHelper()}
+    </div>
+  );
 };

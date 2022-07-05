@@ -1,9 +1,7 @@
 import * as React from "react";
 import * as RouterDOM from "react-router-dom";
 
-
 export const NotFound = () => {
-
   return (
     <div>
       <div>
@@ -12,5 +10,4 @@ export const NotFound = () => {
       </div>
     </div>
   );
-
 };

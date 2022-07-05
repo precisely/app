@@ -1,8 +1,3 @@
-import JWTDecode from "jwt-decode";
-
-import * as SessionUtils from "~/src/utils/session";
-
-
 export interface Args {
   method: string,
   headers?: Record<string, string>,
@@ -15,8 +10,7 @@ export interface Args {
 export interface Result<T> {
   status: number,
   ok: boolean,
-  data?: T,
-  jwt?: SessionUtils.JWT
+  data?: T
 }
 
 
@@ -26,9 +20,6 @@ export async function api<T>(args: Args): Promise<Result<T>> {
     "Content-Type": "application/json",
     ...args.headers
   };
-  if (SessionUtils.isAuthenticated()) {
-    headers["Authorization"] = SessionUtils.authorization();
-  }
   const body = JSON.stringify(args.data);
   const url = args.query ?
     (`${args.url}?` + new URLSearchParams(args.query)) :
@@ -46,17 +37,6 @@ export async function api<T>(args: Args): Promise<Result<T>> {
   }
   catch (err) {
     // probably no response body, do nothing
-  }
-  // attempt Authentication header JWT decode
-  if (resp.headers) {
-    const jwtRaw = resp.headers.get("Authorization");
-    if (jwtRaw) {
-      const decoded: SessionUtils.JWTDecoded = JWTDecode(jwtRaw);
-      res.jwt = {
-        token: jwtRaw,
-        decoded
-      };
-    }
   }
   return res;
 }
