@@ -16,7 +16,7 @@ export const getPatientEffect = (
         setPatientsFn(resp);
       } catch (error) {
         // TODO: Add proper error handling.
-        toast.error("PIA request broke!");
+        toast.error("PIA request broke! getPatient");
       }
     };
     getPatient();
@@ -59,7 +59,8 @@ export const findRunsEffect = (
         setRunsFn(await findActiveRuns(role, extras));
       } catch (error) {
         // TODO: Add proper error handling.
-        toast.error("PIA request broke!");
+        toast.error("PIA request broke! findRuns");
+        console.log(error);
       }
     };
     go();
@@ -83,7 +84,7 @@ export const getRunEffect = (
         setRun(resp);
       } catch (error) {
         // TODO: Add proper error handling.
-        toast.error("PIA request broke!");
+        toast.error("PIA request broke! getRun");
       }
     };
     if (!currentRun || currentRun.id != runId) {
@@ -125,7 +126,7 @@ export const useEffectGetPatient = (
         setPatientsFn(resp);
       } catch (error) {
         // TODO: Add proper error handling.
-        toast.error("PIA request broke!");
+        toast.error("PIA request broke! (setPatients)");
       }
     };
     getPatient();

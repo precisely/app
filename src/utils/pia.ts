@@ -30,9 +30,9 @@ export interface TherapyIndex extends BasicIndex {
   };
 }
 
-export interface LabIndex extends BasicIndex {}
+export interface LabIndex extends BasicIndex { }
 
-export interface PatientIndex extends BasicIndex {}
+export interface PatientIndex extends BasicIndex { }
 
 //Need to think more about how args would be used in the runs - is the type an array of JSONDatastrings?
 export interface Run {
@@ -51,15 +51,19 @@ export interface Patient {
   race: string;
 }
 
-export async function startRun(name: string, args: any[] = []): Promise<Run> {
-  const resp = await ApiUtils.api<Run>({
+export async function startRun(name: string, args: any[] = [], kwargs: { [key: string]: any } = {}): Promise<Run> {
+  const resp = await ApiUtils.api<{ run: Run }>({
     method: "POST",
-    data: args,
-    url: `${process.env.PIA_URL}/api/runs/start/${name}`,
+    data: {
+      flow: name,
+      args: args,
+      kwargs: kwargs
+    },
+    url: `${process.env.PIA_URL}/api/runs/`,
   });
   if (resp.ok) {
     console.log("startRun returned ", resp.data);
-    return resp.data;
+    return resp.data.run;
   } else {
     // FIXME: error handling
     toast.error("startRun failed");
@@ -73,14 +77,14 @@ export async function continueRun(
   data: JSONData = null,
   permit: JSONData = null
 ): Promise<Run> {
-  const resp = await ApiUtils.api<Run>({
+  const resp = await ApiUtils.api<{ run: Run }>({
     method: "POST",
     data: { input: data, permit },
-    url: `${process.env.PIA_URL}/api/runs/continue/${runId}`,
+    url: `${process.env.PIA_URL}/api/runs/${runId}`,
   });
   if (resp.ok) {
     console.log("continueRun returned ", resp.data);
-    return resp.data;
+    return resp.data.run;
   } else {
     // FIXME: error handling
     toast.error("continueRun failed");
@@ -90,13 +94,13 @@ export async function continueRun(
 }
 
 export async function getRun(runId: string): Promise<Run> {
-  const resp = await ApiUtils.api<Run>({
+  const resp = await ApiUtils.api<{ run: Run }>({
     method: "GET",
     url: `${process.env.PIA_URL}/api/runs/${runId}`,
   });
   if (resp.ok) {
     console.log("getRun returned ", resp.data);
-    return resp.data;
+    return resp.data.run;
   } else {
     // FIXME: error handling
     toast.error("getRun failed");
@@ -124,13 +128,14 @@ export async function getPatient(patientId: number): Promise<Patient> {
 // query string format: state=running&index.patient-id=123&index.roles$=patient
 // FIXME: This should accept a JS object and convert it into this format string instead.
 export async function findRuns(query: string): Promise<Run[]> {
-  const resp = await ApiUtils.api<Run[]>({
+  console.log("findRuns", query);
+  const resp = await ApiUtils.api<{ runs: Run[] }>({
     method: "GET",
-    url: `${process.env.PIA_URL}/api/runs/find?${query}`,
+    url: `${process.env.PIA_URL}/api/runs?${query}`,
   });
   if (resp.ok) {
     console.log("findRuns returned ", resp.data);
-    return resp.data;
+    return resp.data.runs;
   } else {
     // FIXME: error handling
     toast.error("findRuns failed");
