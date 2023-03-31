@@ -12,9 +12,13 @@
     <div id="root"></div>
     <script>
      // deal with dark mode; must be done here to avoid FOUC
-     if (localStorage.theme === "dark" ||
-         (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+     if (localStorage.theme === "dark"
+        // Dark Mode looks horrific
+        // Disable logic that selects dark mode based on system settings
+        //  ||
+        //  (!("theme" in localStorage) &&
+        //   window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
        document.documentElement.classList.add("dark");
      }
      else {
